@@ -1,36 +1,66 @@
-#navbar {
-    font-size: 1em;
-    color: #fff;
-    padding: 0.5em;
-    font-size: 1.25em;
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 3rem;
+}
 
+#navbar {
     position: fixed;
-    top: 0;
-    left: 50%; 
-    transform: translateX(-50%); 
-    z-index: 1000;
-    margin: 0.5em;
-    
-    background-color: #5E9FAF; 
-    border-radius: 10px; 
-    
-    /* Make the box fit its contents */
-    display: inline-block;
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 13px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 #navbar ul {
     list-style: none;
-
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
 }
-#navbar ul li {
-    margin-left: 1.5em;
+
+#navbar li {
+    margin: 0;
+    position: relative;
 }
+
 #navbar a {
-    color: #000;
     text-decoration: none;
+    color: #333;
+    font-size: 17.5px;
+    font-weight: 500;
+    padding: 7.5px 15px;
+
+    position: relative; 
+    display: inline-block; 
 }
+
 #navbar a:hover {
-    color: #fff;
+    color: #5E9FAF;
+}
+
+#navbar a.active {
+    border: 2px solid #5E9FAF;
+    border-radius: 12px;
+
+    transition: left 0.3s;
+}
+
+#navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 7px; /* Adjust this value to position the line below the text */
+    left: 15%; /* Starts the line from the center */
+    width: 70%; /* Initially spans the full width of the text */
+    height: 2px; /* Height of the underline */
+    background-color: #5E9FAF; /* Color of the underline */
+    transition: transform 0.3s ease-in-out;
+    transform: scaleX(0);
+    transform-origin: center; /* Ensures the expansion/shrinking happens from the center */
+}
+
+#navbar a.active::after {
+    transform: scaleX(1);
 }
