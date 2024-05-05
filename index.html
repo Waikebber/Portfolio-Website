@@ -8,7 +8,10 @@
     <meta name="author" content="Kai Webber">
 
     <title>Kai Webber | Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home-style.css">
+    <link rel="stylesheet" href="css/media-styles.css">
+
+    <script src="main.js" defer></script>
 </head>
 <body>
     <header class="main-header">
@@ -32,26 +35,28 @@
     <div id="home">
         <div class="container">
             <section id="main">
-                <h2>Hi I'm Kai,</h2>
-                <h3>Computer Science and Computer Engineering Student</h3>
-                <p>I'm a student at Northeastern University. ... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore eveniet quas animi et, necessitatibus minus, voluptatum amet sit provident in velit adipisci officiis, placeat pariatur libero quasi accusamus inventore deserunt!
+                <h2 id="intro_greeting">Hi I'm Kai,</h2>
+                <h3 id="intro_major">Computer Science and<br>Computer Engineering Student</h3>
+                <p id="intro_paragraph">I'm a student at Northeastern University. ... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore eveniet quas animi et, necessitatibus minus, voluptatum amet sit provident in velit adipisci officiis, placeat pariatur libero quasi accusamus inventore deserunt!
                 Dignissimos sequi reiciendis, magnam numquam obcaecati voluptatibus nobis dolor expedita ut officia sit maxime nisi tenetur. Unde similique, ea facilis labore maiores earum laudantium reiciendis saepe. Debitis dolores esse eos. </p>
                 <ul class="wrapper">
                     <li class="icon email">
-                    <span class="tooltip">Email</span>
-                    <span><i class="fab fa-email-f"></i></span>
+                        <span class="tooltip">Email</span>
+                        <span><img src="images/email-icon.png" alt="Email Icon"></span>
                     </li>
-                    <li class="icon linkedin">
-                        <span class="tooltip">LinkedIn</span>
-                        <span><i class="fab fa-linkedin-f"></i></span>
+                    <li class="icon linkedin" data-link="https://www.linkedin.com/in/kai-webber/">
+                            <span class="tooltip">LinkedIn</span>
+                            <span><img src="images/linkedin-icon.png" alt="LinkedIn Icon"></span>
                     </li>
-                    <li class="icon github">
+                    
+                    <li class="icon github" data-link="https://github.com/Waikebber">
                         <span class="tooltip">Github</span>
-                        <span><i class="fab fa-github"></i></span>
+                        <span><span><img src="images/github-icon.png" alt="Github Icon"></span></span>
+                        
                     </li>
                     <li class="icon instagram">
                     <span class="tooltip">Instagram</span>
-                    <span><i class="fab fa-instagram"></i></span>
+                    <span><span><img src="images/instagram-icon.png" alt="Instagram Icon"></span></span>
                     </li>
         
                 </ul>

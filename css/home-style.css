@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla&family=Merriweather&display=swap');
+
 
 * {
     margin: 0;
@@ -66,69 +66,31 @@ body {
 #home {
     background: #cee8ee;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    align-items: center;
-    margin: 0 auto;
-}
-
-#main {
-    padding: 25px 30px;
-    box-sizing: border-box;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    border-radius: 5em;
-}
-
-#sidebar {
-    padding: 0 20px;
-    box-sizing: border-box;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    border-radius: 5em;
-
-    float: right;
-}
-
-#sidebar img {
-    object-fit: cover; 
-    width: 100%;  
-    border-radius: 5em;
-  }
-
-
-
-/* #home {
-    background: #cee8ee;
-    height: 100vh;
-}
-
-#home .container {
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    border-radius: 5em;
 }
 
 #main {
     float: left;
     width: 60%;
+    height: 100vh;
     
     padding: 25px 30px;
     box-sizing: border-box;
-    display: flex; 
 
-    justify-content: center;
-    align-items: left; 
+    display: flex;
     flex-direction: column;
+    align-items: left; 
+    gap: 10px;
+    
 }
-#main h2 {
+#intro_greeting {
     flex:1;
-    font-size: 2em;
-    margin-bottom: 0.5em;
+    font-size: 4em;;
 }
-#main h3 {
+#intro_major {
     flex:2;
     font-size: 2em;
-    margin-bottom: 0.5em;
 }
-#main p {
+#intro_paragraph {
     flex:3;
     font-size: 1.25em;
     margin-bottom: 1em;
@@ -142,12 +104,20 @@ body {
 #sidebar {
     float: right;
     width: 40%;
-    padding: 0 20px;
+    height: 100vh;
+    padding: 5px 5px 5px 5px; /* top right bottom left */
     box-sizing: border-box;
-    padding-top: 25px;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
 #sidebar img {
-    max-width: 100%; 
+    flex: 1;
+    max-width: 85%; ;
     height: auto; 
-    border-radius: 2em;
-} */
+    border-radius: 4em;
+
+    border: 6px solid #5E9FAF; 
+    border-radius: 5em;
+}
