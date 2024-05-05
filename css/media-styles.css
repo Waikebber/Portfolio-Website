@@ -59,17 +59,20 @@ pointer-events: auto;
 text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
 }
 
+/* Makes the icons responsive */
 .wrapper .icon img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Adjust the image to fit inside the container */
+    object-fit: contain;
 }
 
+/* Colors for the icons */
 .email { --color: #0000FF;}
 .linkedin { --color: #0077b5;}
 .github {--color: #333333;}
 .instagram { --color: #e4405f;}
 
+/* Changes the background and text color of the icon when hovered */
 .icon:hover,
 .icon:hover .tooltip,
 .icon:hover .tooltip::before {
@@ -77,7 +80,17 @@ background: var(--color);
 color: white;
 }
 
+/* Adds the data-link attribute to the icon */
 .wrapper .icon::before {
     content: attr(data-link); 
     display: none;
+}
+
+
+/* Makes Github and Email icons white when hovered */
+.wrapper .icon.github:hover img {
+    filter: invert(100%);
+}
+.wrapper .icon.email:hover img {
+    filter: invert(100%);
 }
