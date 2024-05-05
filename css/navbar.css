@@ -1,0 +1,36 @@
+#navbar {
+    font-size: 1em;
+    color: #fff;
+    padding: 0.5em;
+    font-size: 1.25em;
+
+    position: fixed;
+    top: 0;
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 1000;
+    margin: 0.5em;
+    
+    background-color: #5E9FAF; 
+    border-radius: 10px; 
+    
+    /* Make the box fit its contents */
+    display: inline-block;
+}
+
+#navbar ul {
+    list-style: none;
+
+    display: flex;
+    justify-content: center;
+}
+#navbar ul li {
+    margin-left: 1.5em;
+}
+#navbar a {
+    color: #000;
+    text-decoration: none;
+}
+#navbar a:hover {
+    color: #fff;
+}

@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kai Webber's personal website">
-    <meta name="keywords" content="Kai Webber, Northeastern University, computer science, computer engineering, portfolio">
-    <meta name="author" content="Kai Webber">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Kai Webber's personal website">
+        <meta name="keywords" content="Kai Webber, Northeastern University, computer science, computer engineering, portfolio">
+        <meta name="author" content="Kai Webber">
 
-    <title>Kai Webber | Portfolio</title>
-    <link rel="stylesheet" href="css/home-style.css">
-    <link rel="stylesheet" href="css/media-styles.css">
+        <title>Kai Webber | Portfolio</title>
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="css/media-links.css">
+        <link rel="stylesheet" href="css/projects.css">
+        <link rel="stylesheet" href="css/skills-resume.css">
+        <link rel="stylesheet" href="css/photography.css">
+        <link rel="stylesheet" href="css/footer.css">
 
-    <script src="main.js" defer></script>
-</head>
-<body>
-    <header class="main-header">
-        <div class="container">
-            <h1>Kai Webber</h1>
-        </div>
-        <nav id="navbar">
-            <div class="container">
+        <script src="main.js" defer></script>
+    </head>
+    <body>
+        <header class="main-header">
+            <nav id="navbar">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#projects">Projects</a></li>
@@ -28,89 +30,96 @@
                     <li><a href="#photos">Photography</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+            </nav>
+        </header>
+
+        <div id="home">
+            <div class="container">
+                <section id="main">
+                    <h2 id="intro_greeting">Hi I'm Kai,</h2>
+                    <h3 id="intro_major">Computer Science and<br>Computer Engineering Student</h3>
+                    <p id="intro_paragraph">I'm a student at Northeastern University. ... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore eveniet quas animi et, necessitatibus minus, voluptatum amet sit provident in velit adipisci officiis, placeat pariatur libero quasi accusamus inventore deserunt!
+                    Dignissimos sequi reiciendis, magnam numquam obcaecati voluptatibus nobis dolor expedita ut officia sit maxime nisi tenetur. Unde similique, ea facilis labore maiores earum laudantium reiciendis saepe. Debitis dolores esse eos. </p>
+                    <ul class="wrapper">
+                        <li class="icon email" data-link="#contact">
+                            <span class="tooltip">Email</span>
+                            <span><img src="images/email-icon.png" alt="Email Icon"></span>
+                        </li>
+                        <li class="icon linkedin" data-link="https://www.linkedin.com/in/kai-webber/">
+                                <span class="tooltip">LinkedIn</span>
+                                <span><img src="images/linkedin-icon.png" alt="LinkedIn Icon"></span>
+                        </li>
+                        <li class="icon github" data-link="https://github.com/Waikebber">
+                            <span class="tooltip">Github</span>
+                            <span><span><img src="images/github-icon.png" alt="Github Icon"></span></span>
+                            
+                        </li>
+                        <li class="icon instagram" data-link="#">
+                            <span class="tooltip">Instagram</span>
+                            <span><span><img src="images/instagram-icon.png" alt="Instagram Icon"></span></span>
+                        </li>
+                    </ul>
+                </section>
+                <aside id="sidebar">
+                    <img src="images/kai.jpg" alt="Kai Webber">
+                </aside>
             </div>
-        </nav>
-    </header>
+        </div>
 
-    <div id="home">
-        <div class="container">
-            <section id="main">
-                <h2 id="intro_greeting">Hi I'm Kai,</h2>
-                <h3 id="intro_major">Computer Science and<br>Computer Engineering Student</h3>
-                <p id="intro_paragraph">I'm a student at Northeastern University. ... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore eveniet quas animi et, necessitatibus minus, voluptatum amet sit provident in velit adipisci officiis, placeat pariatur libero quasi accusamus inventore deserunt!
-                Dignissimos sequi reiciendis, magnam numquam obcaecati voluptatibus nobis dolor expedita ut officia sit maxime nisi tenetur. Unde similique, ea facilis labore maiores earum laudantium reiciendis saepe. Debitis dolores esse eos. </p>
-                <ul class="wrapper">
-                    <li class="icon email">
-                        <span class="tooltip">Email</span>
-                        <span><img src="images/email-icon.png" alt="Email Icon"></span>
-                    </li>
-                    <li class="icon linkedin" data-link="https://www.linkedin.com/in/kai-webber/">
-                            <span class="tooltip">LinkedIn</span>
-                            <span><img src="images/linkedin-icon.png" alt="LinkedIn Icon"></span>
-                    </li>
-                    
-                    <li class="icon github" data-link="https://github.com/Waikebber">
-                        <span class="tooltip">Github</span>
-                        <span><span><img src="images/github-icon.png" alt="Github Icon"></span></span>
-                        
-                    </li>
-                    <li class="icon instagram">
-                    <span class="tooltip">Instagram</span>
-                    <span><span><img src="images/instagram-icon.png" alt="Instagram Icon"></span></span>
-                    </li>
-        
+        <section id="projects">
+            <div class="container">
+                <h2>Projects</h2>
+                <p>Here are some of the projects I've worked on:</p>
+                <ul>
+                    <li><a href="">Project 1</a></li>
+                    <li><a href="">Project 2</a></li>
+                    <li><a href="">Project 3</a></li>
                 </ul>
-            </section>
-            <aside id="sidebar">
-                <img src="images/kai.jpg" alt="Kai Webber">
-            </aside>
-        </div>
-    </div>
+            </div>
+        </section>
+        <section id="skills">
+            <div class="container">
+                <h2>Skills</h2>
+                <p>Here are some of the skills I have:</p>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                    <li>C++</li>
+                    <li>SQL</li>
+                    <li>Git</li>
+                    <li>Linux</li>
+                    <li>Photoshop</li>
+                </ul>
+            </div>
+        </section>
 
-    <section id="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <p>Here are some of the projects I've worked on:</p>
-            <ul>
-                <li><a href="">Project 1</a></li>
-                <li><a href="">Project 2</a></li>
-                <li><a href="">Project 3</a></li>
-            </ul>
-        </div>
-    </section>
+        <section id="resume">
+            <div class="container">
+                <h2>Resume</h2>
+                <p>Here is my resume:</p>
+                <a href="resume.pdf" target="_blank">Download Resume</a>
+            </div>
+        </section>
 
-    <section id="resume">
-        <div class="container">
-            <h2>Resume</h2>
-            <p>Here is my resume:</p>
-            <a href="resume.pdf" target="_blank">Download Resume</a>
-        </div>
-    </section>
-
-    <section id="hobbies">
-        <div class="container">
-            <h2>Hobbies</h2>
-            <ul>
-                <li>Playing the guitar</li>
-                <li>Reading</li>
-                <li>Running</li>
-            </ul>
-        </div>
-    </section>
-
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Kai Webber</p>
-
-        </div>
-    </footer>
-    
+        <section id="photography">
+            <div class="container">
+                <h2>Photography</h2>
+                <ul>
+                    <li>Image 1</li>
+                    <li>Image 2</li>
+                    <li>Image 3</li>
+                </ul>
+            </div>
+        </section>
 
 
-
-
-
-    
-</body>
+        <footer class="main-footer">
+            <div class="container">
+                <p>&copy; 2024 Kai Webber</p>
+            </div>
+        </footer>
+    </body>
 </html>
