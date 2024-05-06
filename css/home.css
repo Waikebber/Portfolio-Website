@@ -1,6 +1,9 @@
 #home {
     background: var(--bkg-color);
-    min-height: 90vh;
+
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
 }
 
 #home .container {
@@ -8,6 +11,10 @@
     border-radius: 20px; 
     box-sizing: border-box; 
     overflow: hidden; 
+
+    display: flex;  
+    justify-content: center;  
+    align-items: center;
 }
 
 #home-box {
@@ -25,6 +32,8 @@
     width: 100%;
     min-height: 35rem;
     max-height: 45rem;
+
+    margin-top: -1em;
 }
 
 #main-box {
@@ -78,6 +87,7 @@
 
 #sidebar {
     flex:2;
+    padding: 30px;
     margin: 4rem 0 0 -1em;
 
     display: flex;               
@@ -109,16 +119,14 @@
     #sidebar {
         justify-content: center;
         margin-bottom: 2.25em;
-    }
-
-    #sidebar {
-        max-width: 50%;
+        padding: 0;
+        max-width: 60%;
         margin-top: 10px
     }
+
     #sidebar img {
         margin: 10px;
     }
-
 }
 
 @media screen and (max-width: 768px) {
