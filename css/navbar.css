@@ -87,3 +87,10 @@ input[id="photography"]:checked ~ .slider {
 input[id="contact"]:checked ~ .slider {
     transform: translateX(500%);
 }
+
+
+@media screen and (max-width: 1300px) {
+    .navbar {
+        display: none;
+    }
+}
