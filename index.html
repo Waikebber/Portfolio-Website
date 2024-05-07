@@ -21,20 +21,7 @@
         <script src="main.js" defer></script>
     </head>
     <body>
-        <header class="main-header" id="home">
-            <nav id="navbar">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#photography">Photography</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <section id="home" class="section">
+        <section id="home-section" class="section">
             <div class="container">
                 <div id="home-box">
                     <div id="main-box">
@@ -42,8 +29,7 @@
                             <h2 id="intro_greeting">Hi I'm Kai,</h2>
                             <h3 id="intro_major">Computer Science and<br>Computer Engineering Student</h3>
                             <p id="intro_paragraph">I'm a student at Northeastern University. ... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore eveniet quas animi et, necessitatibus minus, voluptatum amet sit provident in velit adipisci officiis, placeat pariatur libero quasi accusamus inventore deserunt!
-
-                        </p>
+                            </p>    
                             <ul class="wrapper">
                                 <li class="icon email" data-link="#contact">
                                     <span class="tooltip">Email</span>
@@ -64,14 +50,36 @@
                             </ul>
                         </section>
                     </div>
-                    <aside id="sidebar">
-                        <img src="images/kai.jpg" alt="Kai Webber">
-                    </aside>
+                    <aside id="sidebar"> <img src="images/kai.jpg" alt="Kai Webber"> </aside>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="section">
+        <header class="section" id="bar-section">
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <input type="radio" id="home" name="navbar" checked>
+                <label class="tab" for="home">Home</label>                
+            
+                <input type="radio" id="projects" name="navbar">
+                <label class="tab" for="projects">Projects</label>  
+            
+                <input type="radio" id="skills" name="navbar">
+                <label class="tab" for="skills">Skills</label>
+            
+                <input type="radio" id="resume" name="navbar">
+                <label class="tab" for="resume">Resume</label>
+            
+                <input type="radio" id="photography" name="navbar">
+                <label class="tab" for="photography">Photography</label>
+            
+                <input type="radio" id="contact" name="navbar">
+                <label class="tab" for="contact">Contact</label>
+            
+                <span class="slider"></span>
+            </nav>
+        </header>
+
+        <section id="projects-section" class="section">
             <div class="container">
                 <h2>Projects</h2>
                 <p>Here are some of the projects I've worked on:</p>
@@ -82,7 +90,7 @@
                 </ul>
             </div>
         </section>
-        <section id="skills" class="section">
+        <section id="skills-section" class="section">
             <div class="container">
                 <h2>Skills</h2>
                 <p>Here are some of the skills I have:</p>
@@ -99,9 +107,9 @@
                     <li>Photoshop</li>
                 </ul>
             </div>
-        </section class="section">
+        </section>
 
-        <section id="resume" class="section">
+        <section id="resume-section" class="section">
             <div class="container">
                 <h2>Resume</h2>
                 <p>Here is my resume:</p>
@@ -109,7 +117,7 @@
             </div>
         </section>
 
-        <section id="photography" class="section">
+        <section id="photography-section" class="section">
             <div class="container">
                 <h2>Photography</h2>
                 <ul>
@@ -120,7 +128,7 @@
             </div>
         </section>
 
-        <section id="contact" class="section">
+        <section id="contact-section" class="section">
             <div class="container">
                 <h2>Contact</h2>
                 <p>Feel free to reach out to me:</p>

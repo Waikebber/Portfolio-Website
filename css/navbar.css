@@ -1,66 +1,89 @@
-.main-header {
+#bar-section {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center; 
-    padding: 3rem;
+
+    height: 10vh;
+    width: 100%;
+    padding: 0 0 2.5rem 0;
+
+    position: sticky;
+    top: 1em;
+    z-index: 1000;
 }
 
-#navbar {
-    position: fixed;
-    background: var(--bkg-color);
-    padding: 10px 15px;
-    border-radius: 13px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-#navbar ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-}
-
-#navbar li {
-    margin: 0;
-    position: relative;
-}
-
-#navbar a {
-    text-decoration: none;
-    color: var(--gray-text);
-    font-size: 17.5px;
+.navbar {
+    font-size: 1.3rem;
     font-weight: 500;
-    padding: 7.5px 15px;
+    padding: 0.5rem;
+    
+    background-color: var(--bkg-color);
+    border-radius: 1000px;
+    box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+    list-style: none;
+    position: relative;
 
-    position: relative; 
-    display: inline-block; 
+    display: flex;
 }
 
-#navbar a:hover {
-    color: var(--main-color);
+input[type="radio"] {
+    display: none;
+    appearance: none; 
+    -moz-appearance: none;
+    -webkit-appearance: none; 
 }
 
-#navbar a.active {
-    border: 2px solid var(--main-color);
-    border-radius: 12px;
-
-    transition: left 0.3s;
+.tab {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: inherit;
+    cursor: pointer;
+    z-index: 2;
 }
 
-#navbar a::after {
-    content: '';
+.navbar .slider {
+    width: 150px;
+    height: 50px;
     position: absolute;
-    bottom: 7px; 
-    left: 15%; 
-    width: 70%;
-    height: 2px;
-    background-color: var(--main-color);
-    transition: transform 0.3s ease-in-out;
-    transform: scaleX(0);
-    transform-origin: center;
+    border-radius: inherit;
+    background-color: var(--accent-color);
+    z-index: 0;
+    transition: 0.25s ease;
 }
 
-#navbar a.active::after {
-    transform: scaleX(1);
+.tab.active {
+    color: var(--highlight-color); /* Replace with your desired highlight color */
+    background-color: var(--accent-color); /* Optional: change background on active */
+}
+
+
+input[type="radio"]:checked + label {
+    color: var(--blk-text);
+}
+input[type="radio"]:hover + label {
+    color: var(--ob-blue);
+}
+
+input[id="home"]:checked ~ .slider {
+    transform: translateX(0);
+}
+input[id="projects"]:checked ~ .slider {
+    transform: translateX(100%);
+}
+
+input[id="skills"]:checked ~ .slider {
+    transform: translateX(200%);
+}
+input[id="resume"]:checked ~ .slider {
+    transform: translateX(300%);
+}
+input[id="photography"]:checked ~ .slider {
+    transform: translateX(400%);
+}
+input[id="contact"]:checked ~ .slider {
+    transform: translateX(500%);
 }

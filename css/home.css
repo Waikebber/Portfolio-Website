@@ -1,12 +1,10 @@
-#home {
-    background: var(--bkg-color);
-
+#home-section {
     display: flex;
     justify-content: center; 
     align-items: center; 
 }
 
-#home .container {
+#home-section .container {
     min-height: 90vh;
     border-radius: 20px; 
     box-sizing: border-box; 
@@ -21,6 +19,8 @@
     background: var(--main-color);
     border-radius: 50px; 
     padding: 0 20px; /* top/bot, left/right */
+
+
     box-sizing: border-box; 
     overflow: hidden; 
     box-shadow: rgb(0 0 0 / 50%) 0px 0px 10px 0px;
@@ -34,6 +34,7 @@
     max-height: 45rem;
 
     margin-top: -1em;
+    /* margin-bottom: 100px; */
 }
 
 #main-box {
