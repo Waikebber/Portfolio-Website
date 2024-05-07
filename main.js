@@ -31,7 +31,7 @@ function activateSectionOnScroll() {
         let currentSectionId = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop - (document.querySelector('#bar-section').clientHeight);
-            if (pageYOffset >= sectionTop) {
+            if (scrollY >= sectionTop) {
                 currentSectionId = section.getAttribute('id');
             }
         });
@@ -49,7 +49,6 @@ function activateSectionOnScroll() {
 
 //Adds a smooth scroll effect to the navigation bar
 function smoothScrollTo(element, duration) {
-    const headerOffset = document.querySelector('#bar-section').clientHeight;
     const elementPosition = element.getBoundingClientRect().top;
     const offsetPosition = elementPosition + window.scrollY;
 
