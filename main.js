@@ -10,14 +10,12 @@ function setupNavigationScroll() {
     const navbarRadios = document.querySelectorAll('.navbar input[type="radio"]');
     navbarRadios.forEach(function(radio) {
         radio.addEventListener('change', function(event) {
-            // Prevent default action to avoid instant jump
             event.preventDefault();
             if (this.checked) {
                 const sectionId = this.id + '-section';
                 const section = document.getElementById(sectionId);
                 if (section) {
-                    // Calculate offset to ensure the section isn't hidden beneath the navbar
-                    smoothScrollTo(section, 500); // Adjust scroll duration to your preference
+                    smoothScrollTo(section, 1000); 
                 }
             }
         });
@@ -53,9 +51,9 @@ function activateSectionOnScroll() {
 function smoothScrollTo(element, duration) {
     const headerOffset = document.querySelector('#bar-section').clientHeight;
     const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    const offsetPosition = elementPosition + window.scrollY;
 
-    const startPosition = window.pageYOffset;
+    const startPosition = window.scrollY;
     const distance = offsetPosition - startPosition;
     let startTime = null;
 
