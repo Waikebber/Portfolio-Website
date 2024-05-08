@@ -17,8 +17,13 @@
         <link rel="stylesheet" href="css/photography.css">
         <link rel="stylesheet" href="css/contact.css">
         <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/buffers.css">
 
         <script src="main.js" defer></script>
+
+        <style>
+            body { display: none; }  /* Hide the body initially */
+        </style>
     </head>
     <body>
         <section id="home-section" class="section">
@@ -79,17 +84,42 @@
             </nav>
         </header>
 
+        <div id="buffer-section-top"></div>
+
         <section id="projects-section" class="section">
-            <div class="container">
-                <h2>Projects</h2>
-                <p>Here are some of the projects I've worked on:</p>
-                <ul>
-                    <li><a href="">Project 1</a></li>
-                    <li><a href="">Project 2</a></li>
-                    <li><a href="">Project 3</a></li>
-                </ul>
-            </div>
+            <!-- <div class="container"> -->
+                <div class="bento-box" id="projects-title">
+                    <h1>Projects and Experience</h1>
+                </div>
+                <div class="bento-box" id="website">
+                    <h2>This website</h2>
+                </div>
+                <div class="bento-box" id="arm">
+                    <h2>Robotic Arm</h2>
+                </div>
+                <div class="bento-box" id="racing">
+                    <h2>NU Electric Racing Club</h2>
+                </div>
+                <div class="bento-box" id="img1">
+                    <img src="not-found.png"/>
+                </div>
+                <div class="bento-box" id="kri">
+                    <h2>Kostas Research Institute</h2>
+                </div>
+                <div class="bento-box" id="rover">
+                    <h2>NU SEDs, Rover Team</h2>
+                </div>
+                <div class="bento-box" id="img2">
+                    <img src="not-found.png"/>
+                </div>
+                <div class="bento-box" id="unet">
+                    <h2>UNET Image Classifier</h2>
+                </div>
+                <div class="bento-box" id="more">
+                    <h2>More</h2>
+                </div>
         </section>
+
         <section id="skills-section" class="section">
             <div class="container">
                 <h2>Skills</h2>
@@ -169,5 +199,12 @@
                 <p>&copy; 2024 Kai Webber</p>
             </div>
         </footer>
+
+        <!-- Shows the page once fully loaded (prevent FOUC)-->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() { 
+                document.body.style.display = "block";
+            });
+        </script>
     </body>
 </html>
