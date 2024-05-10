@@ -4,22 +4,21 @@
     align-items: center;
 
     height: 10vh;
-    width: 100%;
-    padding: 0 0 2.5rem 0;
+    padding: 0 0 2.5vh 0;
 
     position: sticky;
-    top: 1em;
+    top: 2vh;
     z-index: 1000;
 }
 
 .navbar {
-    font-size: 1.3rem;
+    font-size: 2.5vh;
     font-weight: 500;
-    padding: 0.5rem;
+    padding: 1vh;
     
     background-color: var(--bkg-color);
-    border-radius: 1000px;
-    box-shadow: 0 0 1px 0 rgba(24, 94, 224, 0.15), 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+    border-radius: 10vh;
+    box-shadow: 0 0 0.3vh 0 rgba(24, 94, 224, 0.15),0 1vh 1.5vh 0 rgba(24, 94, 224, 0.15);
     list-style: none;
     position: relative;
 
@@ -34,20 +33,20 @@ input[type="radio"] {
 }
 
 .tab {
-    width: 150px;
-    height: 50px;
+    width: 17.2vh;
+    height: 5.5vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem;
+    padding: 1vh;
     border-radius: inherit;
     cursor: pointer;
     z-index: 2;
 }
 
 .navbar .slider {
-    width: 150px;
-    height: 50px;
+    width: 17.2vh;
+    height: 5.5vh;
     position: absolute;
     border-radius: inherit;
     background-color: var(--accent-color);
@@ -56,8 +55,8 @@ input[type="radio"] {
 }
 
 .tab.active {
-    color: var(--highlight-color); /* Replace with your desired highlight color */
-    background-color: var(--accent-color); /* Optional: change background on active */
+    color: var(--highlight-color);
+    background-color: var(--accent-color);
 }
 
 
