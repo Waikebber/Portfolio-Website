@@ -17,71 +17,66 @@
 
 #home-box {
     background: var(--main-color);
-    border-radius: 50px; 
-    padding: 0 20px; /* top/bot, left/right */
-
+    border-radius: 8vh; 
+    padding: 0 2vh; /* top/bot, left/right */
+    width: 100%;
+    height: 80vh;
 
     box-sizing: border-box; 
     overflow: hidden; 
-    box-shadow: rgb(0 0 0 / 50%) 0px 0px 10px 0px;
+    box-shadow: rgb(0 0 0 / 50%) 0 0 1vh 0;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    width: 100%;
-    min-height: 35rem;
-    max-height: 45rem;
-
-    margin-top: -1em;
-    /* margin-bottom: 100px; */
 }
 
 #main-box {
     flex:3;
-    padding: 30px;
+    padding: 6vh;
     box-sizing: border-box;
 
     box-shadow: rgb(0 0 0 / 50%) 0px 0px 10px 0px;
-    border-radius: 5em;
+    border-radius: 8vh;
     background: var(--main-color);
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
 
-    margin: 2em 0 2em 3em;
+    margin: 2vh 0 2vh 3vh;
 }
 
 #main {
-    padding: 30px;
+    padding: 1vh;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2.5vh;
 }
 
 #intro_greeting {
     flex:1;
-    font-size: 4em;
-    margin-top: 0.2em;
+    font-size: 9vh;
+    margin-top: 2.5vh;
 }
 #intro_major {
     flex:2;
-    font-size: 2em;
-    line-height: 1.25em;
-    margin-top: 0.45em;
+    font-size: 4vh;
+    line-height: 5vh;
+    margin-top: 2vh;
 }
 #intro_paragraph {
     flex:3;
-    font-size: 1.25em;
-    margin-top: -0.25em;
-    margin-bottom: 1em;
+    font-size: 2.5vh;
+    line-height: 3vh;
+    margin-top: -0.5vh;
+    margin-bottom: 0.5vh;
 }
 #main ul {
     flex:4;
-    font-size: 1.25em;
+    font-size: 1.25vh;
     justify-content: center;
 }
 
@@ -97,11 +92,11 @@
 }
 #sidebar img {
     max-width: 80%;
-    height: auto; 
+    height: 70vh; 
     margin-bottom: 3.8em;
 
-    border: 6px solid var(--accent-color); 
-    border-radius: 5em;
+    border: 0.75vh solid var(--accent-color); 
+    border-radius: 8vh;
 }
 
 @media screen and (max-width: 1300px) {
