@@ -1,7 +1,7 @@
 #projects-section {
     background: var(--main-color);
     min-height: 100vh;
-    min-width: 100vw;
+    width: 99vw;
 
     display: grid;
     place-content: center;
@@ -23,7 +23,6 @@
 
 .bento {
     background-color: var(--accent-color);
-    padding: 0.5rem 1rem;
     text-align: center;
     
     display: flex;
@@ -31,14 +30,13 @@
     justify-content: center;
     align-items: center;
 
-
     border-radius: 3vh;
     overflow: hidden;
     transition: all 0.2s ease;
-    min-height: auto;
+    min-height: 15vh;
     min-width: auto;
     
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 1vh rgba(0, 0, 0, 0.2);
     border-color: var(--accent-color);
     border-style: solid;
     border-width: 1vh;
@@ -46,34 +44,46 @@
 
 .bento:hover {
     transform: scale(1.05);
+    border-width: 0;
+    filter: grayscale(60%) brightness(1);
 }
 .bento-title:hover,
 .bento-img1:hover,
 .bento-img2:hover {
     transform: scale(1);
+    border-width: 1vh;
+    filter: none;
 }
-
+.bento-more:hover {
+    filter: none;
+}
 .bento h2 {
     font-size: 3vh;
     line-height: 3vh;
     letter-spacing: auto;
 }
 
+.bento:hover h2 {
+    filter: none;
+}
+
 
 .txt-bkg {
-    background-color: var(--accent-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1vh 2.5vh;
+
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    margin-top: 0.5rem;
     text-align: center;
-    padding: 1rem;
     border-radius: 3vh;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transform: scale(0.95);
+    background-color: var(--accent-color-opaq);
 }
 .bento:hover .txt-bkg {
-    opacity: 0.9;
+    opacity: 1;
     transform: scale(1);
 }
 

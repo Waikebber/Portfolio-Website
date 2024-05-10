@@ -3,7 +3,8 @@
 :root {
     --main-color: #5e9faf;
     --secondary-color: #90CAD7; 
-    --accent-color: #61c1d8; 
+    --accent-color: rgb(97, 193, 216); 
+    --accent-color-opaq: rgba(97, 192, 216, 0.8); 
     --bkg-color: #cee8ee;
     --blk-text: #052125;
     --gray-text: #333;
