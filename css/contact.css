@@ -1,5 +1,105 @@
 #contact-section {
     height: 100vh;
-    background-color: #f9f9f9;
-    padding: 50px 0;
+    background-color: var(--bkg-color);
+    display: flex;
+    justify-content: center;
+    padding: 7vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#contact-partition {
+    background: rgb(245, 245, 244);
+    border-radius: 3vh;
+    min-height: 75vh;
+    min-width: 90%; 
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sub sub "
+        "form image"
+        "submit image";
+    gap: 2.5vh;
+}
+#contact-me {
+    grid-area: header;
+    padding: 7vh 0 0 0;
+    font-size: 5vh;
+    text-align: center;
+    width: 100%;
+}
+
+#contact-sub {
+    grid-area: sub;
+    font-size: 2.5vh;
+    text-align: center;
+    width: 100%;
+}
+
+form { 
+    padding: 5vh 0 10vh 10vh; /* top, right, bottom, left */
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+}
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1vh;
+}
+
+.form-row-full {
+    grid-column: 1 / -1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#message-content {
+    height: 15vh;
+}
+
+#submit {
+    grid-area: submit;
+    padding: 1.5vh 2vh;
+    font-size: 2.5vh;
+    background-color: var(--main-color);
+    width: 100%;
+    border-radius: 5vh;
+    justify-self: center; 
+    align-self: center;
+    margin: auto;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+#contact-im {
+    grid-area: image;
+    border-radius: 3vh;
+    box-shadow: 0 0 1vh 0 rgb(0 0 0 / 50%);
+    height: 45vh;
+    width: auto;
+
+    margin: 4vh 10vh 0 0; /* top, right, bottom, left */
+    justify-self: center;
+}
+input[type="text"], input[type="email"], textarea {
+    width: 100%; 
+    box-sizing: border-box;
+}
+label {
+    font-size: 2.75vh;
+    line-height: 4vh;
+}
+input, textarea {
+    font-size: 2vh; 
+    padding: 1vh; 
+    width: 100%;
+    border-radius: 2vh;
+}
+textarea {
+    resize: none;
 }

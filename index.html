@@ -39,7 +39,7 @@
                             <p id="intro_paragraph">Tosca is her name, as if it were not. ... Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore eveniet quas animi et, necessitatibus minus, voluptatum amet sit provident in velit adipisci officiis, placeat pariatur libero quasi accusamus inventore deserunt!
                             </p>    
                             <ul class="wrapper">
-                                <li class="icon email" data-link="#contact">
+                                <li class="icon email" data-link="#contact-section">
                                     <span class="tooltip">Email</span>
                                     <span><img src="images/email-icon.png" alt="Email Icon"></span>
                                 </li>
@@ -158,7 +158,8 @@
             <div class="container">
                 <h2>Resume</h2>
                 <p>Here is my resume:</p>
-                <a href="resume.pdf" target="_blank">Download Resume</a>
+                <a href="https://www.linkedin.com/in/kai-webber/overlay/1707365589154/single-media-viewer/?profileId=ACoAADiboWABppCR18_w-hY78TF9_WsC1_CxcN0"
+                    target="_blank">Download Resume</a>
             </div>
         </section>
 
@@ -175,19 +176,41 @@
 
         <section id="contact-section" class="section">
             <div class="container">
-                <h2>Contact</h2>
-                <p>Feel free to reach out to me:</p>
-                <form action="contact.php" method="post">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" required></textarea>
-                    <button type="submit">Send</button>
-                </form>
+                <div id="contact-partition">
+                    <h2 id="contact-me">Contact Me</h2>
+                    <p id="contact-sub">Feel free to reach out!</p>
+                    <form action="contact.php" method="post" id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fName" id="fName-label">First Name:</label>
+                                <input type="text" id="fName" name="fName" placeholder="Your Name..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lName" id="lName-label">Last Name:</label>
+                                <input type="text" id="lName" name="lName" placeholder="Your Last Name..." required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" id="email-label">Email:</label>
+                                <input type="email" id="email" name="email" placeholder="Your Email..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" id="subject-label">Subject:</label>
+                                <input type="text" id="subject" name="sub" placeholder="Subject..." required>
+                            </div>
+                        </div>
+                        <div class="form-row-full">
+                            <label for="message" id="message-label">Message:</label>
+                            <textarea id="message-content" name="message" placeholder="..." required></textarea>
+                        </div>
+                        <button type="submit" id="submit">Send</button>
+                    </form>
+                    <img src="images/contact-image.jpg" alt="" id="contact-im">
+                </div>
             </div>
         </section>
+        
 
 
         <footer class="main-footer">
