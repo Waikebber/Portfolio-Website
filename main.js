@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setupNavigationScroll();
     activateSectionOnScroll();
     setupFormValidation();
+    setupEmailLinkScroll();
+    setupFooterEmailLinkScroll();
 });
 
 // Sets up click events for navigation bar radio buttons to scroll to sections
@@ -110,5 +112,24 @@ function setupFormValidation() {
     });
 }
 
-
 //Scroll from the email link to the contact section
+function setupEmailLinkScroll() {
+    const emailLink = document.querySelector('.icon.email');
+    emailLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        const contactSection = document.getElementById('contact-section');
+        if (contactSection) {
+            smoothScrollTo(contactSection, 1000);
+        }
+    });
+}
+function setupFooterEmailLinkScroll() {
+    const footerEmailLink = document.querySelector('#footer-icons .icon.email');
+    footerEmailLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        const contactSection = document.getElementById('contact-section');
+        if (contactSection) {
+            smoothScrollTo(contactSection, 1000);
+        }
+    });
+}
