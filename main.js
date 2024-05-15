@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupIconLinks();
     setupNavigationScroll();
     activateSectionOnScroll();
+    setupFormValidation();
 });
 
 // Sets up click events for navigation bar radio buttons to scroll to sections
@@ -88,3 +89,26 @@ function setupIconLinks() {
         });
     });
 }
+
+//Contact form validation
+function setupFormValidation() {
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        var isValid = true;
+        var email = document.getElementById('email').value;
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        var emailErrorElement = document.getElementById('email-error');
+        emailErrorElement.textContent = '';
+
+        if (!emailPattern.test(email)) {
+            isValid = false;
+            emailErrorElement.textContent = 'Please enter a valid email address.';
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+}
+
+
+//Scroll from the email link to the contact section
