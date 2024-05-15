@@ -7,16 +7,16 @@
 position: relative;
 background: var(--bkg-color);
 border-radius: 50%;
-padding: 15px;
-margin: 10px;
-width: 50px;
-height: 50px;
-font-size: 18px;
+padding: 1vh;
+margin: 1.212vh;
+width: 6.058vh;
+height: 6.058vh;
+font-size: 2.181vh;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+box-shadow: 0 1.212vh 1.212vh rgba(0, 0, 0, 0.1);
 cursor: pointer;
 transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -24,12 +24,12 @@ transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 .wrapper .tooltip {
 position: absolute;
 top: 0;
-font-size: 14px;
+font-size: 1.696vh;
 background: var(--bkg-color);
 color: var(--bkg-color);
-padding: 5px 8px;
-border-radius: 5px;
-box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+padding: 0.606vh 0.969vh;
+border-radius: 0.606vh;
+box-shadow: 0 1.212vh 1.212vh rgba(0, 0, 0, 0.1);
 opacity: 0;
 pointer-events: none;
 transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -38,17 +38,17 @@ transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 .wrapper .tooltip::before {
 position: absolute;
 content: "";
-height: 8px;
-width: 8px;
+height: 0.969vh;
+width: 0.969vh;
 background: var(--bkg-color);
-bottom: -3px;
+bottom: -0.363vh;
 left: 50%;
 transform: translate(-50%) rotate(45deg);
 transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .wrapper .icon:hover .tooltip {
-top: -45px;
+top: -5.452vh;
 opacity: 1;
 visibility: visible;
 pointer-events: auto;
@@ -56,7 +56,7 @@ pointer-events: auto;
 
 .wrapper .icon:hover span,
 .wrapper .icon:hover .tooltip {
-text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+text-shadow: 0 -0.121vh 0 rgba(0, 0, 0, 0.1);
 }
 
 /* Makes the icons responsive */
