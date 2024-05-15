@@ -174,11 +174,16 @@
             </div>
         </section>
 
+        <div id="buffer-photography-contact"></div>
+
         <section id="contact-section" class="section">
             <div class="container">
                 <div id="contact-partition">
-                    <h2 id="contact-me">Contact Me</h2>
-                    <p id="contact-sub">Feel free to reach out!</p>
+                    <div id="header-group">
+                        <h2 id="contact-me">Contact Me</h2>
+                        <p id="contact-sub">Feel free to reach out!</p>
+                    </div>
+                    <img src="images/contact-image.jpg" alt="Contact Image" id="contact-im">
                     <form action="contact.php" method="post" id="contact-form">
                         <div class="form-row">
                             <div class="form-group">
@@ -194,6 +199,7 @@
                             <div class="form-group">
                                 <label for="email" id="email-label">Email:</label>
                                 <input type="email" id="email" name="email" placeholder="Your Email..." required>
+                                <div class="error-message" id="email-error"></div>
                             </div>
                             <div class="form-group">
                                 <label for="subject" id="subject-label">Subject:</label>
@@ -202,14 +208,15 @@
                         </div>
                         <div class="form-row-full">
                             <label for="message" id="message-label">Message:</label>
-                            <textarea id="message-content" name="message" placeholder="..." required></textarea>
+                            <textarea id="message-content" name="message" placeholder="Your Message..." required></textarea>
                         </div>
                         <button type="submit" id="submit">Send</button>
                     </form>
-                    <img src="images/contact-image.jpg" alt="" id="contact-im">
                 </div>
             </div>
         </section>
+        
+        
         
 
 
