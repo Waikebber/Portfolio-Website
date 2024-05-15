@@ -181,7 +181,7 @@ textarea {
 }
 
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1050px) {
     #contact-section {
         padding: 2vh;
     }
@@ -194,8 +194,7 @@ textarea {
             "form"
             "form"
             "form"
-            "submit"
-            "image";
+            "submit";
         padding: 2vh;
         gap: 3vh;
     }
