@@ -17,3 +17,10 @@
         var(--main-color) 86% 86%
     );
 }
+
+#buffer-photography-contact {
+    height: 30vh;
+    background-image: url('../images/photo-contact-buffer.svg');
+    background-size: cover;
+    background-position: center;
+}
