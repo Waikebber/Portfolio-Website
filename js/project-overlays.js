@@ -1,6 +1,8 @@
-function showOverlay(description) {
-    document.getElementById("overlay-title").innerText = description.split(' ')[0];
+function showOverlay(title, subtitle, description, imageUrl) {
+    document.getElementById("overlay-title").innerText = title;
+    document.getElementById("overlay-subtitle").innerText = subtitle;
     document.getElementById("overlay-description").innerText = description;
+    document.getElementById("overlay-image").src = imageUrl;
     document.getElementById("overlay").style.display = "flex";
 }
 
