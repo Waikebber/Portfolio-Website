@@ -19,12 +19,17 @@
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/buffers.css">
 
-        <script src="js/main.js" defer></script>
+        <script src="js/nav-links.js" defer></script>
+        <script src="js/email.js" defer></script>
         <script src="js/project-overlays.js" defer></script>
+        <script src="js/main.js" defer></script>
+        
 
-        <style>
-            body { display: none; }  /* Hide the body initially */
-        </style>
+        <script>
+            // Prevent FOUC
+            document.body.style.display = "none";
+        </script>
+
     </head>
     <body>
         <section id="home-section" class="section">
@@ -121,7 +126,7 @@
                     </div>
                 </div>
                 <div class="bento bento-img2"></div>
-                <div class="bento bento-unet" onclick="showOverlay('UNET Image Classifier', 'Personal Project', 'In a personal project, I developed an automated pipeline for scraping images from Google and segmenting them. I trained a U-Net image segmentation model using data labeled with the LabelBox API. By testing on bird species datasets, I achieved high accuracy and optimized data preprocessing. This project enhanced my skills in machine learning, data preprocessing, and automated image segmentation. <a href=&quot;https://github.com/Waikebber/Bird_Classifier; target=&quot;_blank&quot;>Read more</a>', 'path/to/image6.jpg')"> 
+                <div class="bento bento-unet" onclick="showOverlay('UNET Image Classifier', 'Personal Project', 'In a personal project, I developed an automated pipeline for scraping images from Google and segmenting them. I trained a U-Net image segmentation model using data labeled with the LabelBox API. By testing on bird species datasets, I achieved high accuracy and optimized data preprocessing. This project enhanced my skills in machine learning, data preprocessing, and automated image segmentation. <a href=&quot;https://github.com/Waikebber/Bird_Classifier; target=&quot;_blank&quot;>Read more</a>', 'images/unet-results.jpg')"> 
                     <!-- TODO: Add image path -->
                     <div class="txt-bkg">
                         <h2>UNET Image Classifier</h2>
