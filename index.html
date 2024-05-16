@@ -94,34 +94,35 @@
                 <div class="bento bento-title">
                     <h1>Projects and Experience</h1>
                 </div>
-                <div class="bento bento-website" onclick="showOverlay('This website')">
+                <div class="bento bento-website" onclick="showOverlay('This Website', 'Personal Project', 'With no prior knowledge of frontend development, I taught myself HTML, CSS, and JavaScript to build this personal portfolio website. This project not only showcases my skills and projects but also marks the beginning of my journey into web development. I plan to take on the AWS Cloud Resume Challenge to gain a deeper understanding of cloud technologies and further expand my learning in future projects with JavaScript.', 'images/proj/laptop-web.jpg')">
                     <div class="txt-bkg">
                         <h2>This website</h2>
                     </div>
                 </div>
-                <div class="bento bento-arm" onclick="showOverlay('Robotic Arm project details')">
+                <div class="bento bento-arm" onclick="showOverlay('Robotic Arm', 'Class project', 'For my Embedded Design class at Northeastern University, I developed a robotic arm using pulse width modulation (PWM) to control its movements. The goal was to program the arm to carefully pick up a bottle from various positions and move it to designated locations with precision. This project involved both hardware and software components, requiring an in-depth understanding of embedded systems and motor control. It significantly enhanced my skills in embedded systems, problem-solving, and provided hands-on experience with robotic control systems. <a href=&quot;https://github.com/Waikebber/PWM-Robotic-Arm&quot; target=&quot;_blank&quot;>Read more</a>', 'images/proj/arm-class.jpg')">
                     <div class="txt-bkg">
                         <h2>Robotic Arm</h2>
                     </div>
                 </div>
-                <div class="bento bento-car" onclick="showOverlay('NU Electric Racing Club project details')">
+                <div class="bento bento-car" onclick="showOverlay('NU Electric Racing Club', 'Telemetry Team', 'In my first semester, I joined the Northeastern Electric Racing Club and contributed to the telemetry team. I helped use a telemetry-XBee to transfer real-time data from the racing car to the data team. Additionally, I learned the InfluxDB Flux language to create simple visuals for the club members to monitor the car\'s components effectively. This experience allowed me to develop my skills in data transfer, visualization, and teamwork within a high-performance engineering environment.', 'images/proj/electric_car.jpg')">
                     <div class="txt-bkg">
                         <h2>NU Electric Racing Club</h2>
                     </div>
                 </div>
                 <div class="bento bento-img1"></div>
-                <div class="bento bento-kri" onclick="showOverlay('Kostas Research Institute project details')">
+                <div class="bento bento-kri" onclick="showOverlay('Kostas Research Institute', 'Data Scientist/Engineer Coop', 'From January 2023 to June 2023, I completed a co-op at the Kostas Research Institute, where I pioneered the development of subpixel image classification models for enhanced satellite imagery. I created a comprehensive database to organize satellite imagery metadata and labels and constructed per-pixel and sub-pixel neural net machine learning models using Python. Additionally, I derived multiclass models for both RGB/NRGB autonomous car imagery and multi-band satellite imagery. This experience allowed me to deepen my expertise in machine learning, data organization, and image processing.', 'images/proj/kri.jpg')">
                     <div class="txt-bkg">
                         <h2>Kostas Research Institute</h2>
                     </div>
                 </div>
-                <div class="bento bento-seds" onclick="showOverlay('NU SEDs, Rover Team project details')">
+                <div class="bento bento-seds" onclick="showOverlay('NU SEDs, Rover Team', 'Autonomous Navigation Team Member', 'As a member of the NU SEDS club, I am part of the autonomous team for the rover project. I have been fortunate to work on the localization of the rover in its autonomous settings. This role involves developing and refining the systems that enable the rover to determine its position and navigate autonomously. It has provided me with valuable experience in robotics, autonomous systems, and applied problem-solving in space exploration contexts.', 'images/proj/rover.jpg')">
                     <div class="txt-bkg">
                         <h2>NU SEDs, Rover Team</h2>
                     </div>
                 </div>
                 <div class="bento bento-img2"></div>
-                <div class="bento bento-unet" onclick="showOverlay('UNET Image Classifier project details')">
+                <div class="bento bento-unet" onclick="showOverlay('UNET Image Classifier', 'Personal Project', 'In a personal project, I developed an automated pipeline for scraping images from Google and segmenting them. I trained a U-Net image segmentation model using data labeled with the LabelBox API. By testing on bird species datasets, I achieved high accuracy and optimized data preprocessing. This project enhanced my skills in machine learning, data preprocessing, and automated image segmentation. <a href=&quot;https://github.com/Waikebber/Bird_Classifier; target=&quot;_blank&quot;>Read more</a>', 'path/to/image6.jpg')"> 
+                    <!-- TODO: Add image path -->
                     <div class="txt-bkg">
                         <h2>UNET Image Classifier</h2>
                     </div>
@@ -135,7 +136,9 @@
                 <div class="overlay-content">
                     <span class="close-btn" onclick="hideOverlay()">&times;</span>
                     <h2 id="overlay-title"></h2>
+                    <h3 id="overlay-subtitle"></h3>
                     <p id="overlay-description"></p>
+                    <img id="overlay-image" src="" alt="Project Image">
                 </div>
             </div>
         </section>

@@ -47,6 +47,7 @@
     transform: scale(1.05);
     border-width: 0;
     filter: grayscale(60%) brightness(1);
+    cursor: pointer;
 }
 .bento-title:hover,
 .bento-img1:hover,
@@ -54,9 +55,11 @@
     transform: scale(1);
     border-width: 1vh;
     filter: none;
+    cursor: auto;
 }
 .bento-more:hover {
     filter: none;
+    cursor: auto;
 }
 .bento h2 {
     font-size: 3vh;
@@ -176,6 +179,9 @@
 }
 .bento-unet {
     grid-area: box-9;
+    background-image: url("../images/proj/birds.jpg");
+    background-size: cover;
+    background-position: center;
 }
 .bento-more {
     grid-area: box-10;
@@ -183,37 +189,77 @@
 
 /* Overlay */
 .overlay {
-    position: fixed;
     display: none;
-    width: 50%;
+    position: fixed;
+    width: 40%;
     height: 100%;
     top: 0;
     right: 0;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
-    justify-content: center;
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
 }
 
 .overlay-content {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
+    padding: 5vh;
+    border-radius: 1vh;;
+    width: 90%;
+    height: 100%;
+    text-align: left;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .close-btn {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 30px;
+    left: -6.058vh;
+    top: 2vh;
+    font-size: 4vh;
     cursor: pointer;
+    background-color: #fff;
+    color: #000;
+    border-radius: 50%;
+    width: 4.847vh;
+    height: 4.847vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 1vh rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s, color 0.3s;
 }
 
+.close-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
 
+.overlay-content h2 {
+    font-size: 5vh;
+    line-height: 6vh;
+}
+.overlay-content h3 {
+    font-size: 3vh;
+    line-height: 4vh;
+    margin-top: 1vh;
+}
 
+.overlay-content p {
+    font-size: 2vh;
+    line-height: 3vh;
+    margin-top: 2.423vh;
+}
+
+.overlay-content img {
+    margin-top: 2.423vh;
+    border-radius: 2vh;
+    max-width: 100%;
+    height: auto;
+}
 
 
 @media screen and (max-width: 1115px) {
@@ -224,6 +270,9 @@
             "box-6 box-6 box-6"
             "box-8 box-7 box-4"
             "box-9 box-9 box-10";
+    }
+    .overlay {
+        width: 65%;
     }
 }
 
@@ -238,5 +287,24 @@
             "box-7 box-9"
             "box-8 box-10"
             ;
+    }
+    .overlay {
+        width: 100%;
+    }
+
+    .overlay-content h2 {
+        font-size: 4vh;
+        line-height: 5vh;
+    }
+    .overlay-content h3 {
+        font-size: 2.5vh;
+        line-height: 3vh;
+        margin-top: 0vh;
+    }
+    
+    .overlay-content p {
+        font-size: 1.75vh;
+        line-height: 2vh;
+        margin-top: 2.423vh;
     }
 }
