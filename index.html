@@ -8,6 +8,7 @@
         <meta name="author" content="Kai Webber">
 
         <title>Kai Webber | Portfolio</title>
+
         <link rel="stylesheet" href="css/default.css">
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/home.css">
@@ -23,15 +24,14 @@
         <script src="js/email.js" defer></script>
         <script src="js/project-overlays.js" defer></script>
         <script src="js/main.js" defer></script>
-        
-
-        <script>
-            // Prevent FOUC
-            document.body.style.display = "none";
-        </script>
-
     </head>
     <body>
+        <!-- HIDE OVERLAY AND FOUC -->
+        <script>
+            #overlay { display: none; }
+            body { display: none; }
+        </script>
+
         <section id="home-section" class="section">
             <div class="container">
                 <div id="home-box">
@@ -261,6 +261,7 @@
         <script>
             document.addEventListener("DOMContentLoaded", function() { 
                 document.body.style.display = "block";
+                hideOverlay();
             });
         </script>
     </body>
