@@ -1,7 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // hideOverlay();
-});
-
 function showOverlay(title, subtitle, description, imageUrl) {
     document.getElementById("overlay-title").innerText = title;
     document.getElementById("overlay-subtitle").innerText = subtitle;
