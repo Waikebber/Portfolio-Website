@@ -8,11 +8,28 @@ async function fetchImages() {
     try {
         const response = await fetch('/images');
         images = await response.json();
+        images = shuffle(images);
         createCarouselItems();
         showSlide(currentIndex);
     } catch (error) {
         console.error('Error fetching images:', error);
     }
+}
+
+/**
+ *  Shuffle the array
+ * 
+ * @param {*} array 
+ * @returns shuffled array
+ */
+function shuffle(array) {
+    let currentIndex = array.length;
+    while (currentIndex != 0) {
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
 }
 
 /**
