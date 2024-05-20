@@ -1,5 +1,7 @@
 let currentIndex = 3; // Start with the fourth image as active
 let images = [];
+let startX = 0;
+let isDragging = false;
 
 /**
  * Fetch images from the server
@@ -11,6 +13,7 @@ async function fetchImages() {
         images = shuffle(images);
         createCarouselItems();
         showSlide(currentIndex);
+        addDragEvents(); // Add drag events
     } catch (error) {
         console.error('Error fetching images:', error);
     }
@@ -65,7 +68,6 @@ function showSlide(index) {
 
     slides.forEach((slide, idx) => {
         slide.classList.remove('active', 'prev', 'next', 'prev-prev', 'next-next');
-        slide.style.display = 'none';
     });
 
     const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
@@ -73,11 +75,9 @@ function showSlide(index) {
     const prevPrevIndex = (currentIndex - 2 + totalSlides) % totalSlides;
     const nextNextIndex = (currentIndex + 2) % totalSlides;
 
-    slides[prevPrevIndex].style.display = 'flex';
-    slides[prevIndex].style.display = 'flex';
-    slides[currentIndex].style.display = 'flex';
-    slides[nextIndex].style.display = 'flex';
-    slides[nextNextIndex].style.display = 'flex';
+    slides.forEach((slide, idx) => {
+        slide.style.display = (idx === prevPrevIndex || idx === prevIndex || idx === currentIndex || idx === nextIndex || idx === nextNextIndex) ? 'flex' : 'none';
+    });
 
     slides[prevPrevIndex].classList.add('prev-prev');
     slides[prevIndex].classList.add('prev');
@@ -96,6 +96,45 @@ function nextSlide() {
 function prevSlide() {
     const totalSlides = document.querySelectorAll('.carousel-item').length;
     showSlide((currentIndex - 1 + totalSlides) % totalSlides);
+}
+
+// Add event listeners for drag functionality
+function addDragEvents() {
+    const carouselInner = document.getElementById('carousel-inner');
+    
+    carouselInner.addEventListener('mousedown', startDrag);
+    carouselInner.addEventListener('touchstart', startDrag);
+
+    carouselInner.addEventListener('mousemove', onDrag);
+    carouselInner.addEventListener('touchmove', onDrag);
+
+    carouselInner.addEventListener('mouseup', endDrag);
+    carouselInner.addEventListener('touchend', endDrag);
+}
+
+function startDrag(event) {
+    isDragging = true;
+    startX = event.type === 'touchstart' ? event.touches[0].clientX : event.clientX;
+}
+
+function onDrag(event) {
+    if (!isDragging) return;
+    const currentX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
+    const diffX = currentX - startX;
+
+    if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+            prevSlide();
+        } else {
+            nextSlide();
+        }
+        endDrag();
+    }
+}
+
+function endDrag() {
+    isDragging = false;
+    startX = 0;
 }
 
 // Initial setup
