@@ -1,7 +1,9 @@
 let currentIndex = 3; // Start with the fourth image as active
 let images = [];
 
-// Fetch images from the server
+/**
+ * Fetch images from the server
+ */
 async function fetchImages() {
     try {
         const response = await fetch('/images');
@@ -13,10 +15,12 @@ async function fetchImages() {
     }
 }
 
-// Function to create carousel items
+/**
+ * Create carousel items
+ */
 function createCarouselItems() {
     const carouselInner = document.getElementById('carousel-inner');
-    carouselInner.innerHTML = ''; // Clear any existing items
+    carouselInner.innerHTML = ''; // Clear the carousel inner
     images.forEach((src, index) => {
         const div = document.createElement('div');
         div.className = 'carousel-item';
@@ -32,34 +36,37 @@ function createCarouselItems() {
     });
 }
 
-// Function to show the slide at the given index
+/**
+ * Show the slide at the given index
+ * 
+ * @param {*} index 
+ */
 function showSlide(index) {
     const slides = document.querySelectorAll('.carousel-item');
     const totalSlides = slides.length;
     currentIndex = index;
 
     slides.forEach((slide, idx) => {
-        slide.classList.remove('active');
+        slide.classList.remove('active', 'prev', 'next', 'prev-prev', 'next-next');
         slide.style.display = 'none';
     });
 
-    // Calculate the indices to show
-    const indicesToShow = [];
-    for (let i = -3; i <= 3; i++) {
-        let idx = (currentIndex + i + totalSlides) % totalSlides;
-        indicesToShow.push(idx);
-    }
+    const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    const nextIndex = (currentIndex + 1) % totalSlides;
+    const prevPrevIndex = (currentIndex - 2 + totalSlides) % totalSlides;
+    const nextNextIndex = (currentIndex + 2) % totalSlides;
 
-    indicesToShow.forEach((idx) => {
-        slides[idx].style.display = 'flex';
-        slides[idx].classList.remove('active');
-    });
+    slides[prevPrevIndex].style.display = 'flex';
+    slides[prevIndex].style.display = 'flex';
+    slides[currentIndex].style.display = 'flex';
+    slides[nextIndex].style.display = 'flex';
+    slides[nextNextIndex].style.display = 'flex';
 
+    slides[prevPrevIndex].classList.add('prev-prev');
+    slides[prevIndex].classList.add('prev');
     slides[currentIndex].classList.add('active');
-
-    // Adjust the carousel-inner transform to center the active slide
-    const offset = -((currentIndex - 3 + totalSlides) % totalSlides) * 100 / 7;
-    document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+    slides[nextIndex].classList.add('next');
+    slides[nextNextIndex].classList.add('next-next');
 }
 
 // Function to go to the next slide
