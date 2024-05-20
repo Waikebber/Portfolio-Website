@@ -18,6 +18,13 @@
     );
 }
 
+#buffer-resume-photography {
+    height: 30vh;
+    background-image: url('../images/resume-photo-border.svg');
+    background-size: cover;
+    background-position: center;
+}
+
 #buffer-photography-contact {
     height: 30vh;
     background-image: url('../images/photo-contact-buffer.svg');
