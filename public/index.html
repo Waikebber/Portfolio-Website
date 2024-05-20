@@ -23,6 +23,7 @@
         <script src="js/nav-links.js" defer></script>
         <script src="js/email.js" defer></script>
         <script src="js/project-overlays.js" defer></script>
+        <script src="js/carousel.js" defer></script>
         <script src="js/main.js" defer></script>
 
         <!-- HIDE FOUC -->
@@ -178,16 +179,44 @@
             </div>
         </section>
 
+
+
         <section id="photography-section" class="section">
             <div class="container">
                 <h2>Photography</h2>
-                <ul>
-                    <li>Image 1</li>
-                    <li>Image 2</li>
-                    <li>Image 3</li>
-                </ul>
+                <div class="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item" onclick="showSlide(0)">
+                            <img src="image1.jpg" alt="Image 1">
+                        </div>
+                        <div class="carousel-item" onclick="showSlide(1)">
+                            <img src="image2.jpg" alt="Image 2">
+                        </div>
+                        <div class="carousel-item" onclick="showSlide(2)">
+                            <img src="image3.jpg" alt="Image 3">
+                        </div>
+                        <div class="carousel-item" onclick="showSlide(3)">
+                            <img src="image4.jpg" alt="Image 4">
+                        </div>
+                        <div class="carousel-item" onclick="showSlide(4)">
+                            <img src="image5.jpg" alt="Image 5">
+                        </div>
+                        <div class="carousel-item" onclick="showSlide(5)">
+                            <img src="image6.jpg" alt="Image 6">
+                        </div>
+                        <div class="carousel-item" onclick="showSlide(6)">
+                            <img src="image7.jpg" alt="Image 7">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" onclick="prevSlide()">&#10094;</a>
+                    <a class="carousel-control-next" onclick="nextSlide()">&#10095;</a>
+                </div>
             </div>
         </section>
+
+
+
+
 
         <div id="buffer-photography-contact"></div>
 
