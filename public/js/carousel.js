@@ -1,6 +1,7 @@
 let currentIndex = 3; // Start with the fourth image as active
 let images = [];
 let currentActiveOverlay = null;
+let minWidth = 1050; // Minimum width for showing prev and next images
 
 /**
  * Fetch images from the server
@@ -91,8 +92,8 @@ function showSlide(index) {
     slides[currentIndex].classList.add('active');
     slides[currentIndex].style.display = 'flex';
     
-    // Only show prev and next images if the screen width is greater than 1000px
-    if (window.innerWidth > 1000) {
+    // Only show prev and next images if the screen width is greater than minWidth
+    if (window.innerWidth > minWidth) {
         slides[prevIndex].classList.add('prev');
         slides[prevIndex].style.display = 'flex';
         slides[nextIndex].classList.add('next');
@@ -136,7 +137,7 @@ function handleCarouselClick(event) {
 
     if (slide.classList.contains('active')) {
         showLocation(index);
-    } else if (window.innerWidth > 1000) { // Allow clicking to change slides only if width is greater than 1000px
+    } else if (window.innerWidth > minWidth) { // Allow clicking to change slides only if width is greater than minWidth
         showSlide(index);
     }
 }
