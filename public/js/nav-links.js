@@ -42,8 +42,10 @@ function activateSectionOnScroll() {
 
 //Adds a smooth scroll effect to the navigation bar
 function smoothScrollTo(element, duration) {
+    const bufferPosition = -55;
+
     const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.scrollY;
+    const offsetPosition = elementPosition + window.scrollY + bufferPosition;
 
     const startPosition = window.scrollY;
     const distance = offsetPosition - startPosition;
