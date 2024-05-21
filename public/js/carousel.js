@@ -1,7 +1,19 @@
+document.addEventListener('DOMContentLoaded', function() {
+    hideOverlay();
+    setupIconLinks();
+    setupNavigationScroll();
+    activateSectionOnScroll();
+    setupFormValidation();
+    setupEmailLinkScroll();
+    setupFooterEmailLinkScroll();
+    
+    // Fetch images and set up the carousel
+    fetchImages();
+});
+
 let currentIndex = 3; // Start with the fourth image as active
 let images = [];
-let startX = 0;
-let isDragging = false;
+let currentActiveOverlay = null;
 
 /**
  * Fetch images from the server
@@ -9,25 +21,25 @@ let isDragging = false;
 async function fetchImages() {
     try {
         const response = await fetch('/images');
-        images = await response.json();
-        images = shuffle(images);
+        const data = await response.json();
+        images = shuffle(data);
         createCarouselItems();
         showSlide(currentIndex);
-        addDragEvents(); // Add drag events
+        addEventDelegation(); // Add event delegation
     } catch (error) {
         console.error('Error fetching images:', error);
     }
 }
 
 /**
- *  Shuffle the array
+ * Shuffle the array
  * 
  * @param {*} array 
  * @returns shuffled array
  */
 function shuffle(array) {
     let currentIndex = array.length;
-    while (currentIndex != 0) {
+    while (currentIndex !== 0) {
         let randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
@@ -41,19 +53,25 @@ function shuffle(array) {
 function createCarouselItems() {
     const carouselInner = document.getElementById('carousel-inner');
     carouselInner.innerHTML = ''; // Clear the carousel inner
-    images.forEach((src, index) => {
+    images.forEach((image, index) => {
         const div = document.createElement('div');
         div.className = 'carousel-item';
-        if (index === currentIndex) {
-            div.classList.add('active');
-        }
-        div.setAttribute('onclick', `showSlide(${index})`);
         const img = document.createElement('img');
-        img.src = src;
+        img.src = image.src;
         img.alt = `Image ${index + 1}`;
         div.appendChild(img);
+
+        // Create the location overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'location-overlay';
+        overlay.innerText = image.location;
+        div.appendChild(overlay);
+
         carouselInner.appendChild(div);
     });
+
+    // Force reflow/redraw
+    carouselInner.offsetHeight;
 }
 
 /**
@@ -68,6 +86,14 @@ function showSlide(index) {
 
     slides.forEach((slide, idx) => {
         slide.classList.remove('active', 'prev', 'next', 'prev-prev', 'next-next');
+        slide.style.transform = ''; // Reset transform
+        slide.style.display = 'none'; // Hide all slides initially
+
+        // Hide the overlay for all slides
+        const overlay = slide.querySelector('.location-overlay');
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
     });
 
     const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
@@ -75,15 +101,59 @@ function showSlide(index) {
     const prevPrevIndex = (currentIndex - 2 + totalSlides) % totalSlides;
     const nextNextIndex = (currentIndex + 2) % totalSlides;
 
-    slides.forEach((slide, idx) => {
-        slide.style.display = (idx === prevPrevIndex || idx === prevIndex || idx === currentIndex || idx === nextIndex || idx === nextNextIndex) ? 'flex' : 'none';
-    });
-
-    slides[prevPrevIndex].classList.add('prev-prev');
-    slides[prevIndex].classList.add('prev');
     slides[currentIndex].classList.add('active');
+    slides[currentIndex].style.display = 'flex';
+    slides[prevIndex].classList.add('prev');
+    slides[prevIndex].style.display = 'flex';
     slides[nextIndex].classList.add('next');
+    slides[nextIndex].style.display = 'flex';
+    slides[prevPrevIndex].classList.add('prev-prev');
+    slides[prevPrevIndex].style.display = 'flex';
     slides[nextNextIndex].classList.add('next-next');
+    slides[nextNextIndex].style.display = 'flex';
+
+    // Force reflow/redraw
+    requestAnimationFrame(() => {
+        slides[currentIndex].style.transform = 'translateX(0)'; // Example transform to trigger reflow
+    });
+}
+
+/**
+ * Show the location text for the active image
+ * 
+ * @param {*} index 
+ */
+function showLocation(index) {
+    const slides = document.querySelectorAll('.carousel-item');
+    const activeSlide = slides[index];
+    const overlay = activeSlide.querySelector('.location-overlay');
+
+    if (overlay.style.display === 'block') {
+        overlay.style.display = 'none';
+    } else {
+        overlay.style.display = 'block';
+    }
+}
+
+// Function to handle all click events for the carousel
+function handleCarouselClick(event) {
+    const slide = event.target.closest('.carousel-item');
+    if (!slide) return;
+
+    const slides = Array.from(slide.parentNode.children);
+    const index = slides.indexOf(slide);
+
+    if (slide.classList.contains('active')) {
+        showLocation(index);
+    } else {
+        showSlide(index);
+    }
+}
+
+// Add event delegation
+function addEventDelegation() {
+    const carouselInner = document.getElementById('carousel-inner');
+    carouselInner.addEventListener('click', handleCarouselClick);
 }
 
 // Function to go to the next slide
@@ -96,45 +166,6 @@ function nextSlide() {
 function prevSlide() {
     const totalSlides = document.querySelectorAll('.carousel-item').length;
     showSlide((currentIndex - 1 + totalSlides) % totalSlides);
-}
-
-// Add event listeners for drag functionality
-function addDragEvents() {
-    const carouselInner = document.getElementById('carousel-inner');
-    
-    carouselInner.addEventListener('mousedown', startDrag);
-    carouselInner.addEventListener('touchstart', startDrag);
-
-    carouselInner.addEventListener('mousemove', onDrag);
-    carouselInner.addEventListener('touchmove', onDrag);
-
-    carouselInner.addEventListener('mouseup', endDrag);
-    carouselInner.addEventListener('touchend', endDrag);
-}
-
-function startDrag(event) {
-    isDragging = true;
-    startX = event.type === 'touchstart' ? event.touches[0].clientX : event.clientX;
-}
-
-function onDrag(event) {
-    if (!isDragging) return;
-    const currentX = event.type === 'touchmove' ? event.touches[0].clientX : event.clientX;
-    const diffX = currentX - startX;
-
-    if (Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-            prevSlide();
-        } else {
-            nextSlide();
-        }
-        endDrag();
-    }
-}
-
-function endDrag() {
-    isDragging = false;
-    startX = 0;
 }
 
 // Initial setup
