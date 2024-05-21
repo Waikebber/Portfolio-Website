@@ -114,22 +114,28 @@
 .carousel-control-next {
     position: absolute;
     top: 50%;
-    width: auto;
-    padding: 1.832vh;
-    margin-top: -2.519vh;
-    color: black;
+    width: 3em;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
     font-weight: bold;
     font-size: 2.748vh;
     cursor: pointer;
     user-select: none;
+    z-index: 2;
+    transform: translateY(-50%);
 }
 
 .carousel-control-prev {
-    left: 0;
+    left: 1em;
 }
 
 .carousel-control-next {
-    right: 0;
+    right: 1em;
 }
 
 .location-overlay {
@@ -146,4 +152,39 @@
 
 .carousel-item.active .location-overlay {
     display: block; 
+}
+
+@media screen and (max-width: 1000px) {
+    #photography-section h2 {
+        font-size: 3vh;
+    }
+
+    .carousel-item {
+        width: 100%; /* Only show the active image */
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .carousel-item.prev, 
+    .carousel-item.next,
+    .carousel-item.prev-prev, 
+    .carousel-item.next-next {
+        display: none; /* Hide previous and next images */
+    }
+
+    .carousel-item.active {
+        width: 100%; /* Make active image take full width */
+    }
+
+    .carousel-item img {
+        height: 100%; /* Image takes up full height of the carousel-inner */
+        width: 100%; /* Image takes up full width of the carousel-inner */
+        object-fit: contain; /* Ensure image covers the available area */
+    }
+
+    .location-overlay {
+        font-size: 1.5vh;
+    }
 }

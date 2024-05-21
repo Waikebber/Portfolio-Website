@@ -1,16 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    hideOverlay();
-    setupIconLinks();
-    setupNavigationScroll();
-    activateSectionOnScroll();
-    setupFormValidation();
-    setupEmailLinkScroll();
-    setupFooterEmailLinkScroll();
-    
-    // Fetch images and set up the carousel
-    fetchImages();
-});
-
 let currentIndex = 3; // Start with the fourth image as active
 let images = [];
 let currentActiveOverlay = null;
@@ -103,14 +90,18 @@ function showSlide(index) {
 
     slides[currentIndex].classList.add('active');
     slides[currentIndex].style.display = 'flex';
-    slides[prevIndex].classList.add('prev');
-    slides[prevIndex].style.display = 'flex';
-    slides[nextIndex].classList.add('next');
-    slides[nextIndex].style.display = 'flex';
-    slides[prevPrevIndex].classList.add('prev-prev');
-    slides[prevPrevIndex].style.display = 'flex';
-    slides[nextNextIndex].classList.add('next-next');
-    slides[nextNextIndex].style.display = 'flex';
+    
+    // Only show prev and next images if the screen width is greater than 1000px
+    if (window.innerWidth > 1000) {
+        slides[prevIndex].classList.add('prev');
+        slides[prevIndex].style.display = 'flex';
+        slides[nextIndex].classList.add('next');
+        slides[nextIndex].style.display = 'flex';
+        slides[prevPrevIndex].classList.add('prev-prev');
+        slides[prevPrevIndex].style.display = 'flex';
+        slides[nextNextIndex].classList.add('next-next');
+        slides[nextNextIndex].style.display = 'flex';
+    }
 
     // Force reflow/redraw
     requestAnimationFrame(() => {
@@ -145,7 +136,7 @@ function handleCarouselClick(event) {
 
     if (slide.classList.contains('active')) {
         showLocation(index);
-    } else {
+    } else if (window.innerWidth > 1000) { // Allow clicking to change slides only if width is greater than 1000px
         showSlide(index);
     }
 }
@@ -167,6 +158,10 @@ function prevSlide() {
     const totalSlides = document.querySelectorAll('.carousel-item').length;
     showSlide((currentIndex - 1 + totalSlides) % totalSlides);
 }
+
+// Add event listeners for arrow controls
+document.querySelector('.carousel-control-next').addEventListener('click', nextSlide);
+document.querySelector('.carousel-control-prev').addEventListener('click', prevSlide);
 
 // Initial setup
 fetchImages();
