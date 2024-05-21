@@ -15,7 +15,19 @@ app.get('/images', (req, res) => {
         const workbook = xlsx.readFile(path.join(__dirname, 'public/images/photography/images.xlsx'));
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        const data = xlsx.utils.sheet_to_json(worksheet);
+        const rawData = xlsx.utils.sheet_to_json(worksheet);
+
+        // Process the raw data to extract image names and locations
+        const data = rawData.reduce((acc, row) => {
+            Object.keys(row).forEach((key, index) => {
+                if (index % 2 === 0) {
+                    const imgName = row[key];
+                    const location = row[Object.keys(row)[index + 1]];
+                    acc.push({ img_name: imgName, location });
+                }
+            });
+            return acc;
+        }, []);
 
         // Get the list of image files in the directory
         const imagesDir = path.join(__dirname, 'public/images/photography');
@@ -24,10 +36,10 @@ app.get('/images', (req, res) => {
                 return res.status(500).json({ error: 'Unable to scan directory' });
             }
             const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
-            
+
             // Combine image files with their locations
             const imagesWithLocations = imageFiles.map(file => {
-                const imageData = data.find(item => item.img_name === file);
+                const imageData = data.find(item => item.img_name.toLowerCase() === file.toLowerCase());
                 return {
                     src: `/images/photography/${file}`,
                     location: imageData ? imageData.location : 'Unknown Location'
