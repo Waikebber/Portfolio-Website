@@ -1,0 +1,35 @@
+#resume-section {
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2vh;
+}
+
+#container-resume {
+    text-align: center;
+}
+
+#container-resume h2 {
+    margin-bottom: 2.29vh;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2.29vh;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1.145vh 2.29vh;
+    background-color: var(--main-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.573vh;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--accent-color);
+}
