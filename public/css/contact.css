@@ -126,7 +126,7 @@ textarea {
             "header image"
             "form form"
             "submit submit";
-        padding: 5vh;;
+        padding: 5vh;
         gap: 2.5vh;
     }
 
@@ -179,7 +179,6 @@ textarea {
         transition: background-color 0.3s;
     }
 }
-
 
 @media screen and (max-width: 1050px) {
     #contact-section {
