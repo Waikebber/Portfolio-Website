@@ -160,9 +160,11 @@ function prevSlide() {
     showSlide((currentIndex - 1 + totalSlides) % totalSlides);
 }
 
-// Add event listeners for arrow controls
-document.querySelector('.carousel-control-next').addEventListener('click', nextSlide);
-document.querySelector('.carousel-control-prev').addEventListener('click', prevSlide);
+// Initialize carousel controls
+function initializeCarouselControls() {
+    document.querySelector('.carousel-control-next').addEventListener('click', nextSlide);
+    document.querySelector('.carousel-control-prev').addEventListener('click', prevSlide);
+}
 
 // Initial setup
 fetchImages();
