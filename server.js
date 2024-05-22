@@ -7,7 +7,14 @@ const path = require('path');
 const xlsx = require('xlsx');
 
 // Import configuration
-const config = require('./config');
+let config;
+if (fs.existsSync('config.local.js')) {
+    config = require('./config.local.js');
+} else {
+    config = require('./config.js');
+}
+
+module.exports = config;
 
 const app = express();
 const PORT = 3000;
