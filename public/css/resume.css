@@ -12,9 +12,13 @@
 
 #container-resume h2 {
     margin-bottom: 2.29vh;
+    font-size: 3vh;
+    line-height: 4vh;
 }
 
 .buttons {
+    font-size: 2vh;
+    line-height: 3vh;
     display: flex;
     justify-content: center;
     gap: 2.29vh;
