@@ -251,34 +251,40 @@
                         <p id="contact-sub">Feel free to reach out!</p>
                     </div>
                     <img src="images/contact-image.jpg" alt="Contact Image" id="contact-im">
-                    <form action="contact.php" method="post" id="contact-form">
+                    <form id="contact-form" action="https://formsubmit.co/" method="POST">
+                        <!--Honeypot-->
+                        <input type="text" name="_honey" style="display:none">
+                        <!--Disable Captcha-->
+                        <input type="hidden" name="_captcha" value="false">
+        
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="fName" id="fName-label">First Name:</label>
-                                <input type="text" id="fName" name="fName" placeholder="Your Name..." required>
+                                <label for="fName" id="fName-label">First&nbsp;Name:</label>
+                                <input type="text" id="fName" name="First Name" placeholder="Your Name..." required>
                             </div>
                             <div class="form-group">
-                                <label for="lName" id="lName-label">Last Name:</label>
-                                <input type="text" id="lName" name="lName" placeholder="Your Last Name..." required>
+                                <label for="lName" id="lName-label">Last&nbsp;Name:</label>
+                                <input type="text" id="lName" name="Last Name" placeholder="Your Last Name..." required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email" id="email-label">Email:</label>
-                                <input type="email" id="email" name="email" placeholder="Your Email..." required>
+                                <input type="email" id="email" name="Email" placeholder="Your Email..." required>
                                 <div class="error-message" id="email-error"></div>
                             </div>
                             <div class="form-group">
                                 <label for="subject" id="subject-label">Subject:</label>
-                                <input type="text" id="subject" name="sub" placeholder="Subject..." required>
+                                <input type="text" id="subject" name="Subject" placeholder="Subject..." required>
                             </div>
                         </div>
                         <div class="form-row-full">
                             <label for="message" id="message-label">Message:</label>
-                            <textarea id="message-content" name="message" placeholder="Your Message..." required></textarea>
+                            <textarea id="message-content" name="Message" placeholder="Your Message..." required></textarea>
                         </div>
                         <button type="submit" id="submit">Send</button>
                     </form>
+                    <p id="success-message">Thanks for submitting!</p>
                 </div>
             </div>
         </section>
