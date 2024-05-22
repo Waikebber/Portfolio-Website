@@ -56,8 +56,6 @@ Thumbs.db
 *.code-workspace
 
 # Personal Files
-config.local.js
-
 public/images/kai.JPG
 public/images/kai-photo.jpg
 public/images/contact-image.jpg
