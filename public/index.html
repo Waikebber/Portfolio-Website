@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="css/buffers.css">
 
         <script src="js/nav-links.js" defer></script>
+        <script src="js/hamburger-menu.js" defer></script>
         <script src="js/email.js" defer></script>
         <script src="js/project-overlays.js" defer></script>
         <script src="js/carousel.js" defer></script>
@@ -64,30 +65,49 @@
                 </div>
             </div>
         </section>
-
+        
         <header class="section" id="bar-section">
             <nav class="navbar" role="navigation" aria-label="Main navigation">
                 <input type="radio" id="home" name="navbar" checked>
                 <label class="tab" for="home">Home</label>                
-            
+        
                 <input type="radio" id="projects" name="navbar">
                 <label class="tab" for="projects">Projects</label>  
-            
+        
                 <input type="radio" id="skills" name="navbar">
                 <label class="tab" for="skills">Skills</label>
-            
+        
                 <input type="radio" id="resume" name="navbar">
                 <label class="tab" for="resume">Resume</label>
-            
+        
                 <input type="radio" id="photography" name="navbar">
                 <label class="tab" for="photography">Photography</label>
-            
+        
                 <input type="radio" id="contact" name="navbar">
                 <label class="tab" for="contact">Contact</label>
-            
+        
                 <span class="slider"></span>
             </nav>
         </header>
+    
+        <div class="hamburger-menu" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    
+        <div class="dimmed-background" id="dimmed-background">
+            <div class="nav-links" id="nav-links">
+                <a href="#home-section">Home</a>
+                <a href="#projects-section">Projects</a>
+                <a href="#skills-sections">Skills</a>
+                <a href="#resume-section">Resume</a>
+                <a href="#photography-section">Photography</a>
+                <a href="#contact-section">Contact</a>
+            </div>
+        </div>
+        
+        
 
         <div id="buffer-section-top"></div>
 
