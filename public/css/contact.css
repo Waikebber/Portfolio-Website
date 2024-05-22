@@ -121,6 +121,15 @@ textarea {
     resize: none;
 }
 
+#success-message {
+    display: none;
+    color: green;
+    text-align: center;
+    margin-top: 5vh;
+    font-size: 1.2em;
+}
+
+
 @media screen and (max-width: 1450px) {
     #contact-partition {
         grid-template-areas:
