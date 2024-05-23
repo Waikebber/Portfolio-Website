@@ -1,4 +1,4 @@
-# Personal Portfolio Website
+# Personal Portfolio Website -- Kai Webber
 
 Welcome to my personal portfolio website repository! This project showcases my work, skills, and contact information. The website is fully responsive and built using HTML, CSS, and JavaScript.
 
