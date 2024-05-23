@@ -28,42 +28,50 @@ This is my personal portfolio website where you can find information about me, t
 - **HTML**
 - **CSS**
 - **JavaScript**
+- **Node.js**
 
 ## Installation
 To run the website locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/portfolio-website.git
+   git clone https://github.com/Waikebber/Website.git
    ```
 2. Navigate to the project directory:
     ```bash
-    cd portfolio-website
+    cd Website
     ```
-3. Open the ```index.html``` file.
+3. Run ```node server.js``` in the terminal.
 
 ## Usage
 - Navigate through the different sections using the navigation bar.
 - View details of each project in the Projects section.
 - Download my resume from the Skills/Resume section.
 - Use the contact form to send me a message.
+- A Showcase of various photos taken by myself.
 
 ## Project Structure
 ```css
 Website/
-├── index.html
-├── projects.html
-├── skills.html
-├── contact.html
-├── css/
-│   ├── styles.css
-├── js/
-│   ├── main.js
-├── images/
-│   ├── project1.png
-│   ├── project2.png
-│   └── ...
+├── public/
+│   ├── index.html
+│   ├── css/
+│   │   ├── *.css
+│   ├── js/
+│   │   └── *.js
+│   └── images/
+│       ├── photography/
+│       │   └──*.jpg
+│       ├── proj/
+│       │   └──*.jpg/.png
+│       └── ...
+├── server.js
+├── package.json
+├── Procfile
+├── .gitignore
+├── LICENSE
 └── README.md
+
 ```
 - ```index.html```: The main landing page.
 - ```projects.html```: The page showcasing my projects.
