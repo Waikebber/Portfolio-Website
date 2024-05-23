@@ -154,7 +154,7 @@
     display: block; 
 }
 
-@media screen and (max-width: 1050px) {
+@media (orientation: portrait) {
     #photography-section h2 {
         font-size: 3vh;
     }
