@@ -1,9 +1,9 @@
-# Personal Portfolio Website
+# Personal Portfolio Website -- Kai Webber
 
 Welcome to my personal portfolio website repository! This project showcases my work, skills, and contact information. The website is fully responsive and built using HTML, CSS, and JavaScript.
 
 ## The Deployed Website
-You can find the fully deloyed website [here](#)
+Find the fully deployed website [here](https://www.kaiwebber.com)
 
 ## Table of Contents
 - [Introduction](#introduction)
