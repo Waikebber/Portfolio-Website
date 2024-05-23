@@ -11,7 +11,8 @@
 #contact-partition {
     background: rgb(245, 245, 244);
     border-radius: 3vh;
-    height: 80vh;
+    min-height: 80vh;
+    max-height: 90vh;
     min-width: 90%;
     display: grid;
     grid-template-areas:
@@ -190,7 +191,7 @@ textarea {
     }
 }
 
-@media screen and (max-width: 1050px) {
+@media (orientation: portrait) {
     #contact-section {
         padding: 2vh;
     }

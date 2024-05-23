@@ -82,7 +82,7 @@
     transition-delay: 0.25s;
 }
 
-@media (max-width: 1050px) {
+@media (orientation: portrait) {
     .skills-container {
         flex-direction: column;
         align-items: center;
