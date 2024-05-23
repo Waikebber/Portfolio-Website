@@ -97,3 +97,30 @@ color: white;
 .wrapper .icon.linkedin:hover img {
     filter: invert(100%);
 }
+
+@media screen and (max-width: 350px) {
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .wrapper .icon {
+        margin: 1.212vh;
+        width: 5vh;
+        height: 5vh;
+        font-size: 2.181vh;
+    }
+
+    .wrapper .tooltip {
+        font-size: 1.696vh;
+        padding: 0.606vh 0.969vh;
+        border-radius: 0.606vh;
+    }
+
+    .wrapper .tooltip::before {
+        height: 0.969vh;
+        width: 0.969vh;
+        bottom: -0.363vh;
+    }
+}

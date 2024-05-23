@@ -19,7 +19,7 @@
     border-radius: 8vh;
     padding: 0 2vh;
     width: 100%;
-    height: 80vh;
+    min-height: 80vh;
     box-sizing: border-box;
     overflow: hidden;
     box-shadow: rgb(0 0 0 / 50%) 0 0 1vh 0;
@@ -94,30 +94,60 @@
     border-radius: 8vh;
 }
 
-@media screen and (max-width: 1100px) {
+@media (orientation: portrait) {
     #home-section {
         display: flex;
         justify-content: center;
         align-items: center;
+        min-height: 120vh; /* Ensure the home section takes up 120vh */
+        width: 100%;
+    }
+
+    #home-section .container {
+        margin: 0;
+        height: 100%;
     }
 
     #home-box {
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        height: auto;
-        width: 90%; 
-        /* margin: 0; */
+        height: 100%;
+        width: 100%; 
+        padding: 2vh;
+    }
+
+    #main {
+        padding: 0 5vh;
+    }
+
+    #intro_greeting {
+        margin: 0;
+        font-size: 5vh;
+        line-height: 3vh;
+    }
+    
+    #intro_major {
+        margin: 0;
+        font-size: 3vh;
+        line-height: 3vh;
+    }
+    
+    #intro_paragraph {
+        margin: 0;
+        font-size: 2vh;
+        line-height: 2vh;
     }
 
     #main-box {
         position: relative;
         justify-content: center;
-        margin-left: 0;
-        z-index: 1;
+        margin: -20vh 0 0 0; /* Negative margin to overlap on the sidebar */
+        z-index: 2; 
         background: rgba(255, 255, 255, 0.8);
         width: 100%;
-        margin-top: -60vh; /* Overlay the text on the image */
+        height: auto;
+        padding-top: 10vh; /* Add padding to shift the text down */
     }
 
     #sidebar {
@@ -128,13 +158,43 @@
         order: -1; /* Ensure the image comes first */
         width: 100%; /* Ensure the image takes full width */
         margin: 0; 
+        position: relative;
+        z-index: 1; /* Ensure the image is behind the text */
+        height: 60vh; /* Ensure the sidebar takes up a portion of the 120vh */
     }
 
     #sidebar img {
         width: 100%;
-        height: 50%; 
-        object-fit: contain; /* cover, contain, fill, scale-down */
-        object-position: top; 
-        margin: auto 0; 
+        height: auto; 
+        max-height: 80vh; 
+        object-fit: contain; 
+        object-position: center; 
+        margin: auto; 
+        position: relative; 
+    }
+}
+
+/* Additional media query for very small screens */
+@media (max-width: 350px) {
+    #main {
+        padding: 0 2vh;
+    }
+
+    #intro_greeting {
+        font-size: 4vh;
+        line-height: 2.5vh;
+        padding: 0 2vh;
+    }
+    
+    #intro_major {
+        font-size: 2.5vh;
+        line-height: 2vh;
+        padding: 0 2vh;
+    }
+    
+    #intro_paragraph {
+        font-size: 1.5vh;
+        line-height: 1.5vh;
+        padding: 0 2vh;
     }
 }
