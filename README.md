@@ -2,6 +2,9 @@
 
 Welcome to my personal portfolio website repository! This project showcases my work, skills, and contact information. The website is fully responsive and built using HTML, CSS, and JavaScript.
 
+## The Deployed Website
+You can find the fully deloyed website [here](#)
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
@@ -73,13 +76,16 @@ Website/
 └── README.md
 
 ```
-- ```index.html```: The main landing page.
-- ```projects.html```: The page showcasing my projects.
-- ```skills.html```: The page detailing my skills and resume.
-- ```contact.html```: The page with the contact form.
-- ```css/```: Directory containing the CSS files.
-- ```js/```: Directory containing the JavaScript files.
-- ```images/```: Directory containing the images used on the website.
+- ```public/```: Directory containing all static files.
+    - ```index.html```: The main landing page.
+    - ```css/```: Directory containing the CSS files.
+    - ```js/```: Directory containing the JavaScript files.
+    - ```images/```: Directory containing the images used on the website.
+- ```server.js```: The main server file for handling backend operations.
+- ```package.json```: File containing metadata about the project and its dependencies.
+- ```Procfile```: File for specifying commands that are executed by the Heroku app.
+- ```.gitignore```: File specifying which files and directories to ignore in the Git repository.
+- ```LICENSE```: The file containing the project's license information.
 
 ## License
 This project is licensed under the MIT License. See the [```LICENSE```](./LICENSE) file for details.
