@@ -64,3 +64,9 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         alert('There was an error submitting the form.');
     });
 });
+
+// Email CC the sender
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    var email = document.getElementById('email').value;
+    document.getElementById('cc-input').value = email;
+});
