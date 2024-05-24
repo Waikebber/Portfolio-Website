@@ -42,7 +42,7 @@ To run the website locally, follow these steps:
    ```
 2. Navigate to the project directory:
     ```bash
-    cd Website
+    cd Portfolio-Website
     ```
 3. Run ```node server.js``` in the terminal.
 
