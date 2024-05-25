@@ -38,7 +38,6 @@
     font-size: 3vh;
     line-height: 4vh;
     padding: 0 2vh;
-
     margin: 0;
     transition: transform 0.5s ease-in-out, top 0.5s ease-in-out;
     position: absolute;
@@ -65,18 +64,18 @@
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
-.skills-box:hover {
+.skills-box:hover, .skills-box.active {
     width: 30%;
     height: auto;
     justify-content: flex-start;
 }
 
-.skills-box:hover h3 {
+.skills-box:hover h3, .skills-box.active h3 {
     top: 2vh;
     transform: translate(-50%, 0%);
 }
 
-.skills-box:hover .skills-list li {
+.skills-box:hover .skills-list li, .skills-box.active .skills-list li {
     opacity: 1; 
     transform: translateY(0);
     transition-delay: 0.25s;
@@ -93,7 +92,7 @@
         margin: 2vh 0;
     }
 
-    .skills-box:hover {
+    .skills-box:hover, .skills-box.active {
         width: 100%;
     }
 }
