@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carousel
     fetchImages();
     initializeCarouselControls();
+
+    //Skills
+    initializeSkillBoxes();
 });
 
 
