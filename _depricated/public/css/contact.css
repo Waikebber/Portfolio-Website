@@ -1,0 +1,230 @@
+#contact-section {
+    height: 100vh;
+    background-color: var(--bkg-color);
+    display: flex;
+    justify-content: center;
+    padding: 7vh;
+    overflow: hidden;
+    z-index: 1; /* Ensure section is above other elements */
+}
+
+#contact-partition {
+    background: rgb(245, 245, 244);
+    border-radius: 3vh;
+    min-height: 80vh;
+    max-height: 90vh;
+    min-width: 90%;
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sub sub"
+        "form image"
+        "submit image";
+    gap: 2.5vh;
+    padding: 5vh;
+    z-index: 2; /* Ensure partition is above the section */
+}
+
+#header-group {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 6vh;
+}
+
+#contact-me {
+    font-size: 6vh;
+    text-align: center;
+    width: 100%;
+}
+
+#contact-sub {
+    font-size: 3vh;
+    text-align: center;
+    width: 100%;
+}
+
+#contact-im {
+    grid-area: image;
+    border-radius: 3vh;
+    box-shadow: 0 0 1vh 0 rgb(0 0 0 / 50%);
+    height: 45vh;
+    width: auto;
+    justify-self: center;
+    align-self: left;
+}
+
+form {
+    grid-area: form;
+    padding: 0 0 0 5vh;
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+    z-index: 3; /* Ensure form is above the partition */
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1vh;
+}
+
+.form-row-full {
+    grid-column: 1 / -1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#message-content {
+    height: 15vh;
+}
+
+#submit {
+    grid-area: submit;
+    padding: 1.5vh 2vh;
+    font-size: 2.5vh;
+    background-color: var(--main-color);
+    width: 100%;
+    border-radius: 5vh;
+    justify-self: center;
+    align-self: center;
+    margin: auto;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#submit:hover {
+    background-color: var(--secondary-color);
+}
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    font-size: 2.75vh;
+    line-height: 4vh;
+}
+
+input, textarea {
+    font-size: 2vh;
+    padding: 1vh;
+    width: 100%;
+    border-radius: 2vh;
+}
+
+textarea {
+    resize: none;
+}
+
+#success-message {
+    display: none;
+    color: green;
+    text-align: center;
+    font-size: 2vh;
+}
+
+
+@media screen and (max-width: 1450px) {
+    #contact-partition {
+        grid-template-areas:
+            "header image"
+            "header image"
+            "form form"
+            "submit submit";
+        padding: 5vh;
+        gap: 2.5vh;
+    }
+
+    #header-group {
+        align-items: flex-start;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #contact-me, #contact-sub {
+        text-align: center;
+        padding: 0;
+    }
+
+    form {
+        padding: 2vh 0 5vh 0;
+        width: 100%;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2vh;
+        width: 100%;
+    }
+
+    .form-row-full {
+        grid-template-columns: 1fr;
+        gap: 2vh;
+        width: 100%;
+    }
+
+    #contact-im {
+        height: 25vh;
+        width: auto;
+        margin: 0 auto;
+        justify-self: center;
+    }
+
+    #submit {
+        padding: 1.5vh 2vh;
+        font-size: 2vh;
+        background-color: var(--main-color);
+        width: 100%;
+        border-radius: 3vh;
+        justify-self: center;
+        align-self: center;
+        margin: auto;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+}
+
+@media (orientation: portrait) {
+    #contact-section {
+        padding: 2vh;
+    }
+    #contact-partition {
+        min-height: 85vh;
+        grid-template-areas:
+            "header"
+            "sub"
+            "form"
+            "form"
+            "form"
+            "form"
+            "submit";
+        padding: 2vh;
+        gap: 3vh;
+    }
+    #header-group h2{
+        font-size: 4vh;
+    }
+    #header-group p{
+        font-size: 2.5vh;
+        line-height: 3vh;
+    }
+
+    form {
+        padding: 0;
+    }
+
+    .form-row, .form-row-full {
+        display: block;
+    }
+
+    #contact-im {
+        display: none;
+    }
+}
