@@ -6,3 +6,8 @@ export interface MediaButtonProps {
     showTooltip?: boolean;
     color: string;
 }
+
+export interface SkillBoxProps {
+  category: string;
+  skills: string[];
+}
