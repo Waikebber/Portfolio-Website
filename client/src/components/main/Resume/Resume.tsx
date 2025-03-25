@@ -1,3 +1,4 @@
+'use client';
 import { Box, Heading, Button, HStack } from '@chakra-ui/react';
 import useResumeLinks from '@/hooks/useResume';
 

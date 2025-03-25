@@ -11,3 +11,13 @@ export interface SkillBoxProps {
   category: string;
   skills: string[];
 }
+
+export interface PhotoData {
+  src: string;
+  location: string;
+}
+
+export interface EnhancedPhotoData extends PhotoData {
+  title: string;
+  subtitle: string;
+}
