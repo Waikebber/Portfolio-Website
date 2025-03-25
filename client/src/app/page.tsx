@@ -13,6 +13,7 @@ import Footer from "@/components/main/Footer/Footer";
 
 import HeroToProjBuffer from "@/components/buffers/HeroToProjBuffer";
 import ResumeToPhotoBuffer from "@/components/buffers/ResumeToPhotoBuffer";
+import PhotoToContactBuffer from "@/components/buffers/PhotoToContactBuffer";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <Resume />
         <ResumeToPhotoBuffer />
         <Photography />
+        <PhotoToContactBuffer />
         <Footer />
       </Provider>
     </ColorModeProvider>

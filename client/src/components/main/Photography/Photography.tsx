@@ -14,7 +14,7 @@ const Photography = () => {
       id="photography-section"
       w="100%"
       h="100vh"
-      bg="white"
+      bg="var(--white-color)"
       display="flex"
       alignItems="center"
       justifyContent="center"
