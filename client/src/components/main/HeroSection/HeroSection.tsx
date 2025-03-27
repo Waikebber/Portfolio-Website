@@ -6,7 +6,7 @@ import "@/styles/global.css";
 
 const HeroSection = () => {
   const [isCompact] = useMediaQuery(
-    ["(max-width: 800px)", "(orientation: portrait)"],
+    ["(max-width: 900px)", "(orientation: portrait)"],
     { ssr: false }
   );
 

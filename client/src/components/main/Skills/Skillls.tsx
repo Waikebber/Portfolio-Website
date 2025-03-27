@@ -15,7 +15,7 @@ const Skills: React.FC = () => {
          className="skills-container"
         flexDirection={{ base: "column", md: "row" }}
         justifyContent={{ base: "center", md: "space-around" }}
-        alignItems="stretch"
+        alignItems="center"
         flexWrap="wrap"
         maxW="1200px"
         mx="auto"

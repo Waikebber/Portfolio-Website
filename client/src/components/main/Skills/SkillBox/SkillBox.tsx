@@ -11,13 +11,16 @@ const SkillBox: React.FC<SkillBoxProps> = ({ category, skills }) => {
       position="relative"
       display="flex"
       flexDirection="column"
-      justifyContent={active ? "flex-start" : "center"}
       alignItems="center"
+      justifyContent={active ? "flex-start" : "center"}
       height={active ? "auto" : "43vh"}
       minHeight="43vh"
       width={{ base: "90%", md: active ? "30%" : "25%" }}
+      minW="280px"
+      flex="1 1 0"
       m="1vh"
-      p="2vh"
+      p="3vh"
+      pt="6.3vh"
       textAlign="center"
       overflow="hidden"
       transition="all 0.3s ease-in-out"
@@ -31,7 +34,6 @@ const SkillBox: React.FC<SkillBoxProps> = ({ category, skills }) => {
       _hover={{
         width: { md: "30%" },
         height: "auto",
-        justifyContent: "flex-start",
       }}
     >
       <Heading
@@ -46,6 +48,7 @@ const SkillBox: React.FC<SkillBoxProps> = ({ category, skills }) => {
         left="50%"
         transform={active ? "translate(-50%, 0%)" : "translate(-50%, -50%)"}
         w="100%"
+        pointerEvents="none"
       >
         {category}
       </Heading>
@@ -55,10 +58,11 @@ const SkillBox: React.FC<SkillBoxProps> = ({ category, skills }) => {
         textAlign="center"
         listStyleType="none"
         p="1vh"
-        mt="4vh"
+        pb="2vh"
+        mt="1vh"
         w="100%"
         fontSize="2vh"
-        lineHeight="3vh"
+        lineHeight="2.75vh"
       >
         {skills.map((skill, index) => (
           <List.Item
