@@ -3,11 +3,11 @@ import React from 'react';
 import { Box, Flex, Heading, Text, useBreakpointValue } from '@chakra-ui/react';
 import usePhotographyData from '@/hooks/Photography/usePhotographyData';
 import Carousel from './Carousel/Carousel';
-// import CompactCarousel from './Carousel/CompactCarousel';
+import CompactCarousel from './Carousel/CompactCarousel';
 
 const Photography = () => {
   const { photos, loading, error } = usePhotographyData();
-  const isCompact = useBreakpointValue({ base: true, md: false });
+  const isCompact = useBreakpointValue({ base: true, lg: false });
 
   return (
     <Box
@@ -27,7 +27,7 @@ const Photography = () => {
         ) : error ? (
           <Text color="red.500">{error}</Text>
         ) : isCompact ? (
-          <Carousel images={photos} />
+          <CompactCarousel images={photos} />
         ) : (
           <Carousel images={photos} />
         )}

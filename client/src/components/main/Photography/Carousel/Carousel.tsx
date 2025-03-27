@@ -41,6 +41,7 @@ const Carousel = ({ images }: { images: EnhancedPhotoData[] }) => {
       justify="center"
       cursor="grab"
       userSelect="none"
+      style={{ touchAction: 'none' }}
     >
       {images.map((image, index) => {
         let styleProps = {
