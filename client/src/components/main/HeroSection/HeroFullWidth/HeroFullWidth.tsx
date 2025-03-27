@@ -66,7 +66,7 @@ const HeroFullWidth = () => {
         {/* Sidebar Image */}
         <Flex flex={2} p={8} align="center" justify="center">
           <NextImage
-            src="/assets/kai.jpg"
+            src="/assets/kai.webp"
             alt="Kai Webber"
             width={400}
             height={400}

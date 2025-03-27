@@ -43,7 +43,7 @@ const HeroCompact = () => {
           border="0.75vh solid var(--accent-color)"
         >
           <NextImage
-            src="/assets/kai.jpg"
+            src="/assets/kai.webp"
             alt="Kai Webber"
             width={1000}
             height={600}
