@@ -32,13 +32,14 @@ const Resume = () => {
               asChild
               bg="var(--main-color)"
               color="white"
+              fontSize="2vh"
               padding="1.145vh 2.29vh"
               borderRadius="0.573vh"
               _hover={{ bg: 'var(--accent-color)' }}
             >
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                {name}
-              </a>
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  {name}
+                </a>
             </Button>
           ))}
         </HStack>
