@@ -1,0 +1,19 @@
+
+{
+    "experience": [
+        {
+            "title": "eMoney Advisor",
+            "type": "Software Engineer Coop",
+            "description": "",
+            "image": "/assets/experience/emoney-logo.jpg"
+        },
+        {
+            "title": "Kostas Research Institute",
+            "type": "Data Scientist/Engineer Coop",
+            "description": "Developed subpixel image classification models for enhanced satellite imagery. Built a database, created machine learning models, and derived multiclass models for both RGB and NRGB imagery.",
+            "image": "/assets/experience/kri.jpg",
+            "image2": "/assets/experience/satellite.jpg"
+        }
+    ]
+}
+  
