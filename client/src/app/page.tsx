@@ -7,9 +7,9 @@ import Skills from "@/components/main/Skills/Skillls";
 import Resume from "@/components/main/Resume/Resume";
 import Photography from "@/components/main/Photography/Photography";
 import Footer from "@/components/main/Footer/Footer";
-// import NavBar from "./components/NavBar";
-// import Projects from "@/components/main/Projects";
-// import ContactForm from "@/components/main/ContactForm";
+// import NavBar from "./components/NavBar/NavBar";
+// import Projects from "@/components/main/Projects/Projects";
+import ContactForm from "@/components/main/ContactForm/ContactForm";
 
 import HeroToProjBuffer from "@/components/buffers/HeroToProjBuffer";
 import ResumeToPhotoBuffer from "@/components/buffers/ResumeToPhotoBuffer";
@@ -26,6 +26,7 @@ export default function Home() {
         <ResumeToPhotoBuffer />
         <Photography />
         <PhotoToContactBuffer />
+        <ContactForm />
         <Footer />
       </Provider>
     </ColorModeProvider>
