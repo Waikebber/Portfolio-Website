@@ -8,16 +8,23 @@ export interface MediaButtonProps {
 }
 
 export interface SkillBoxProps {
-  category: string;
-  skills: string[];
+    category: string;
+    skills: string[];
 }
 
 export interface PhotoData {
-  src: string;
-  location: string;
+    src: string;
+    location: string;
 }
 
 export interface EnhancedPhotoData extends PhotoData {
-  title: string;
-  subtitle: string;
+    title: string;
+    subtitle: string;
+}
+
+export type ExperienceItem = {
+    title: string
+    type: string
+    description: string
+    images: string[]
 }
