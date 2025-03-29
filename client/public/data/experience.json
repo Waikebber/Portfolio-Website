@@ -4,14 +4,14 @@
             "title": "eMoney Advisor",
             "type": "Software Engineer Coop",
             "description": "At eMoney, I work on the Data Aggregation Team, where I contribute to the development and maintenance of backend systems that power advisor and client-facing applications. My work involves managing database structures and enhancing the central data API using .NET and C#. I also help support a message-driven architecture that leverages RabbitMQ, Redis, Docker, and NexusDB for efficient and scalable data processing. This role has deepened my understanding of distributed systems and strengthened my skills in building robust, production-grade software.",
-            "images": ["/assets/experience/emoney-logo.jpg"]
+            "images": ["/assets/experience/emoney-logo.webp"]
         },
         {
             "title": "Kostas Research Institute",
             "type": "Data Scientist/Engineer Coop",
             "description": "At the KRI Lab, I joined the Geospatial Development Team, where I developed subpixel image classification models to enhance satellite imagery. I built databases using SQLite3 and SQLAlchemy, created machine learning models, and developed multiclass classifiers for both RGB and NRGB imagery. This hands-on experience in a collaborative lab environment helped me grow technically and professionally.",
             "images": [
-                "/assets/experience/kri.jpg"
+                "/assets/experience/kri.webp"
             ]
         }
     ]
