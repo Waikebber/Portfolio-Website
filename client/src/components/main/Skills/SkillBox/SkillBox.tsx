@@ -33,7 +33,6 @@ const SkillBox: React.FC<SkillBoxProps> = ({ category, skills }) => {
       onClick={() => setActive(!active)}
       _hover={{
         width: { md: "30%" },
-        height: "auto",
       }}
     >
       <Heading
