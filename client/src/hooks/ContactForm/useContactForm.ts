@@ -34,16 +34,16 @@ export default function useContactForm() {
       return;
     }
 
-    const result = await sendContactEmail(formData);
+    const result = await sendContactEmail(form, blockedEmails);
     if (result.success) {
       setIsInvalid(false);
-      setSuccessMsg("Thanks for reaching out. I’ll get back to you soon.");
+      setSuccessMsg("Thanks for reaching out. I'll get back to you soon.");
       form.reset();
     } else {
       setIsInvalid(true);
       setErrorMsg('Something went wrong. Please try again later.');
     }
-  };
+};
 
   return {
     formRef,
