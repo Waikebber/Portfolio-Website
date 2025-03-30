@@ -38,3 +38,7 @@ export interface Project {
     linkImage: string;
     displayImage: string;
 }
+
+export interface NavbarProps {
+    navItems: string[];
+}
