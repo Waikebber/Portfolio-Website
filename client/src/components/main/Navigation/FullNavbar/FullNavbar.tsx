@@ -1,14 +1,16 @@
 'use client'
-import { Box, HStack, RadioGroup, Text } from '@chakra-ui/react'
-import useNavState from '@/hooks/useNavState'
-import { NavbarProps } from '@/types'
 import { useEffect, useRef, useState } from 'react'
+import { Box, HStack, RadioGroup, Text } from '@chakra-ui/react'
+import useNavState from '@/hooks/Navigation/useNavState'
+import useScrollToSection from '@/hooks/Navigation/useScrollToSection'
+import { NavbarProps } from '@/types'
 
 const FullNavbar: React.FC<NavbarProps> = ({ navItems }) => {
-  const { value, setValue, scrollToSection } = useNavState(navItems)
+  const { value, setValue } = useNavState(navItems)
   const itemRefs = useRef<Record<string, HTMLDivElement | null>>({})
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0 })
+  const { scrollToSection } = useScrollToSection()
 
   const handleChange = (details: { value: string | null }) => {
     if (details.value) {
