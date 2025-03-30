@@ -1,17 +1,25 @@
 'use client';
 import { Flex } from "@chakra-ui/react";
 import MediaButton from "./mediaButton/MediaButton";
+import useScrollToSection from "@/hooks/Navigation/useScrollToSection";
 
 const MediaButtonWrapper = ({
   showTooltip = true,
-}
-) => {
+}) => {
+  const { scrollToSection } = useScrollToSection();
+
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollToSection('contact');
+  };
+
   return (
     <Flex as="ul" display="inline-flex" listStyleType="none">
       <MediaButton
         imagePath="/assets/icons/email-icon.png"
         linkName="Email"
-        linkUrl="mailto:your-email@example.com"
+        linkUrl="#contact"
+        onClick={handleEmailClick}
         color="#0000FF"
         showTooltip={showTooltip}
       />

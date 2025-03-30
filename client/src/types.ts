@@ -5,6 +5,7 @@ export interface MediaButtonProps {
     linkUrl: string;
     showTooltip?: boolean;
     color: string;
+    onClick?: (e: React.MouseEvent) => void;
 }
 
 export interface SkillBoxProps {

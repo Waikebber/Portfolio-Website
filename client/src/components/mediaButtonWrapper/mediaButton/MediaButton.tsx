@@ -11,9 +11,10 @@ const MediaButton = ({
   linkUrl,
   showTooltip = true,
   color,
+  onClick,
 }: MediaButtonProps) => {
   return (
-    <ChakraLink href={linkUrl} target="_blank">
+    <ChakraLink href={linkUrl} target="_blank" onClick={onClick}>
       <Box as="li" listStyleType="none" position="relative" className="group">
         <Box
           position="relative"
