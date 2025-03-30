@@ -1,0 +1,19 @@
+.buffer-section-top {
+    height: 30vh;
+    background-image: 
+    linear-gradient(
+        180deg in oklab,
+        var(--bkg-color) 15% 15%,
+        var(--main-color) 86% 86%
+    );
+}
+
+.buffer-proj-skill {
+    height: 30vh;
+    background-image: 
+    linear-gradient(
+        0deg in oklab,
+        var(--bkg-color) 15% 15%,
+        var(--main-color) 86% 86%
+    );
+}

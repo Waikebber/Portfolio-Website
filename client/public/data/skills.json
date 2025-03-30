@@ -1,0 +1,15 @@
+[
+    {
+      "category": "Coding Skills",
+      "skills": ["Python", "Java", "Typescript", "C# | .NET", "C++ | C", "JavaScript", "HTML | CSS", "SQL", "Matlab", "Verilog"]
+    },
+    {
+      "category": "Software Skills",
+      "skills": ["AutoCAD", "SolidWorks", "Arduino", "Git", "Google Earth Engine", "Intel Quartus Prime", "TensorFlow", "Autodesk Inventor", "InfluxDB"]
+    },
+    {
+      "category": "Interests",
+      "skills": ["Machine Learning", "Embedded Software", "Software Development", "Robotics", "Image Processing"]
+    }
+  ]
+  

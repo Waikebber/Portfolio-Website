@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Kai Webber's personal website.">
+        <meta name="keywords" content="Kai Webber, Northeastern University, NEU, Computer Science, Computer Engineering, Portfolio, Kai, Webber, Student">
+        <meta name="author" content="Kai Webber">
+
+        <title>Kai Webber | Portfolio</title>
+
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="css/media-links.css">
+        <link rel="stylesheet" href="css/projects.css">
+        <link rel="stylesheet" href="css/skills.css">
+        <link rel="stylesheet" href="css/resume.css">
+        <link rel="stylesheet" href="css/photography.css">
+        <link rel="stylesheet" href="css/contact.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/buffers.css">
+
+        <script src="js/nav-links.js" defer></script>
+        <script src="js/hamburger-menu.js" defer></script>
+        <script src="js/email.js" defer></script>
+        <script src="js/project-overlays.js" defer></script>
+        <script src="js/carousel.js" defer></script>
+        <script src="js/skills.js" defer></script>
+        <script src="js/main.js" defer></script>
+
+
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="images/favicon_io/site.webmanifest">
+    </head>
+    <body>
+        <section id="home-section" class="section">
+            <div class="container">
+                <div id="home-box">
+                    <div id="main-box">
+                        <section id="main">
+                            <h2 id="intro_greeting">I'm Kai,</h2>
+                            <h3 id="intro_major">
+                                <i>Computer Science and<br>Computer Engineering Student</i>
+                            </h3>
+                            <p id="intro_paragraph">
+                                I am a passionate tech enthusiast with a love for innovation and problem-solving, currently studying at Northeastern University. I thrive on tackling complex challenges and creating impactful solutions. Whether it's coding new projects, exploring the latest tech trends, or collaborating on cutting-edge research, I am always eager to push boundaries and make a difference.
+                            </p>    
+                            <ul class="wrapper">
+                                <li class="icon email">
+                                    <span class="tooltip">Email</span>
+                                    <span><img src="images/email-icon.png" alt="Email Icon"></span>
+                                </li>
+                                <li class="icon linkedin" data-link="https://www.linkedin.com/in/kai-webber/">
+                                        <span class="tooltip">LinkedIn</span>
+                                        <span><img src="images/linkedin-icon.png" alt="LinkedIn Icon"></span>
+                                </li>
+                                <li class="icon github" data-link="https://github.com/Waikebber">
+                                    <span class="tooltip">Github</span>
+                                    <span><span><img src="images/github-icon.png" alt="Github Icon"></span></span>
+                                </li>
+                                <li class="icon instagram" data-link="https://www.instagram.com/k_webb_photos/">
+                                    <span class="tooltip">Instagram</span>
+                                    <span><span><img src="images/instagram-icon.png" alt="Instagram Icon"></span></span>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                    <aside id="sidebar"> <img src="images/kai.jpg" alt="Kai Webber"> </aside>
+                </div>
+            </div>
+        </section>
+
+        <header class="section" id="bar-section">
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <input type="radio" id="home" name="navbar" checked>
+                <label class="tab" for="home">Home</label>                
+        
+                <input type="radio" id="projects" name="navbar">
+                <label class="tab" for="projects">Projects</label>  
+        
+                <input type="radio" id="skills" name="navbar">
+                <label class="tab" for="skills">Skills</label>
+        
+                <input type="radio" id="resume" name="navbar">
+                <label class="tab" for="resume">Resume</label>
+        
+                <input type="radio" id="photography" name="navbar">
+                <label class="tab" for="photography">Photography</label>
+        
+                <input type="radio" id="contact" name="navbar">
+                <label class="tab" for="contact">Contact</label>
+        
+                <span class="slider"></span>
+            </nav>
+        </header>
+    
+        <div class="hamburger-menu" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    
+        <div class="dimmed-background" id="dimmed-background">
+            <div class="nav-links" id="nav-links">
+                <a href="#home-section">Home</a>
+                <a href="#projects-section">Projects</a>
+                <a href="#skills-section">Skills</a>
+                <a href="#resume-section">Resume</a>
+                <a href="#photography-section">Photography</a>
+                <a href="#contact-section">Contact</a>
+            </div>
+        </div>
+        
+        
+
+        <div id="buffer-section-top"></div>
+
+        <section id="projects-section" class="section">
+            <div class="proj-container">
+                <div class="bento bento-title">
+                    <h1>Projects and Experience</h1>
+                </div>
+                <div class="bento bento-website" onclick="showOverlay('This Website', 'Personal Project', 'With no prior knowledge of frontend development, I taught myself HTML, CSS, JavaScript, and Node.js to build this personal portfolio website. This project not only showcases my skills and projects but also marks the beginning of my journey into web development. <a href=&quot;https://github.com/Waikebber/Website&quot; target=&quot;_blank&quot;>Read more</a>', 'images/proj/laptop-web.jpg')">
+                    <div class="txt-bkg">
+                        <h2>This website</h2>
+                    </div>
+                </div>
+                <div class="bento bento-arm" onclick="showOverlay('Robotic Arm', 'Class project', 'For my Embedded Design class at Northeastern University, I developed a robotic arm using pulse width modulation (PWM) to control its movements. The goal was to program the arm to carefully pick up a bottle from various positions and move it to designated locations with precision. This project involved both hardware and software components, requiring an in-depth understanding of embedded systems and motor control. It significantly enhanced my skills in embedded systems, problem-solving, and provided hands-on experience with robotic control systems. <a href=&quot;https://github.com/Waikebber/PWM-Robotic-Arm&quot; target=&quot;_blank&quot;>Read more</a>', 'images/proj/arm-class.jpg')">
+                    <div class="txt-bkg">
+                        <h2>Robotic Arm</h2>
+                    </div>
+                </div>
+                <div class="bento bento-car" onclick="showOverlay('NU Electric Racing Club', 'Telemetry Team', 'In my first semester, I joined the Northeastern Electric Racing Club and contributed to the telemetry team. I helped use a telemetry-XBee to transfer real-time data from the racing car to the data team. Additionally, I learned the InfluxDB Flux language to create simple visuals for the club members to monitor the car\'s components effectively. This experience allowed me to develop my skills in data transfer, visualization, and teamwork within a high-performance engineering environment.', 'images/proj/electric_car.jpg')">
+                    <div class="txt-bkg">
+                        <h2>NU Electric Racing Club</h2>
+                    </div>
+                </div>
+                <div class="bento bento-img1"></div>
+                <div class="bento bento-kri" onclick="showOverlay('Kostas Research Institute', 'Data Scientist/Engineer Coop', 'From January 2023 to June 2023, I completed a co-op at the Kostas Research Institute, where I pioneered the development of subpixel image classification models for enhanced satellite imagery. I created a comprehensive database to organize satellite imagery metadata and labels and constructed per-pixel and sub-pixel neural net machine learning models using Python. Additionally, I derived multiclass models for both RGB (Red, Green, Blue) autonomous car imagery and NRGB (Near-Infrared, Red, Green, Blue) multi-band satellite imagery. This experience allowed me to deepen my expertise in machine learning, data organization, and image processing.', 'images/proj/kri.jpg')">
+                    <div class="txt-bkg">
+                        <h2>Kostas Research Institute</h2>
+                    </div>
+                </div>
+                <div class="bento bento-seds" onclick="showOverlay('NEU SEDS, Rover Team', 'Autonomous Navigation Team Member', 'As a member of the Northeastern University Students for the Exploration and Development of Space (NEU SEDS) club, I am part of the autonomous team for the rover project. I have been fortunate to work on the localization of the rover in its autonomous settings. This role involves developing and refining the systems that enable the rover to determine its position and navigate autonomously. It has provided me with valuable experience in robotics, autonomous systems, and applied problem-solving in space exploration contexts.', 'images/proj/rover.jpg')">
+                    <div class="txt-bkg">
+                        <h2>NEU SEDS, Rover Team</h2>
+                    </div>
+                </div>
+                <div class="bento bento-img2"></div>
+                <div class="bento bento-unet" onclick="showOverlay('UNET Image Classifier', 'Personal Project', 'In a personal project, I developed an automated pipeline for scraping images from Google and segmenting them. I trained a U-Net image segmentation model using data labeled with the LabelBox API. By testing on bird species datasets, I achieved high accuracy and optimized data preprocessing. This project enhanced my skills in machine learning, data preprocessing, and automated image segmentation. <a href=&quot;https://github.com/Waikebber/Bird_Classifier&quot; target=&quot;_blank&quot;>Read more</a>', 'images/proj/unet.png')"> 
+                    <div class="txt-bkg">
+                        <h2>UNET Image Classifier</h2>
+                    </div>
+                </div>
+                <div class="bento bento-more">
+                    <h2 id="more-before">...</h2>
+                    <h2 id="more-after">More to Come Soon</h2>
+                </div>
+            </div>
+            <div id="overlay" class="overlay" style="display:none;">
+                <div class="overlay-content">
+                    <span class="close-btn" onclick="hideOverlay()">&times;</span>
+                    <h2 id="overlay-title"></h2>
+                    <h3 id="overlay-subtitle"></h3>
+                    <p id="overlay-description"></p>
+                    <img id="overlay-image" src="" alt="Project Image">
+                </div>
+            </div>
+        </section>
+        
+
+        <div id="buffer-proj-skill"></div>
+
+        <section id="skills-section" class="section">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skills-container">
+                    <div class="skills-box" id="coding-skills-box">
+                        <h3>Coding Skills</h3>
+                        <ul class="skills-list">
+                            <li>Python</li>
+                            <li>Java</li>
+                            <li>C++</li>
+                            <li>JavaScript</li>
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>SQL</li>
+                            <li>Matlab</li>
+                            <li>Verilog</li>
+                        </ul>
+                    </div>
+                    <div class="skills-box" id="software-skills-box">
+                        <h3>Software Skills</h3>
+                        <ul class="skills-list">
+                            <li>AutoCAD</li>
+                            <li>SolidWorks</li>
+                            <li>Arduino</li>
+                            <li>Git</li>
+                            <li>Google Earth Engine</li>
+                            <li>Intel Quartus Prime</li>
+                            <li>TensorFlow</li>
+                            <li>Autodesk Inventor</li>
+                            <li>InfluxDB</li>
+                        </ul>
+                    </div>
+                    <div class="skills-box" id="interests-skills-box">
+                        <h3>Interests</h3>
+                        <ul class="skills-list">
+                            <li>Machine Learning</li>
+                            <li>Embedded Software</li>
+                            <li>Software Development</li>
+                            <li>Robotics</li>
+                            <li>Image Processing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>        
+        
+
+        <section id="resume-section" class="section">
+            <div id="container-resume">
+                <h2>Find My Resume Here</h2>
+                <div class="buttons">
+                    <a href="https://www.linkedin.com/in/kai-webber/" target="_blank" class="btn">LinkedIn</a>
+                    <a href="https://drive.google.com/file/d/162NYeGPTBKxquMvJJNf3t9jFFjqtad8O/view?usp=sharing" target="_blank" class="btn">Google Drive</a>
+                </div>
+            </div>
+        </section>
+
+        <div id="buffer-resume-photography"></div>
+
+        <section id="photography-section" class="section">
+            <div id="container-photo">
+                <h2>Photography</h2>
+                <div class="carousel">
+                    <div class="carousel-inner" id="carousel-inner">
+                        <!-- Carousel items will be inserted here by JavaScript -->
+                    </div>
+                    <a class="carousel-control-prev" onclick="prevSlide()">&#10094;</a>
+                    <a class="carousel-control-next" onclick="nextSlide()">&#10095;</a>
+                </div>
+            </div>
+        </section>
+
+
+        <div id="buffer-photography-contact"></div>
+        <section id="contact-section" class="section">
+            <div class="container">
+                <div id="contact-partition">
+                    <div id="header-group">
+                        <h2 id="contact-me">Contact Me</h2>
+                        <p id="contact-sub">Feel free to reach out!</p>
+                    </div>
+                    <img src="images/contact-image.jpg" alt="Contact Image" id="contact-im">
+                    <form id="contact-form" action="https://formsubmit.co/7fb8972512fc99243ce7c0200a1d5ffc" method="POST">
+                        <!--Honeypot-->
+                        <input type="text" name="_honey" style="display:none">
+                        <!--Disable Captcha-->
+                        <input type="hidden" name="_captcha" value="false">
+                        <!--Subject form submission-->
+                        <input type="hidden" name="_subject" value="Portfolio Form: New Submission!">
+                        <!--Autoresponse message-->
+                        <input type="hidden" name="_autoresponse" value="Thanks for your submission on Kai's Portfolio Website! I'll get back to you soon!">
+        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fName" id="fName-label">First&nbsp;Name:</label>
+                                <input type="text" id="fName" name="first Name" placeholder="Your Name..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lName" id="lName-label">Last&nbsp;Name:</label>
+                                <input type="text" id="lName" name="last Name" placeholder="Your Last Name..." required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" id="email-label">Email:</label>
+                                <input type="email" id="email" name="email" placeholder="Your Email..." required>
+                                <div class="error-message" id="email-error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" id="subject-label">Subject:</label>
+                                <input type="text" id="subject" name="subject" placeholder="Subject..." required>
+                            </div>
+                        </div>
+                        <div class="form-row-full">
+                            <label for="message" id="message-label">Message:</label>
+                            <textarea id="message-content" name="message" placeholder="Your Message..." required></textarea>
+                        </div>
+                        <button type="submit" id="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer class="main-footer">
+            <div class="container">
+                <ul class="wrapper" id="footer-icons">
+                    <li class="icon email">
+                        <span class="tooltip">Email</span>
+                        <span><img src="images/email-icon.png" alt="Email Icon"></span>
+                    </li>
+                    <li class="icon linkedin" data-link="https://www.linkedin.com/in/kai-webber/">
+                            <span class="tooltip">LinkedIn</span>
+                            <span><img src="images/linkedin-icon.png" alt="LinkedIn Icon"></span>
+                    </li>
+                    <li class="icon github" data-link="https://github.com/Waikebber">
+                        <span class="tooltip">Github</span>
+                        <span><span><img src="images/github-icon.png" alt="Github Icon"></span></span>
+                        
+                    </li>
+                    <li class="icon instagram" data-link="https://www.instagram.com/k_webb_photos/">
+                        <span class="tooltip">Instagram</span>
+                        <span><span><img src="images/instagram-icon.png" alt="Instagram Icon"></span></span>
+                    </li>
+                </ul>
+                <p id="copy-right">&copy; 2024 Kai Webber</p>
+            </div>
+        </footer>
+
+        <!-- Shows the page once fully loaded (prevent FOUC)-->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() { 
+                document.body.style.display = "block";
+                hideOverlay();
+            });
+        </script>
+    </body>
+</html>

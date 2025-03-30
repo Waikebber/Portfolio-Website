@@ -1,0 +1,67 @@
+{
+    "projects": [
+        {
+            "title": "SEE",
+            "type": "System for Envisioning Environment Capstone Project",
+            "description": "In my senior capstone, my team built a wearable system to assist blind individuals without a cane. I led development of the stereo vision module using Python and Raspberry Pi cameras.",
+            "image": "assets/proj/capstone-stereovision-results.webp",
+            "linkImage": "/assets/icons/doc-icon.png",
+            "link": "https://drive.google.com/file/d/1EhjlG2TZQuKKzWXmu6aViNI0hB_jaIVP/view?usp=sharing",
+            "displayImage": "assets/proj/display/capstone-group-photo.webp"
+        },
+        {
+            "title": "March Madness Predictor",
+            "type": "Class/Personal Project",
+            "description": "In my Artificial Intelligence class, I worked with a team of three to build a machine learning tool that predicts NCAA tournament outcomes, with a focus on identifying upsets using historical data from Kaggle.",
+            "image": "assets/proj/march-madness.webp",
+            "linkImage": "/assets/icons/github-icon.png",
+            "link": "https://github.com/Waikebber/CS-4100_MarchMadnessPredictor",
+            "displayImage": "assets/proj/display/ncaa-ball.webp"
+        },
+        {
+            "title": "This Website",
+            "type": "Personal Project",
+            "description": "I designed and built this website using TypeScript and React, styled with Chakra UI and Ark UI components. It's hosted on Render.io and serves as a place to showcase my projects, experience, and interests.",
+            "image": "assets/proj/laptop-web.webp",
+            "linkImage": "/assets/icons/github-icon.png",
+            "link": "https://github.com/Waikebber/Website",
+            "displayImage": "assets/proj/display/web.png"
+        },
+        {
+            "title": "Robotic Arm",
+            "type": "Class Project",
+            "description": "For my Embedded Design class at Northeastern University, I developed a robotic arm using pulse width modulation (PWM) to control its movements. The goal was to program the arm to pick up a bottle from various positions and move it with precision.",
+            "image": "assets/proj/arm-class.webp",
+            "linkImage": "/assets/icons/github-icon.png",
+            "link": "https://github.com/Waikebber/PWM-Robotic-Arm",
+            "displayImage": "assets/proj/display/arm.png"
+        },
+        {
+            "title": "NU Electric Racing Club",
+            "type": "Telemetry Team",
+            "description": "As part of the telemetry team in NU Electric Racing, I worked on real-time data transfer using XBee modules and visualized performance metrics with InfluxDB Flux to monitor key car components.",
+            "image": "assets/proj/electric_car.webp",
+            "linkImage": "/assets/icons/doc-icon.png",
+            "link": "https://electricracing.northeastern.edu/",
+            "displayImage": "assets/proj/electric_car.webp"
+        },
+        {
+            "title": "NEU SEDS, Rover Team",
+            "type": "Autonomous Navigation Team Member",
+            "description": "In the Students for the Exploration and Development of Space club (SEDS) at Northeastern, I worked on the autonomous navigation team, focusing on rover localization systems. This gave me hands-on experience in robotics and space exploration.",
+            "image": "assets/proj/rover.webp",
+            "linkImage": "/assets/icons/notion-icon.png",
+            "link": "https://nuseds.notion.site/NURover-Home-d41f9c94cd89435c80de54dc5ea999e1",
+            "displayImage": "assets/proj/rover.webp"
+        },
+        {
+            "title": "UNET Image Classifier",
+            "type": "Personal Project",
+            "description": "I built a full pipeline for bird image segmentation and classification using a U-Net model. The process included scraping data, labeling with the LabelBox API, automating mask generation for large datasets, and training a multi-class segmentation model with high accuracy.",
+            "image": "assets/proj/unet.png",
+            "linkImage": "/assets/icons/github-icon.png",
+            "link": "https://github.com/Waikebber/Bird_Classifier",
+            "displayImage": "assets/proj/display/unet.webp"
+        }
+    ]
+  }

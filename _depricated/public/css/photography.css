@@ -1,0 +1,190 @@
+#photography-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white-color);
+}
+
+#container-photo {
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#photography-section h2 {
+    padding: 2vh;
+    margin-bottom: 3vh;
+    font-size: 4vh;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    position: relative;
+}
+
+.carousel-item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    cursor: pointer;
+    box-shadow: 0 0.458vh 0.458vh rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-height: 100%; /* Ensure items do not exceed carousel height */
+}
+
+.carousel-item img {
+    border-radius: 3vh;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.carousel-item.active img {
+    border-radius: 0; /* Remove rounded corners for active image */
+}
+
+.carousel-item.active {
+    width: 40%;
+    height: auto;
+    z-index: 1;
+    transform: translateX(0);
+    opacity: 1;
+    box-shadow: 0 0.916vh 1.832vh rgba(0,0,0,0.2);
+}
+
+.carousel-item.prev {
+    width: 30%;
+    height: auto;
+    opacity: 0.5;
+    z-index: 0;
+    border-radius: 5vh;
+    transform: translateX(-110%);
+}
+
+.carousel-item.next {
+    width: 30%;
+    height: auto;
+    opacity: 0.5;
+    z-index: 0;
+    border-radius: 5vh;
+    transform: translateX(110%);
+}
+
+.carousel-item.prev-prev, .carousel-item.next-next {
+    width: 20%;
+    height: auto;
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: 5vh;
+}
+
+.carousel-item.prev-prev {
+    transform: translateX(-220%);
+}
+
+.carousel-item.next-next {
+    transform: translateX(220%);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    width: 3em;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 2.748vh;
+    cursor: pointer;
+    user-select: none;
+    z-index: 2;
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev {
+    left: 1em;
+}
+
+.carousel-control-next {
+    right: 1em;
+}
+
+.location-overlay {
+    position: absolute;
+    font-size: 2vh;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    padding: 1vh;
+    display: none; 
+}
+
+.carousel-item.active .location-overlay {
+    display: block; 
+}
+
+@media (orientation: portrait) {
+    #photography-section h2 {
+        font-size: 3vh;
+    }
+
+    .carousel-item {
+        width: 100%; /* Only show the active image */
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .carousel-item.prev, 
+    .carousel-item.next,
+    .carousel-item.prev-prev, 
+    .carousel-item.next-next {
+        display: none; /* Hide previous and next images */
+    }
+
+    .carousel-item.active {
+        width: 100%; /* Make active image take full width */
+    }
+
+    .carousel-item img {
+        height: 100%; /* Image takes up full height of the carousel-inner */
+        width: 100%; /* Image takes up full width of the carousel-inner */
+        object-fit: contain; /* Ensure image covers the available area */
+    }
+
+    .location-overlay {
+        font-size: 1.5vh;
+    }
+}

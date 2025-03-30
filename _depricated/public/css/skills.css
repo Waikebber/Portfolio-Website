@@ -1,0 +1,98 @@
+#skills-section {
+    background: var(--bkg-color);
+    padding: 2vh;
+}
+
+#skills-section h2 {
+    font-size: 5vh;
+    text-align: center;
+    padding: 3vh;
+}
+
+.skills-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.skills-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 43vh;
+    width: 20%;
+    margin: 1vh;
+    padding: 2vh;
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    border: 1vh solid var(--border-color);
+    border-radius: 5vh;
+    box-shadow: 0 0 2vh rgba(0, 0, 0, 0.1);
+    position: relative;
+    box-sizing: border-box;
+}
+
+.skills-box h3 {
+    font-size: 3vh;
+    line-height: 4vh;
+    padding: 0 2vh;
+    margin: 0;
+    transition: transform 0.5s ease-in-out, top 0.5s ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.skills-list {
+    text-align: center;
+    list-style-type: none;
+    padding: 1vh;
+    margin-top: 4vh; 
+    width: 100%;
+    font-size: 2vh;
+    line-height: 3vh;
+}
+
+.skills-list li {
+    margin: 0.5vh 0;
+    opacity: 0; 
+    transform: translateY(2.29vh); 
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.skills-box:hover, .skills-box.active {
+    width: 30%;
+    height: auto;
+    justify-content: flex-start;
+}
+
+.skills-box:hover h3, .skills-box.active h3 {
+    top: 2vh;
+    transform: translate(-50%, 0%);
+}
+
+.skills-box:hover .skills-list li, .skills-box.active .skills-list li {
+    opacity: 1; 
+    transform: translateY(0);
+    transition-delay: 0.25s;
+}
+
+@media (orientation: portrait) {
+    .skills-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skills-box {
+        width: 80%;
+        margin: 2vh 0;
+    }
+
+    .skills-box:hover, .skills-box.active {
+        width: 100%;
+    }
+}

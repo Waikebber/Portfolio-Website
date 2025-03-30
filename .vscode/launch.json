@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run Client",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder}/client",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Run Server",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceFolder}/server",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "server"],
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+  
