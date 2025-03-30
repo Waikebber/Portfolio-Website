@@ -65,7 +65,7 @@ const Projects = () => {
           borderRadius="2xl"
           shadow="lg"
         >
-          <Heading fontSize={{ base: '5vh', md: '6vh' }} textAlign="center">
+          <Heading fontSize={{ base: '5vh', md: '5.5vh' }} textAlign="center">
             Projects
           </Heading>
         </GridItem>
@@ -73,7 +73,6 @@ const Projects = () => {
         {/* Project Tiles */}
         {projects.map((proj, index) => {
           const bgFit = fitImageMap[proj.title] ? 'contain' : 'cover';
-          // Get custom position or default to 'center'
           const bgPosition = imagePositionMap[proj.title] || 'center';
 
           return (
@@ -140,15 +139,26 @@ const Projects = () => {
                     px={4}
                     py={3}
                     boxShadow="md"
-                    display="inline-block"
+                    display="inline-flex" // Changed to flex for better text control
                     maxW="100%"
                   >
                     <Heading 
                       size="md" 
                       color="var(--text-color)"
                       whiteSpace="normal"
-                      wordBreak="break-word"
                       fontSize={{ base: 'lg', md: 'xl' }}
+                      lineHeight="shorter"
+                      wordBreak="normal"
+                      textOverflow="ellipsis"
+                      css={{
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 4,
+                        overflow: 'hidden',
+                        '@media (max-width: 480px)': {
+                          fontSize: 'calc(1rem + 0.5vw)'
+                        }
+                      }}
                     >
                       {proj.title}
                     </Heading>
