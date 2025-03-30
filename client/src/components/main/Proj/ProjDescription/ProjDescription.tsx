@@ -2,7 +2,7 @@
 
 import { Dialog } from '@ark-ui/react/dialog';
 import { Portal } from '@ark-ui/react/portal';
-import { Box, Heading, Text, Image, CloseButton, Link, HStack, Flex, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Heading, Text, Image, CloseButton, Link, Flex, useBreakpointValue } from '@chakra-ui/react';
 
 interface ProjDescriptionProps {
   isOpen: boolean;
@@ -26,11 +26,9 @@ const ProjDescription = ({
   linkImage,
 }: ProjDescriptionProps) => {
   const linkPosition = useBreakpointValue({
-    base: 'above', // On small screens
-    md: 'overlay'  // On medium screens and up
+    base: 'above',
+    md: 'overlay'
   });
-
-  const isMobile = linkPosition === 'above';
 
   return (
     <Dialog.Root open={isOpen}>
@@ -78,7 +76,7 @@ const ProjDescription = ({
               _hover={{ bg: 'var(--main-color)', color: 'white' }}
             />
 
-            <Dialog.Title textAlign={isMobile ? "center" : "left"}>
+            <Dialog.Title>
               <Heading size="xl" color="var(--text-color)" mb={2}>
                 {title}
               </Heading>
@@ -107,8 +105,8 @@ const ProjDescription = ({
                   alignItems="center"
                   gap={2}
                   w="fit-content"
-                  mx="auto" // Center the link on mobile
-                  justifyContent="center" // Center content inside flex
+                  mx="auto"
+                  justifyContent="center"
                 >
                   <Image
                     src={linkImage}
