@@ -27,8 +27,7 @@ The `client/` directory contains the fully responsive front-end application buil
 
 The portfolio includes a homepage, projects section, photography gallery, resume/skills section, and contact form. It is hosted at [kaiwebber.com](https://www.kaiwebber.com).
 
-👉 View the full client README here:  
-[client/README.md](./client/README.md)
+👉 View the full [client README here](./client/README.md)
 
 ---
 
