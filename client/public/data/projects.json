@@ -3,25 +3,25 @@
         {
             "title": "SEE",
             "type": "System for Envisioning Environment Capstone Project",
-            "description": "System for Envisioning Environment (SEE) is a ...",
+            "description": "In my senior capstone, my team built a wearable system to assist blind individuals without a cane. I led development of the stereo vision module using Python and Raspberry Pi cameras.",
             "image": "assets/proj/capstone-stereovision-results.webp",
             "linkImage": "/assets/icons/doc-icon.png",
-            "link": "...",
+            "link": "https://drive.google.com/file/d/1EhjlG2TZQuKKzWXmu6aViNI0hB_jaIVP/view?usp=sharing",
             "displayImage": "assets/proj/display/capstone-group-photo.webp"
         },
         {
             "title": "March Madness Predictor",
             "type": "Class/Personal Project",
-            "description": "Developed a March Madness bracket predictor using Python using data from a Kaggle competition dataset. ...",
+            "description": "In my Artificial Intelligence class, I worked with a team of three to build a machine learning tool that predicts NCAA tournament outcomes, with a focus on identifying upsets using historical data from Kaggle.",
             "image": "assets/proj/march-madness.webp",
             "linkImage": "/assets/icons/github-icon.png",
-            "link": "...",
+            "link": "https://github.com/Waikebber/CS-4100_MarchMadnessPredictor",
             "displayImage": "assets/proj/display/ncaa-ball.webp"
         },
         {
             "title": "This Website",
             "type": "Personal Project",
-            "description": "Using some experience in Typescript and React, I built this website to showcase my projects and experience. The website is hosted on Render.io, and the source code is available on GitHub. A previous version of the website was built using HTML and CSS.",
+            "description": "I designed and built this website using TypeScript and React, styled with Chakra UI and Ark UI components. It's hosted on Render.io and serves as a place to showcase my projects, experience, and interests.",
             "image": "assets/proj/laptop-web.webp",
             "linkImage": "/assets/icons/github-icon.png",
             "link": "https://github.com/Waikebber/Website",
@@ -39,7 +39,7 @@
         {
             "title": "NU Electric Racing Club",
             "type": "Telemetry Team",
-            "description": "Contributed to the telemetry team using telemetry-XBee for real-time data transfer and InfluxDB Flux for data visualization. Helped monitor car components in a high-performance engineering environment.",
+            "description": "As part of the telemetry team in NU Electric Racing, I worked on real-time data transfer using XBee modules and visualized performance metrics with InfluxDB Flux to monitor key car components.",
             "image": "assets/proj/electric_car.webp",
             "linkImage": "/assets/icons/doc-icon.png",
             "link": "https://electricracing.northeastern.edu/",
@@ -48,7 +48,7 @@
         {
             "title": "NEU SEDS, Rover Team",
             "type": "Autonomous Navigation Team Member",
-            "description": "Worked on rover localization systems to enable autonomous navigation. Gained hands-on experience in robotics and space exploration.",
+            "description": "In the Students for the Exploration and Development of Space club (SEDS) at Northeastern, I worked on the autonomous navigation team, focusing on rover localization systems. This gave me hands-on experience in robotics and space exploration.",
             "image": "assets/proj/rover.webp",
             "linkImage": "/assets/icons/notion-icon.png",
             "link": "https://nuseds.notion.site/NURover-Home-d41f9c94cd89435c80de54dc5ea999e1",
@@ -57,7 +57,7 @@
         {
             "title": "UNET Image Classifier",
             "type": "Personal Project",
-            "description": "Created a pipeline for scraping and segmenting images using a U-Net model. Labeled data with the LabelBox API and trained on bird species datasets with high accuracy.",
+            "description": "I built a full pipeline for bird image segmentation and classification using a U-Net model. The process included scraping data, labeling with the LabelBox API, automating mask generation for large datasets, and training a multi-class segmentation model with high accuracy.",
             "image": "assets/proj/unet.png",
             "linkImage": "/assets/icons/github-icon.png",
             "link": "https://github.com/Waikebber/Bird_Classifier",
