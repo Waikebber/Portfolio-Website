@@ -16,7 +16,7 @@ export default function ExperienceSection() {
   const experience = useExperienceData();
 
   return (
-    <Box id="experience" py={16} px={{ base: 4, md: 8 }} bg="var(--main-color)">
+    <Box id="experience-section" py={16} px={{ base: 4, md: 8 }} bg="var(--main-color)">
       <Box
         border="0.25vh solid"
         borderColor="var(--secondary-color)"
