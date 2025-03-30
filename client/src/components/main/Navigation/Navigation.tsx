@@ -1,7 +1,7 @@
 'use client'
 import { Box, useBreakpointValue } from '@chakra-ui/react'
 import FullNavbar from './FullNavbar/FullNavbar'
-// import HamburgerMenu from './HamburgerMenu/HamburgerMenu'
+import HamburgerMenu from './HamburgerMenu/HamburgerMenu'
 
 const NAV_ITEMS = Array.from(
   [
@@ -15,7 +15,7 @@ const NAV_ITEMS = Array.from(
   ] as const)
 
 const Navigation = () => {
-  const isMobile = useBreakpointValue({ base: true, md: false })
+  const isMobile = useBreakpointValue({ base: true, xl: false })
 
   return (
     <Box
@@ -31,7 +31,7 @@ const Navigation = () => {
       paddingBottom="2.5vh"
     >
       {isMobile ? 
-        <FullNavbar navItems={NAV_ITEMS} /> : 
+        <HamburgerMenu navItems={NAV_ITEMS} /> : 
         <FullNavbar navItems={NAV_ITEMS} />
       }
     </Box>
