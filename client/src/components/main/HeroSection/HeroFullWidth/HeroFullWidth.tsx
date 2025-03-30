@@ -28,9 +28,9 @@ const HeroFullWidth = () => {
           flex={3}
           bg="var(--main-color)"
           borderRadius="8vh"
-          p={{ base: 3, sm: 4, md: 6, lg: 8 }}
+          p={{ base: "3vh", lg: "5vh" }}
           boxShadow="0 0 10px rgba(0, 0, 0, 0.5)"
-          m={{ base: 0, md: "2vh 0 2vh 3vh" }}
+          m={{ base: 0, md: "2vh 0 2vh 4vh" }} // top, right, bottom, left
         >
           <Box display="flex" flexDirection="column" gap={6}>
             <Heading
