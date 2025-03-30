@@ -4,7 +4,7 @@
             "title": "eMoney Advisor",
             "type": "Software Engineer Coop",
             "description": "At eMoney, I work on the Data Aggregation Team, where I contribute to the development and maintenance of backend systems that power advisor and client-facing applications. My work involves managing database structures and enhancing the central data API using .NET and C#. I also help support a message-driven architecture that leverages RabbitMQ, Redis, Docker, and NexusDB for efficient and scalable data processing. This role has deepened my understanding of distributed systems and strengthened my skills in building robust, production-grade software.",
-            "images": ["/assets/experience/emoney-logo.webp"]
+            "images": ["/assets/experience/eMoney-logo.jpg"]
         },
         {
             "title": "Kostas Research Institute",

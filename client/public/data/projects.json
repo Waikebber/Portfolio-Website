@@ -4,25 +4,25 @@
             "title": "SEE",
             "type": "System for Envisioning Environment Capstone Project",
             "description": "System for Envisioning Environment (SEE) is a ...",
-            "image": "assets/proj/capstone-stereovision-results.png",
+            "image": "assets/proj/capstone-stereovision-results.webp",
             "linkImage": "/assets/icons/doc-icon.png",
             "link": "...",
-            "displayImage": "assets/proj/display/capstone-group-photo.jpg"
+            "displayImage": "assets/proj/display/capstone-group-photo.webp"
         },
         {
             "title": "March Madness Predictor",
             "type": "Class/Personal Project",
             "description": "Developed a March Madness bracket predictor using Python using data from a Kaggle competition dataset. ...",
-            "image": "assets/proj/march-madness.jpg",
+            "image": "assets/proj/march-madness.webp",
             "linkImage": "/assets/icons/github-icon.png",
             "link": "...",
-            "displayImage": "assets/proj/display/ncaa-ball.png"
+            "displayImage": "assets/proj/display/ncaa-ball.webp"
         },
         {
             "title": "This Website",
             "type": "Personal Project",
             "description": "Using some experience in Typescript and React, I built this website to showcase my projects and experience. The website is hosted on Render.io, and the source code is available on GitHub. A previous version of the website was built using HTML and CSS.",
-            "image": "assets/proj/laptop-web.jpg",
+            "image": "assets/proj/laptop-web.webp",
             "linkImage": "/assets/icons/github-icon.png",
             "link": "https://github.com/Waikebber/Website",
             "displayImage": "assets/proj/display/web.png"
@@ -31,7 +31,7 @@
             "title": "Robotic Arm",
             "type": "Class Project",
             "description": "For my Embedded Design class at Northeastern University, I developed a robotic arm using pulse width modulation (PWM) to control its movements. The goal was to program the arm to pick up a bottle from various positions and move it with precision.",
-            "image": "assets/proj/arm-class.jpg",
+            "image": "assets/proj/arm-class.webp",
             "linkImage": "/assets/icons/github-icon.png",
             "link": "https://github.com/Waikebber/PWM-Robotic-Arm",
             "displayImage": "assets/proj/display/arm.png"
@@ -40,19 +40,19 @@
             "title": "NU Electric Racing Club",
             "type": "Telemetry Team",
             "description": "Contributed to the telemetry team using telemetry-XBee for real-time data transfer and InfluxDB Flux for data visualization. Helped monitor car components in a high-performance engineering environment.",
-            "image": "assets/proj/electric_car.jpg",
+            "image": "assets/proj/electric_car.webp",
             "linkImage": "/assets/icons/doc-icon.png",
             "link": "https://electricracing.northeastern.edu/",
-            "displayImage": "assets/proj/electric_car.jpg"
+            "displayImage": "assets/proj/electric_car.webp"
         },
         {
             "title": "NEU SEDS, Rover Team",
             "type": "Autonomous Navigation Team Member",
             "description": "Worked on rover localization systems to enable autonomous navigation. Gained hands-on experience in robotics and space exploration.",
-            "image": "assets/proj/rover.jpg",
+            "image": "assets/proj/rover.webp",
             "linkImage": "/assets/icons/notion-icon.png",
             "link": "https://nuseds.notion.site/NURover-Home-d41f9c94cd89435c80de54dc5ea999e1",
-            "displayImage": "assets/proj/rover.jpg"
+            "displayImage": "assets/proj/rover.webp"
         },
         {
             "title": "UNET Image Classifier",
@@ -61,7 +61,7 @@
             "image": "assets/proj/unet.png",
             "linkImage": "/assets/icons/github-icon.png",
             "link": "https://github.com/Waikebber/Bird_Classifier",
-            "displayImage": "assets/proj/display/unet.jpg"
+            "displayImage": "assets/proj/display/unet.webp"
         }
     ]
   }
