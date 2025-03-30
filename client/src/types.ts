@@ -38,24 +38,3 @@ export interface Project {
     linkImage: string;
     displayImage: string;
 }
-
-export const projectGridAreaMap: Record<string, string> = {
-    'This Website': 'box-2',
-    'Robotic Arm': 'box-3',
-    'March Madness Predictor': 'box-4',
-    'SEE': 'box-5',
-    'NEU SEDS, Rover Team': 'box-6',
-    'NU Electric Racing Club': 'box-7',
-    'UNET Image Classifier': 'box-8',
-};
-  
-export const fitImageMap: Record<string, boolean> = {
-    'SEE': false,
-    'March Madness Predictor': false,
-    'This Website': true,
-    'Robotic Arm': false,
-    'NU Electric Racing Club': false,
-    'NEU SEDS, Rover Team': false,
-    'UNET Image Classifier': false,
-  };
-  

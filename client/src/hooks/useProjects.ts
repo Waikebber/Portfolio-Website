@@ -22,8 +22,41 @@ const useProjects = () => {
 
     fetchProjects();
   }, []);
+  
+  const projectGridAreaMap: Record<string, string> = {
+    'This Website': 'box-2',
+    'Robotic Arm': 'box-3',
+    'March Madness Predictor': 'box-4',
+    'SEE': 'box-5',
+    'NEU SEDS, Rover Team': 'box-6',
+    'NU Electric Racing Club': 'box-7',
+    'UNET Image Classifier': 'box-8',
+  };
 
-  return { projects, loading, error };
+  const fitImageMap: Record<string, boolean> = {
+    'SEE': false,
+    'March Madness Predictor': false,
+    'This Website': true,
+    'Robotic Arm': false,
+    'NU Electric Racing Club': false,
+    'NEU SEDS, Rover Team': false,
+    'UNET Image Classifier': false,
+  };
+
+  const imagePositionMap: Record<string, string> = {
+    'SEE': 'center 20%',
+    'March Madness Predictor': 'center 50%',
+    'UNET Image Classifier': 'center 35%',
+  };
+
+  return { 
+    projects, 
+    projectGridAreaMap, 
+    fitImageMap, 
+    imagePositionMap,
+    loading, 
+    error 
+  };
 };
 
 export default useProjects;

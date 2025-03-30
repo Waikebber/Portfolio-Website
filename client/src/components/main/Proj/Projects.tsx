@@ -4,17 +4,16 @@ import { Box, Grid, GridItem, Heading } from '@chakra-ui/react';
 import { useState } from 'react';
 import ProjDescription from './ProjDescription/ProjDescription';
 import useProjects from '@/hooks/useProjects';
-import { Project, projectGridAreaMap } from '@/types';
-import { fitImageMap } from '@/types';
+import { Project } from '@/types';
 
-const imagePositionMap: Record<string, string> = {
-  'SEE': 'center 20%',
-  'March Madness Predictor': 'center 50%',
-  'UNET Image Classifier': 'center 35%',
-};
 
 const Projects = () => {
-  const { projects } = useProjects();
+  const { 
+    projects,
+    projectGridAreaMap,
+    fitImageMap,
+    imagePositionMap,
+    } = useProjects();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
