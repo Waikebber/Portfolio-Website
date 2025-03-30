@@ -1,5 +1,6 @@
-# Personal Portfolio Website -- Kai Webber
-
+# Decpricated Personal Portfolio Website -- Kai Webber
+The project has since been updated. This Directory contains the depricated code of the html and css version of the website.
+---
 Welcome to my personal portfolio website repository! This project showcases my work, skills, and contact information. The website is fully responsive and built using HTML, CSS, and JavaScript.
 
 ## The Deployed Website
