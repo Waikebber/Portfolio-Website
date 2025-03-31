@@ -31,6 +31,7 @@ const useProjects = () => {
     'NEU SEDS, Rover Team': 'box-6',
     'NU Electric Racing Club': 'box-7',
     'UNET Image Classifier': 'box-8',
+    'Electrocardiogram': 'box-9',
   };
 
   const fitImageMap: Record<string, boolean> = {
@@ -41,6 +42,7 @@ const useProjects = () => {
     'NU Electric Racing Club': false,
     'NEU SEDS, Rover Team': false,
     'UNET Image Classifier': false,
+    'Electrocardiogram': false,
   };
 
   const imagePositionMap: Record<string, string> = {

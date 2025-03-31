@@ -35,19 +35,19 @@ const Projects = () => {
           base: `"box-1 box-1"
                  "box-4 box-4"
                  "box-5 box-5"
-                 "box-8 box-8"
+                 "box-8 box-9"
                  "box-3 box-6"
                  "box-2 box-7"`,
 
           md: `"box-1 box-1 box-2"
                "box-6 box-5 box-5"
-               "box-4 box-4 box-4"
+               "box-4 box-4 box-9"
                "box-8 box-7 box-3"`,
 
           xl: `"box-2 box-2 box-1 box-1 box-1 box-3 box-3 box-3"
                "box-7 box-4 box-4 box-5 box-5 box-3 box-3 box-3"
                "box-7 box-4 box-4 box-5 box-5 box-6 box-6 box-6"
-               "box-7 box-8 box-8 box-8 box-8 box-6 box-6 box-6"`,
+               "box-7 box-8 box-8 box-8 box-9 box-6 box-6 box-6"`,
         }}
         gridAutoRows="180px"
         rowGap={4}
