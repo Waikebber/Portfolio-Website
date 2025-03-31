@@ -62,6 +62,15 @@
             "linkImage": "/assets/icons/github-icon.png",
             "link": "https://github.com/Waikebber/Bird_Classifier",
             "displayImage": "assets/proj/display/unet.webp"
+        },
+        {
+            "title": "Electro-cardiogram",
+            "type": "Class Project",
+            "description": "As a class project, I built an ECG signal processing system using an instrumentation amplifier, high-pass and low-pass filters, and a DAC to capture signals. I processed real-time ECG data in MATLAB, implemented heart rate (BPM) calculations, and displayed filtered results, showcasing hands-on experience in biomedical signal processing and system integration.",
+            "image": "assets/proj/ecg.png",
+            "linkImage": "/assets/icons/doc-icon.png",
+            "link": "https://drive.google.com/file/d/1KOAOt0N7vxRpN-WjbBpYB8VZm4z5NxgU/view?usp=sharing",
+            "displayImage": "assets/proj/display/ecg.webp"
         }
     ]
   }
