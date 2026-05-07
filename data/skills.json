@@ -1,0 +1,65 @@
+[
+  {
+    "id": "day-to-day",
+    "category": "DAY-TO-DAY",
+    "label": "Active stack",
+    "skills": ["C#", "TypeScript", "React", "SQL"],
+    "featured": true
+  },
+  {
+    "id": "languages",
+    "category": "LANGUAGES",
+    "label": "Languages",
+    "skills": ["Python", "Java", "C++", "C", "JavaScript"],
+    "featured": false
+  },
+  {
+    "id": "frontend",
+    "category": "FRONTEND",
+    "label": "Frontend",
+    "skills": ["Next.js", "Chakra UI", "Tailwind", "Figma", "Bootstrap"],
+    "featured": false
+  },
+  {
+    "id": "apis-auth",
+    "category": "APIS & AUTH",
+    "label": "APIs & Auth",
+    "skills": ["REST", "SOAP", "OAuth", "FDX", "HTTP"],
+    "featured": false
+  },
+  {
+    "id": "ml",
+    "category": "ML",
+    "label": "ML",
+    "skills": ["scikit-learn", "PyTorch", "U-Net"],
+    "featured": false
+  },
+  {
+    "id": "tools",
+    "category": "TOOLS",
+    "label": "Tools",
+    "skills": ["Git", "Jira", "Postman", "Rider", "VS Code", "Octopus", "Visual Studio"],
+    "featured": false
+  },
+  {
+    "id": "hardware",
+    "category": "HARDWARE",
+    "label": "Hardware",
+    "skills": ["Arduino", "Embedded", "SolidWorks", "AutoCAD"],
+    "featured": false
+  },
+  {
+    "id": "geo-data",
+    "category": "GEO / DATA",
+    "label": "Geo / Data",
+    "skills": ["QGIS", "Google Earth Engine", "MATLAB"],
+    "featured": false
+  },
+  {
+    "id": "infra",
+    "category": "INFRA",
+    "label": "Infra",
+    "skills": ["Docker", "RabbitMQ"],
+    "featured": false
+  }
+]

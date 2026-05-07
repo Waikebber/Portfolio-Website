@@ -77,6 +77,26 @@ Hardware: Arduino, Embedded, SolidWorks, AutoCAD
 Geo/Data: QGIS, Google Earth Engine, MATLAB
 Infra: Docker, RabbitMQ
 
+## Scroll Behavior
+- Scroll-snap mandatory on y axis — each section is exactly 100vh
+- Snap is NOT instant — requires deliberate scroll intent before committing 
+  to the next section. Use scroll-snap-type: y mandatory with CSS, 
+  but override with a custom JS/Framer Motion scroll handler that only 
+  snaps after the user has scrolled at least 18-22% of the viewport height.
+  Below that threshold it snaps back to the current section.
+- No momentum-based accidental snapping — user should feel resistance.
+
+## Scroll Progress Indicator
+- Fixed vertical bar on the right edge of the screen (or bottom)
+- Shows which section you're on out of total sections
+- Design: a slim vertical track (~2px wide, full viewport height) 
+  with a teal filled portion representing scroll progress through sections
+- Each section gets an equal segment of the track
+- Active segment fills with #61c1d8, inactive segments are rgba(255,255,255,0.1)
+- Subtle — should not compete with content
+- On hover, show the section name as a small tooltip to the left of the indicator
+- Clicking a segment jumps to that section
+
 ## Data Abstraction Layer
 All data fetching goes through /lib/data.ts.
 Phase 1: reads from /data/*.json static files.

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "emoney-ase",
+    "dateRange": "Sep 2025 — Present",
+    "location": "Radnor, PA",
+    "title": "Associate Software Engineer",
+    "company": "eMoney Advisor",
+    "description": "Owned two production API connectors via HTTP, REST, and SOAP with OAuth/FDX, and built an in-house payload simulation tool. Now building full-stack premium features in C#, SQL, TypeScript, and React — analytics dashboards surfacing real-time client engagement metrics.",
+    "type": "work"
+  },
+  {
+    "id": "emoney-odin",
+    "dateRange": "Jan 2025 — Aug 2025",
+    "location": "Radnor, PA",
+    "title": "Software Engineer Co-op",
+    "company": "eMoney Advisor — Odin Team",
+    "description": "Maintained C# data aggregation backend with RabbitMQ event-driven messaging. Piloted an Amazon Q proof-of-concept.",
+    "type": "work"
+  },
+  {
+    "id": "kri",
+    "dateRange": "Jan 2023 — Jun 2023",
+    "location": "Burlington, MA",
+    "title": "Data Scientist / Engineer Co-op",
+    "company": "George Kostas Research Institute",
+    "description": "Neural network classification models in Python for multi-band satellite imagery and autonomous vehicle RGB/NRGB data.",
+    "type": "work"
+  },
+  {
+    "id": "northeastern",
+    "dateRange": "Sep 2021 — Aug 2025",
+    "location": "Boston, MA",
+    "title": "B.S. Computer Engineering & Computer Science",
+    "company": "Northeastern University — Graduated Cum Laude",
+    "description": "Blended coursework in computer engineering and CS with 3 industry co-ops across ML research and software engineering.",
+    "type": "education"
+  }
+]
