@@ -2,17 +2,19 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 const NAV_LINKS = [
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Skills", href: "/#skills" },
   { label: "Photography", href: "/photography" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Nav() {
+  const pathname = usePathname();
   const [pastHero, setPastHero] = useState(false);
   const [mouseNearTop, setMouseNearTop] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -58,15 +60,22 @@ export default function Nav() {
           KW
         </Link>
         <nav className="flex items-center gap-10">
-          {NAV_LINKS.map(({ label, href }) => (
-            <Link
-              key={label}
-              href={href}
-              className="text-muted text-[13px] hover:text-warm-white transition-colors duration-200"
-            >
-              {label}
-            </Link>
-          ))}
+          {NAV_LINKS.map(({ label, href }) => {
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={label}
+                href={href}
+                className={`text-[13px] transition-colors duration-200 ${
+                  isActive
+                    ? "text-teal font-medium"
+                    : "text-muted hover:text-warm-white"
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </motion.header>
