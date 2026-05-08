@@ -18,7 +18,7 @@ function PhotoCard({
   return (
     <button
       onClick={onClick}
-      className="group relative w-full rounded-[8px] overflow-hidden cursor-pointer block mb-4 text-left"
+      className="group relative w-full rounded-[8px] overflow-hidden cursor-pointer block text-left"
       style={{ background: "#0f1e22", minHeight: loaded ? undefined : 180 }}
     >
       {!loaded && <Spinner />}
@@ -83,10 +83,15 @@ export default function RegionGrid({
       <p className="text-muted text-[14px] mb-8">{photos.length} photos</p>
 
       {/* Masonry grid */}
-      <div className="columns-3 gap-4">
-        {photos.map((photo, i) => (
-          <div key={photo.id} className="break-inside-avoid">
-            <PhotoCard photo={photo} onClick={() => onSelectPhoto(i)} />
+      <div className="flex gap-4 items-start">
+        {[0, 1, 2].map((col) => (
+          <div key={col} className="flex-1 flex flex-col gap-4">
+            {photos
+              .map((photo, i) => ({ photo, i }))
+              .filter(({ i }) => i % 3 === col)
+              .map(({ photo, i }) => (
+                <PhotoCard key={photo.id} photo={photo} onClick={() => onSelectPhoto(i)} />
+              ))}
           </div>
         ))}
       </div>
