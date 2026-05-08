@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { getPhotoUrl } from "@/lib/storage";
+import Spinner from "@/components/Spinner";
 import type { Photo, PhotoRegion, RegionId } from "@/types";
 
 export default function Accordion({
@@ -25,6 +26,9 @@ export default function Accordion({
 }) {
   const photo = photos[activeIndex];
   const total = photos.length;
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => { setLoaded(false); }, [photo.id]);
   const [venue, city] = photo.location.includes(",")
     ? photo.location.split(",").map((s) => s.trim())
     : [photo.location, null];
@@ -58,12 +62,15 @@ export default function Accordion({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
         >
+          {!loaded && <Spinner size={32} />}
           <Image
             src={getPhotoUrl(photo.filename)}
             alt={photo.location}
             fill
-            className="object-contain"
+            className="object-contain transition-opacity duration-300"
+            style={{ opacity: loaded ? 1 : 0 }}
             priority
+            onLoad={() => setLoaded(true)}
           />
         </motion.div>
       </AnimatePresence>

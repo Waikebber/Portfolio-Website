@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { getPhotoUrl } from "@/lib/storage";
+import Spinner from "@/components/Spinner";
 import type { PhotoRegion, RegionId } from "@/types";
 
 export default function RegionOverview({
@@ -9,6 +13,8 @@ export default function RegionOverview({
   regions: PhotoRegion[];
   onSelectRegion: (region: RegionId) => void;
 }) {
+
+  const [loadedMap, setLoadedMap] = useState<Record<string, boolean>>({});
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex flex-col items-center pt-16 pb-16 px-6">
@@ -28,11 +34,14 @@ export default function RegionOverview({
             }}
           >
             {/* Hero image */}
+            {!loadedMap[region.id] && <Spinner />}
             <Image
               src={getPhotoUrl(region.heroPhoto)}
               alt={region.label}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="object-cover transition-[opacity,transform] duration-500 group-hover:scale-[1.03]"
+              style={{ opacity: loadedMap[region.id] ? 1 : 0 }}
+              onLoad={() => setLoadedMap((m) => ({ ...m, [region.id]: true }))}
             />
 
             {/* Tint overlay */}

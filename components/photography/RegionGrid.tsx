@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { getPhotoUrl } from "@/lib/storage";
+import Spinner from "@/components/Spinner";
 import type { Photo, RegionId } from "@/types";
 
 function PhotoCard({
@@ -9,18 +13,22 @@ function PhotoCard({
   photo: Photo;
   onClick: () => void;
 }) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <button
       onClick={onClick}
       className="group relative w-full rounded-[8px] overflow-hidden cursor-pointer block mb-4 text-left"
-      style={{ background: "#0f1e22" }}
+      style={{ background: "#0f1e22", minHeight: loaded ? undefined : 180 }}
     >
+      {!loaded && <Spinner />}
       <Image
         src={getPhotoUrl(photo.filename)}
         alt={photo.location}
         width={560}
         height={374}
-        style={{ width: "100%", height: "auto", display: "block" }}
+        style={{ width: "100%", height: "auto", display: "block", opacity: loaded ? 1 : 0, transition: "opacity 0.3s" }}
+        onLoad={() => setLoaded(true)}
       />
 
       {/* Bottom gradient */}
