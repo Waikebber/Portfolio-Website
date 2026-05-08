@@ -26,7 +26,7 @@ export function useTotp(onSuccess: () => void): TotpState {
     async function enroll() {
       const { data: existing } = await supabase.auth.mfa.listFactors();
       for (const f of existing?.totp ?? []) {
-        if (f.status === "unverified") {
+        if (f.status !== "verified") {
           await supabase.auth.mfa.unenroll({ factorId: f.id });
         }
       }
