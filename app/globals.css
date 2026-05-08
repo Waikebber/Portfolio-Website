@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors */
+  --color-bg: #0d0d0f;
+  --color-surface: #141417;
+  --color-surface-teal: #0f1e22;
+  --color-teal: #61c1d8;
+  --color-warm-white: #f0ede6;
+  --color-muted: #888888;
+
+  /* Typography */
+  --font-sans: var(--font-inter);
+
+  /* Border radius */
+  --radius-tile: 12px;
+  --radius-chip: 4px;
+  --radius-photo: 10px;
+}
+
+:root {
+  /* Opacity-based borders — use as arbitrary values: border-[--border] */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-teal: rgba(97, 193, 216, 0.3);
+}
+
+/* White number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  filter: invert(1);
+  opacity: 0.5;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #0d0d0f;
+  color: #f0ede6;
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
