@@ -1,4 +1,25 @@
-export default function HeroSection() {
+import { createClient } from "@/lib/supabase/server";
+
+async function getResumeUrl(): Promise<string | null> {
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase
+      .from("resume")
+      .select("storage_path")
+      .order("uploaded_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (!data) return null;
+    const { data: urlData } = supabase.storage.from("docs").getPublicUrl(data.storage_path);
+    return urlData.publicUrl;
+  } catch {
+    return null;
+  }
+}
+
+export default async function HeroSection() {
+  const resumeUrl = await getResumeUrl();
+
   return (
     <div className="h-full flex flex-col justify-center px-6 md:px-16 xl:pl-[270px] xl:pr-[270px]">
       <p className="text-teal text-[12px] tracking-[1.8px] mb-8">
@@ -22,7 +43,9 @@ export default function HeroSection() {
 
       <div className="flex items-center gap-4">
         <a
-          href="#"
+          href={resumeUrl ?? "#"}
+          target={resumeUrl ? "_blank" : undefined}
+          rel={resumeUrl ? "noopener noreferrer" : undefined}
           className="inline-flex items-center justify-center h-[44px] px-8 bg-teal text-bg text-[13px] font-medium rounded-[4px] hover:opacity-90 transition-opacity"
         >
           View resume

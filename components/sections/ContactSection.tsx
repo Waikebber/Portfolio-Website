@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/server";
 
-const LINKS = [
+const STATIC_LINKS = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/kai-webber",
@@ -16,14 +17,37 @@ const LINKS = [
     href: "https://www.instagram.com/k_webb_photos",
     icon: "/assets/icons/instagram-icon.png",
   },
-  {
-    label: "Resume",
-    href: "/docs/Resume-KaiWebber.pdf",
-    icon: "/assets/icons/doc-icon.png",
-  },
 ];
 
-export default function ContactSection() {
+async function getResumeUrl(): Promise<string | null> {
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase
+      .from("resume")
+      .select("storage_path")
+      .order("uploaded_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (!data) return null;
+    const { data: urlData } = supabase.storage.from("docs").getPublicUrl(data.storage_path);
+    return urlData.publicUrl;
+  } catch {
+    return null;
+  }
+}
+
+export default async function ContactSection() {
+  const resumeUrl = await getResumeUrl();
+
+  const links = [
+    ...STATIC_LINKS,
+    {
+      label: "Resume",
+      href: resumeUrl ?? "#",
+      icon: "/assets/icons/doc-icon.png",
+    },
+  ];
+
   return (
     <div className="h-full flex flex-col">
       {/* Main contact content — vertically centered */}
@@ -39,7 +63,7 @@ export default function ContactSection() {
         </p>
 
         <div className="flex items-center gap-4">
-          {LINKS.map(({ label, href, icon }) => (
+          {links.map(({ label, href, icon }) => (
             <a
               key={label}
               href={href}

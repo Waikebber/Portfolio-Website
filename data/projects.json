@@ -54,7 +54,7 @@
     "chips": ["Stereovision", "C++", "Arduino", "Image Recognition"],
     "image": "/assets/proj/bento/capstone-group-photo.webp",
     "activeImage": "/assets/proj/display/capstone-stereovision-results.webp",
-    "link": "/docs/Final Report Capstone.pdf",
+    "link": "https://uplbpxblcipaxuzvhzwc.supabase.co/storage/v1/object/public/docs/projects/Final%20Report%20Capstone.pdf",
     "linkType": "doc",
     "size": "small",
     "order": 3
