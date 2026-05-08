@@ -9,10 +9,10 @@ import RegionGrid from "@/components/photography/RegionGrid";
 import Accordion from "@/components/photography/Accordion";
 import type { Photo, PhotoRegion, RegionId } from "@/types";
 
-const REGION_META: Omit<PhotoRegion, "photoCount">[] = [
-  { id: "italy",      label: "Italy",      heroPhoto: "ita_capri_tree.webp",     subLocations: "Capri · Sorrento · Rome · Vatican" },
-  { id: "japan",      label: "Japan",      heroPhoto: "jpn_nanzenji.webp",       subLocations: "Tokyo · Kyoto · Asakusa" },
-  { id: "california", label: "California", heroPhoto: "usa_halfMoon_harbor.webp", subLocations: "Half Moon Bay · Montara" },
+const REGION_META: Omit<PhotoRegion, "photoCount" | "heroPhoto">[] = [
+  { id: "italy",      label: "Italy",      subLocations: "Capri · Sorrento · Rome · Vatican" },
+  { id: "japan",      label: "Japan",      subLocations: "Tokyo · Kyoto · Asakusa" },
+  { id: "california", label: "California", subLocations: "Half Moon Bay · Montara" },
 ];
 
 type View = "overview" | "region" | "accordion";
@@ -27,7 +27,7 @@ export default function PhotographyPage() {
     const supabase = createClient();
     supabase
       .from("photos")
-      .select("id, filename, location, region")
+      .select("id, filename, location, region, is_hero")
       .order("display_order", { ascending: true })
       .then(({ data }) => {
         setPhotos(
@@ -43,10 +43,15 @@ export default function PhotographyPage() {
     ? photos.filter((p) => p.region === activeRegion)
     : [];
 
-  const photoRegions: PhotoRegion[] = REGION_META.map((meta) => ({
-    ...meta,
-    photoCount: photos.filter((p) => p.region === meta.id).length,
-  }));
+  const photoRegions: PhotoRegion[] = REGION_META.map((meta) => {
+    const regionPhotosAll = photos.filter((p) => p.region === meta.id);
+    const hero = regionPhotosAll.find((p) => p.is_hero) ?? regionPhotosAll[0];
+    return {
+      ...meta,
+      heroPhoto: hero?.filename ?? "",
+      photoCount: regionPhotosAll.length,
+    };
+  });
 
   function openRegion(region: RegionId) {
     setActiveRegion(region);

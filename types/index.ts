@@ -5,6 +5,7 @@ export interface Photo {
   filename: string;
   location: string;
   region: RegionId;
+  is_hero: boolean;
 }
 
 export interface PhotoRegion {

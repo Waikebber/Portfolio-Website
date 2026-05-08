@@ -24,6 +24,13 @@
   --border-teal: rgba(97, 193, 216, 0.3);
 }
 
+/* White number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  filter: invert(1);
+  opacity: 0.5;
+}
+
 html,
 body {
   height: 100%;

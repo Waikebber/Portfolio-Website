@@ -29,13 +29,20 @@ export async function POST(request: NextRequest) {
   const filename = formData.get("filename") as string;
   const region = formData.get("region") as string;
   const location = formData.get("location") as string;
-  const displayOrder = parseInt(formData.get("display_order") as string) || 0;
 
   if (!file || !filename || !region || !location) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
   const admin = createAdminClient();
+
+  const { data: maxRow } = await admin
+    .from("photos")
+    .select("display_order")
+    .order("display_order", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  const displayOrder = (maxRow?.display_order ?? 0) + 1;
 
   const { error: uploadError } = await admin.storage
     .from("photos")

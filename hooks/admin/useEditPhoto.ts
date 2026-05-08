@@ -9,6 +9,8 @@ export function useEditPhoto(allPhotos: AdminPhoto[], onSaved: () => void) {
   const [editLocation, setEditLocation] = useState("");
   const [newLocation, setNewLocation] = useState("");
   const [showNewLocation, setShowNewLocation] = useState(false);
+  const [isHero, setIsHero] = useState(false);
+  const [editOrder, setEditOrder] = useState(0);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,6 +23,8 @@ export function useEditPhoto(allPhotos: AdminPhoto[], onSaved: () => void) {
     setPhoto(p);
     setEditRegion(p.region);
     setEditLocation(p.location);
+    setIsHero(p.is_hero);
+    setEditOrder(p.display_order);
     setNewLocation("");
     setShowNewLocation(false);
     setError(null);
@@ -39,7 +43,7 @@ export function useEditPhoto(allPhotos: AdminPhoto[], onSaved: () => void) {
     const res = await fetch(`/api/photos/${photo.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ region: editRegion, location }),
+      body: JSON.stringify({ region: editRegion, location, is_hero: isHero, display_order: editOrder }),
     });
     if (!res.ok) {
       const { error: msg } = await res.json();
@@ -71,6 +75,9 @@ export function useEditPhoto(allPhotos: AdminPhoto[], onSaved: () => void) {
     editLocation, setEditLocation,
     newLocation, setNewLocation,
     showNewLocation, setShowNewLocation,
+    isHero, setIsHero,
+    editOrder, setEditOrder,
+    totalPhotos: allPhotos.length,
     locationsForRegion,
     saving, deleting, error,
     open, close, save, deletePhoto,

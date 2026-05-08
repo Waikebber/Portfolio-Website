@@ -33,8 +33,34 @@ create table if not exists public.photos (
   region        text        not null,
   country       text        not null,
   display_order integer     not null default 0,
+  is_hero       boolean     not null default false,
   created_at    timestamptz default now()
 );
+
+alter table public.photos add column if not exists is_hero boolean not null default false;
+
+-- Assign sequential display_order to existing photos (safe to re-run: only updates rows where all are 0)
+do $$ begin
+  if (select count(distinct display_order) from public.photos) <= 1 then
+    with ordered as (
+      select id, row_number() over (order by created_at) as rn
+      from public.photos
+    )
+    update public.photos p
+    set display_order = o.rn
+    from ordered o
+    where p.id = o.id;
+  end if;
+end $$;
+
+-- Deferrable so the reorder RPC can shift multiple rows without transient conflicts
+do $$ begin
+  if exists (select 1 from pg_constraint where conname = 'photos_display_order_unique') then
+    alter table public.photos drop constraint photos_display_order_unique;
+  end if;
+  alter table public.photos
+    add constraint photos_display_order_unique unique (display_order) deferrable initially deferred;
+end $$;
 
 create table if not exists public.resume (
   id           uuid        default gen_random_uuid() primary key,
@@ -89,6 +115,35 @@ do $$ begin
     create policy "Users read own role" on public.admin_roles for select to authenticated using (auth.uid() = user_id);
   end if;
 end $$;
+
+-- =====================
+-- RPC: reorder_photo
+-- Shifts surrounding photos in a single UPDATE statement so the unique
+-- constraint on display_order is satisfied atomically.
+-- =====================
+create or replace function reorder_photo(photo_id uuid, new_order integer)
+returns void language plpgsql as $$
+declare
+  old_order integer;
+begin
+  select display_order into old_order from public.photos where id = photo_id;
+  if old_order is null or old_order = new_order then return; end if;
+
+  if new_order < old_order then
+    update public.photos
+      set display_order = display_order + 1
+      where display_order >= new_order and display_order < old_order and id != photo_id;
+  else
+    update public.photos
+      set display_order = display_order - 1
+      where display_order > old_order and display_order <= new_order and id != photo_id;
+  end if;
+
+  update public.photos set display_order = new_order where id = photo_id;
+end;
+$$;
+
+grant execute on function reorder_photo(uuid, integer) to service_role;
 
 -- =====================
 -- Storage policies

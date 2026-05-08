@@ -28,12 +28,32 @@ export async function PATCH(
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { id } = await ctx.params;
-  const { region, location } = await request.json();
+  const { region, location, is_hero, display_order } = await request.json();
 
   const admin = createAdminClient();
+
+  // Clear hero flag for other photos in the region when setting a new hero
+  if (is_hero) {
+    const { error: clearErr } = await admin
+      .from("photos")
+      .update({ is_hero: false })
+      .eq("region", region)
+      .neq("id", id);
+    if (clearErr) return NextResponse.json({ error: clearErr.message }, { status: 500 });
+  }
+
+  // Reorder photos via RPC — runs as a single transaction to satisfy the unique constraint
+  if (display_order != null) {
+    const { error: rpcErr } = await admin.rpc("reorder_photo", {
+      photo_id: id,
+      new_order: display_order,
+    });
+    if (rpcErr) return NextResponse.json({ error: rpcErr.message }, { status: 500 });
+  }
+
   const { error } = await admin
     .from("photos")
-    .update({ region, location, country: REGION_TO_COUNTRY[region] ?? "unknown" })
+    .update({ region, location, country: REGION_TO_COUNTRY[region] ?? "unknown", is_hero: is_hero ?? false })
     .eq("id", id);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
@@ -41,7 +61,7 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   ctx: { params: Promise<{ id: string }> }
 ) {
   const user = await requireFullAdmin();

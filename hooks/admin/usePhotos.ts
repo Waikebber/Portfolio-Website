@@ -10,6 +10,7 @@ export interface AdminPhoto {
   region: string;
   country: string;
   display_order: number;
+  is_hero: boolean;
 }
 
 export function usePhotos() {

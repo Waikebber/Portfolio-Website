@@ -59,8 +59,6 @@ export default function AdminPhotosUploadPage() {
           setNewLocation={upload.setNewLocation}
           showNewLocation={upload.showNewLocation}
           setShowNewLocation={upload.setShowNewLocation}
-          displayOrder={upload.displayOrder}
-          setDisplayOrder={upload.setDisplayOrder}
           uploading={upload.uploading}
           error={upload.error}
           onSubmit={upload.upload}

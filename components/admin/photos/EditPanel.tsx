@@ -18,6 +18,8 @@ export default function EditPanel({
   editLocation, setEditLocation,
   newLocation, setNewLocation,
   showNewLocation, setShowNewLocation,
+  isHero, setIsHero,
+  editOrder, setEditOrder, totalPhotos,
   locationsForRegion,
   saving, deleting, error,
   close, save, deletePhoto,
@@ -78,6 +80,25 @@ export default function EditPanel({
               </p>
             </div>
 
+            {/* Display order */}
+            <div>
+              <p className="text-muted text-[10px] tracking-[1.1px] uppercase mb-1">
+                Order <span className="normal-case tracking-normal">1–{totalPhotos}</span>
+              </p>
+              <input
+                type="number"
+                min={1}
+                max={totalPhotos}
+                value={editOrder}
+                onChange={(e) => {
+                  const v = parseInt(e.target.value);
+                  if (!isNaN(v)) setEditOrder(Math.max(1, Math.min(v, totalPhotos)));
+                }}
+                className="w-full h-9 px-3 rounded-[6px] text-warm-white text-[13px] outline-none"
+                style={selectStyle}
+              />
+            </div>
+
             {/* Region */}
             <div>
               <p className="text-muted text-[10px] tracking-[1.1px] uppercase mb-1">Region</p>
@@ -131,6 +152,35 @@ export default function EditPanel({
                 </>
               )}
             </div>
+
+            {/* Region display photo */}
+            <label className="flex items-center gap-3 cursor-pointer select-none">
+              <div className="relative">
+                <input
+                  type="checkbox"
+                  checked={isHero}
+                  onChange={(e) => setIsHero(e.target.checked)}
+                  className="sr-only"
+                />
+                <div
+                  className="w-4 h-4 rounded-[3px] flex items-center justify-center transition-colors"
+                  style={{
+                    background: isHero ? "#61c1d8" : "transparent",
+                    border: isHero ? "1px solid #61c1d8" : "1px solid rgba(255,255,255,0.2)",
+                  }}
+                >
+                  {isHero && (
+                    <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
+                      <path d="M1 3.5L3.5 6L8 1" stroke="#0d0d0f" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </div>
+              </div>
+              <div>
+                <p className="text-warm-white text-[13px]">Region display photo</p>
+                <p className="text-muted text-[11px]">Shown on the region overview card</p>
+              </div>
+            </label>
 
             {error && <p className="text-[11px]" style={{ color: "#e64d4d" }}>{error}</p>}
 

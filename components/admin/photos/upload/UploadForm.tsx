@@ -14,8 +14,6 @@ interface Props {
   setNewLocation: (v: string) => void;
   showNewLocation: boolean;
   setShowNewLocation: (v: boolean) => void;
-  displayOrder: number;
-  setDisplayOrder: (v: number) => void;
   uploading: boolean;
   error: string | null;
   onSubmit: () => void;
@@ -29,7 +27,6 @@ export default function UploadForm({
   locationsForRegion,
   newLocation, setNewLocation,
   showNewLocation, setShowNewLocation,
-  displayOrder, setDisplayOrder,
   uploading, error, onSubmit, disabled,
 }: Props) {
   return (
@@ -98,18 +95,6 @@ export default function UploadForm({
             </button>
           </>
         )}
-      </div>
-
-      {/* Display order */}
-      <div>
-        <p className="text-muted text-[10px] tracking-[1.1px] uppercase mb-1.5">Display order</p>
-        <input
-          type="number"
-          value={displayOrder}
-          onChange={(e) => setDisplayOrder(parseInt(e.target.value) || 0)}
-          className="w-full h-10 px-3 rounded-[6px] text-warm-white text-[13px] outline-none"
-          style={inputStyle}
-        />
       </div>
 
       {error && <p className="text-[12px]" style={{ color: "#e64d4d" }}>{error}</p>}

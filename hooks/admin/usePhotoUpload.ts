@@ -13,7 +13,6 @@ export function usePhotoUpload(locationsForRegion: string[]) {
   const [location, setLocation] = useState(locationsForRegion[0] ?? "");
   const [newLocation, setNewLocation] = useState("");
   const [showNewLocation, setShowNewLocation] = useState(false);
-  const [displayOrder, setDisplayOrder] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,7 +40,6 @@ export function usePhotoUpload(locationsForRegion: string[]) {
     body.append("filename", filename);
     body.append("region", region);
     body.append("location", loc);
-    body.append("display_order", String(displayOrder));
     const res = await fetch("/api/photos", { method: "POST", body });
     if (!res.ok) {
       const { error: msg } = await res.json();
@@ -59,7 +57,6 @@ export function usePhotoUpload(locationsForRegion: string[]) {
     location, setLocation,
     newLocation, setNewLocation,
     showNewLocation, setShowNewLocation,
-    displayOrder, setDisplayOrder,
     uploading, error,
     onDrop, selectFile, upload,
   };
