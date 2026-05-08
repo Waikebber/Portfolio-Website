@@ -3,15 +3,12 @@
 import Image from "next/image";
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { getPhotoRegions } from "@/lib/data";
-import type { Photo, RegionId } from "@/types";
-
-function photoSrc(filename: string) {
-  return `/assets/photography/${encodeURIComponent(filename)}`;
-}
+import { getPhotoUrl } from "@/lib/storage";
+import type { Photo, PhotoRegion, RegionId } from "@/types";
 
 export default function Accordion({
   photos,
+  regions,
   activeIndex,
   activeRegion,
   onNav,
@@ -19,6 +16,7 @@ export default function Accordion({
   onSeeAll,
 }: {
   photos: Photo[];
+  regions: PhotoRegion[];
   activeIndex: number;
   activeRegion: RegionId;
   onNav: (index: number) => void;
@@ -61,7 +59,7 @@ export default function Accordion({
           transition={{ duration: 0.25 }}
         >
           <Image
-            src={photoSrc(photo.filename)}
+            src={getPhotoUrl(photo.filename)}
             alt={photo.location}
             fill
             className="object-contain"
@@ -132,7 +130,7 @@ export default function Accordion({
       {/* Bottom-center counter + region dots */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
         <div className="flex items-center gap-1.5">
-          {getPhotoRegions().map(({ id }) => (
+          {regions.map(({ id }) => (
             <div
               key={id}
               style={{

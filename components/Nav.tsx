@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 const NAV_LINKS = [
+  { label: "Home", href: "/#hero" },
   { label: "Experience", href: "/#experience" },
   { label: "Projects", href: "/#projects" },
   { label: "Skills", href: "/#skills" },
@@ -54,7 +55,7 @@ export default function Nav() {
       />
       <div className="mx-auto max-w-[1440px] h-full flex items-center justify-between px-10">
         <Link
-          href="/"
+          href="/admin"
           className="text-teal text-[14px] font-medium tracking-[1.12px] hover:opacity-80 transition-opacity"
         >
           KW

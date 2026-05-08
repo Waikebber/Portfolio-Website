@@ -1,10 +1,6 @@
 import Image from "next/image";
+import { getPhotoUrl } from "@/lib/storage";
 import type { Photo, RegionId } from "@/types";
-import { getPhotoRegion } from "@/lib/data";
-
-function photoSrc(filename: string) {
-  return `/assets/photography/${encodeURIComponent(filename)}`;
-}
 
 function PhotoCard({
   photo,
@@ -20,7 +16,7 @@ function PhotoCard({
       style={{ background: "#0f1e22" }}
     >
       <Image
-        src={photoSrc(photo.filename)}
+        src={getPhotoUrl(photo.filename)}
         alt={photo.location}
         width={560}
         height={374}
@@ -60,7 +56,7 @@ export default function RegionGrid({
   onBack: () => void;
   onSelectPhoto: (index: number) => void;
 }) {
-  const regionData = getPhotoRegion(region);
+  const regionLabel = region.charAt(0).toUpperCase() + region.slice(1);
 
   return (
     <div className="min-h-[calc(100vh-64px)] px-12 pt-6 pb-16">
@@ -74,7 +70,7 @@ export default function RegionGrid({
 
       {/* Header */}
       <h1 className="text-warm-white text-[48px] font-medium leading-tight mb-2">
-        {regionData?.label}
+        {regionLabel}
       </h1>
       <p className="text-muted text-[14px] mb-8">{photos.length} photos</p>
 

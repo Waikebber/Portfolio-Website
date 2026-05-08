@@ -1,17 +1,14 @@
 import Image from "next/image";
-import { getPhotoRegions } from "@/lib/data";
-import type { RegionId } from "@/types";
-
-function photoSrc(filename: string) {
-  return `/assets/photography/${encodeURIComponent(filename)}`;
-}
+import { getPhotoUrl } from "@/lib/storage";
+import type { PhotoRegion, RegionId } from "@/types";
 
 export default function RegionOverview({
+  regions,
   onSelectRegion,
 }: {
+  regions: PhotoRegion[];
   onSelectRegion: (region: RegionId) => void;
 }) {
-  const regions = getPhotoRegions();
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex flex-col items-center pt-16 pb-16 px-6">
@@ -32,7 +29,7 @@ export default function RegionOverview({
           >
             {/* Hero image */}
             <Image
-              src={photoSrc(region.heroPhoto)}
+              src={getPhotoUrl(region.heroPhoto)}
               alt={region.label}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
