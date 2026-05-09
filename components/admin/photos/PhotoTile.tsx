@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import Spinner from "@/components/Spinner";
 import type { AdminPhoto } from "@/hooks/admin/usePhotos";
 
 interface Props {
@@ -8,18 +12,23 @@ interface Props {
 }
 
 export default function PhotoTile({ photo, photoUrl, onClick }: Props) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <button
       onClick={onClick}
       className="relative w-full h-[180px] rounded-[8px] overflow-hidden group cursor-pointer"
       style={{ background: "#141417" }}
     >
+      {!loaded && <Spinner />}
       <Image
         src={photoUrl}
         alt={photo.location}
         fill
-        className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
-        sizes="(max-width: 1200px) 25vw, 200px"
+        unoptimized
+        className="object-cover group-hover:scale-[1.03] transition-[opacity,transform] duration-300"
+        style={{ opacity: loaded ? 1 : 0 }}
+        onLoad={() => setLoaded(true)}
       />
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"

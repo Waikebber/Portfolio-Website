@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export function usePhotoUpload(locationsForRegion: string[]) {
@@ -15,6 +15,10 @@ export function usePhotoUpload(locationsForRegion: string[]) {
   const [showNewLocation, setShowNewLocation] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    return () => { if (preview) URL.revokeObjectURL(preview); };
+  }, [preview]);
 
   const onDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();

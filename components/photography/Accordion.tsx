@@ -67,6 +67,7 @@ export default function Accordion({
             src={getPhotoUrl(photo.filename)}
             alt={photo.location}
             fill
+            unoptimized
             className="object-contain transition-opacity duration-300"
             style={{ opacity: loaded ? 1 : 0 }}
             priority

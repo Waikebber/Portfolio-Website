@@ -1,11 +1,6 @@
-import { createClient } from "@/lib/supabase/client";
+import { getPhotoUrl } from "@/lib/storage";
 import type { AdminPhoto } from "@/hooks/admin/usePhotos";
 import PhotoTile from "./PhotoTile";
-
-function getPhotoUrl(filename: string) {
-  const supabase = createClient();
-  return supabase.storage.from("photos").getPublicUrl(filename).data.publicUrl;
-}
 
 interface Props {
   photos: AdminPhoto[];
