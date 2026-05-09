@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Spinner from "@/components/Spinner";
 import type { Project } from "@/types";
 
 const COL_CENTER: Record<number, number> = {
@@ -40,6 +41,7 @@ export default function ProjectTile({
 }) {
   const slideX = inactive && activeProject ? getSlideX(project, activeProject) : 0;
   const [hovered, setHovered] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <motion.div
@@ -57,6 +59,7 @@ export default function ProjectTile({
       whileHover={inactive ? {} : { scale: 1.01 }}
     >
       <div className="absolute inset-0">
+        {!loaded && <Spinner />}
         <motion.div
           className="absolute inset-0 z-10 rounded-[12px]"
           animate={{ background: hovered ? "rgba(0,0,0,0.38)" : "rgba(0,0,0,0.62)" }}
@@ -66,7 +69,9 @@ export default function ProjectTile({
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover rounded-[12px]"
+          className="object-cover rounded-[12px] transition-opacity duration-300"
+          style={{ opacity: loaded ? 1 : 0 }}
+          onLoad={() => setLoaded(true)}
         />
       </div>
 

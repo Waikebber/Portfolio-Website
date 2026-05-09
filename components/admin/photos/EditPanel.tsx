@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import Spinner from "@/components/Spinner";
 import type { useEditPhoto } from "@/hooks/admin/useEditPhoto";
 
 const REGIONS = ["Japan", "Italy", "California"];
@@ -25,6 +29,8 @@ export default function EditPanel({
   close, save, deletePhoto,
 }: Props) {
   const isOpen = !!photo;
+  const [thumbLoaded, setThumbLoaded] = useState(false);
+  useEffect(() => { setThumbLoaded(false); }, [photo?.id]);
 
   function getPhotoUrl(filename: string) {
     const supabase = createClient();
@@ -60,12 +66,15 @@ export default function EditPanel({
         {photo && (
           <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-5">
             {/* Thumbnail */}
-            <div className="relative w-full h-[160px] rounded-[8px] overflow-hidden">
+            <div className="relative w-full h-[160px] rounded-[8px] overflow-hidden" style={{ background: "#19191d" }}>
+              {!thumbLoaded && <Spinner />}
               <Image
                 src={getPhotoUrl(photo.filename)}
                 alt={photo.location}
                 fill
-                className="object-cover"
+                className="object-cover transition-opacity duration-300"
+                style={{ opacity: thumbLoaded ? 1 : 0 }}
+                onLoad={() => setThumbLoaded(true)}
               />
             </div>
 
