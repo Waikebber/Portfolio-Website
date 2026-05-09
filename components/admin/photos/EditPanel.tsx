@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { getPhotoUrl } from "@/lib/storage";
 import Spinner from "@/components/Spinner";
 import type { useEditPhoto } from "@/hooks/admin/useEditPhoto";
 
@@ -31,11 +31,6 @@ export default function EditPanel({
   const isOpen = !!photo;
   const [thumbLoaded, setThumbLoaded] = useState(false);
   useEffect(() => { setThumbLoaded(false); }, [photo?.id]);
-
-  function getPhotoUrl(filename: string) {
-    const supabase = createClient();
-    return supabase.storage.from("photos").getPublicUrl(filename).data.publicUrl;
-  }
 
   return (
     <>
@@ -72,6 +67,7 @@ export default function EditPanel({
                 src={getPhotoUrl(photo.filename)}
                 alt={photo.location}
                 fill
+                unoptimized
                 className="object-cover transition-opacity duration-300"
                 style={{ opacity: thumbLoaded ? 1 : 0 }}
                 onLoad={() => setThumbLoaded(true)}

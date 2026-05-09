@@ -39,6 +39,7 @@ export default function RegionOverview({
               src={getPhotoUrl(region.heroPhoto)}
               alt={region.label}
               fill
+              unoptimized
               className="object-cover transition-[opacity,transform] duration-500 group-hover:scale-[1.03]"
               style={{ opacity: loadedMap[region.id] ? 1 : 0 }}
               onLoad={() => setLoadedMap((m) => ({ ...m, [region.id]: true }))}

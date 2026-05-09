@@ -25,9 +25,9 @@ export default function PhotoTile({ photo, photoUrl, onClick }: Props) {
         src={photoUrl}
         alt={photo.location}
         fill
+        unoptimized
         className="object-cover group-hover:scale-[1.03] transition-[opacity,transform] duration-300"
         style={{ opacity: loaded ? 1 : 0 }}
-        sizes="(max-width: 1200px) 25vw, 200px"
         onLoad={() => setLoaded(true)}
       />
       <div

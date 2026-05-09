@@ -27,6 +27,7 @@ function PhotoCard({
         alt={photo.location}
         width={560}
         height={374}
+        unoptimized
         style={{ width: "100%", height: "auto", display: "block", opacity: loaded ? 1 : 0, transition: "opacity 0.3s" }}
         onLoad={() => setLoaded(true)}
       />
