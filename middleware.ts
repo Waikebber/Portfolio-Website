@@ -43,7 +43,7 @@ export async function middleware(request: NextRequest) {
       .select("role")
       .eq("user_id", user.id)
       .maybeSingle();
-    const role = roleData?.role ?? "full-admin";
+    const role = roleData?.role ?? "guest-admin";
     const dest = role === "guest-admin" ? "/admin/guitar-tabs" : "/admin";
     return NextResponse.redirect(new URL(dest, request.url));
   }
@@ -55,7 +55,7 @@ export async function middleware(request: NextRequest) {
       .select("role")
       .eq("user_id", user.id)
       .maybeSingle();
-    const role = roleData?.role ?? "full-admin";
+    const role = roleData?.role ?? "guest-admin";
 
     const isGuestAllowed = pathname.startsWith("/admin/guitar-tabs");
     if (role === "guest-admin" && !isGuestAllowed) {
