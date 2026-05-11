@@ -60,7 +60,7 @@ export default function Sidebar() {
       {/* Nav items */}
       <nav className="flex flex-col gap-0.5 px-3 pt-3 flex-1">
         {navItems.map(({ label, href }) => {
-          const isActive = pathname === href;
+          const isActive = href === "/admin" ? pathname === href : pathname.startsWith(href);
           return (
             <div key={href} className="relative flex items-center">
               {isActive && (
