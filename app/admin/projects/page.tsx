@@ -1,12 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { getProjects } from "@/lib/data";
 import Spinner from "@/components/Spinner";
-import type { Project } from "@/types";
-
-type ImageMap = Record<string, { bento: string | null; display: string | null; displayBottomOffset: number }>;
+import { useProjectImages } from "@/hooks/admin/useProjectImages";
 
 const SLOT_LABELS: Record<"bento" | "display", string> = {
   bento: "Bento (tile)",
@@ -16,77 +13,17 @@ const SLOT_LABELS: Record<"bento" | "display", string> = {
 const base = getProjects();
 
 export default function AdminProjectsPage() {
-  const [imageMap, setImageMap] = useState<ImageMap>({});
-  const [uploading, setUploading] = useState<{ projectId: string; type: "bento" | "display" } | null>(null);
-  const [savingOffset, setSavingOffset] = useState<string | null>(null);
-  const [loadedSet, setLoadedSet] = useState<Set<string>>(new Set());
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const pendingUpload = useRef<{ projectId: string; type: "bento" | "display" } | null>(null);
-  const debounceRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
-
-  useEffect(() => {
-    fetchImages();
-  }, []);
-
-  async function fetchImages() {
-    const res = await fetch("/api/projects/images");
-    if (res.ok) setImageMap(await res.json());
-  }
-
-  function triggerUpload(project: Project, type: "bento" | "display") {
-    pendingUpload.current = { projectId: project.id, type };
-    fileInputRef.current?.click();
-  }
-
-  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    const meta = pendingUpload.current;
-    if (!file || !meta) return;
-
-    setUploading(meta);
-    e.target.value = "";
-
-    const fd = new FormData();
-    fd.append("project_id", meta.projectId);
-    fd.append("image_type", meta.type);
-    fd.append("file", file);
-
-    const res = await fetch("/api/projects/images", { method: "POST", body: fd });
-    if (res.ok) {
-      const { url } = await res.json();
-      const key = `${meta.projectId}-${meta.type}`;
-      setLoadedSet((prev) => { const next = new Set(prev); next.delete(key); return next; });
-      setImageMap((prev) => ({
-        ...prev,
-        [meta.projectId]: {
-          ...prev[meta.projectId],
-          [meta.type]: url,
-        },
-      }));
-    }
-
-    setUploading(null);
-    pendingUpload.current = null;
-  }
-
-  function handleOffsetChange(projectId: string, value: string) {
-    const offset = Math.max(0, Math.min(50, Number(value) || 0));
-    setImageMap((prev) => ({
-      ...prev,
-      [projectId]: { ...prev[projectId], displayBottomOffset: offset },
-    }));
-
-    clearTimeout(debounceRef.current[projectId]);
-    debounceRef.current[projectId] = setTimeout(async () => {
-      setSavingOffset(projectId);
-      await fetch("/api/projects/images", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ project_id: projectId, display_bottom_offset: offset }),
-      });
-      setSavingOffset(null);
-    }, 600);
-  }
+  const {
+    imageMap,
+    uploading,
+    savingOffset,
+    loadedSet,
+    fileInputRef,
+    triggerUpload,
+    handleFileChange,
+    handleOffsetChange,
+    markLoaded,
+  } = useProjectImages();
 
   return (
     <div className="max-w-[860px]">
@@ -125,6 +62,7 @@ export default function AdminProjectsPage() {
                 <div className="flex gap-4 shrink-0">
                   {(["bento", "display"] as const).map((type) => {
                     const url = imgs[type];
+                    const loadKey = `${project.id}-${type}`;
                     const isUploading = uploading?.projectId === project.id && uploading?.type === type;
                     return (
                       <div key={type} className="flex flex-col items-center gap-2">
@@ -142,15 +80,15 @@ export default function AdminProjectsPage() {
                         >
                           {url ? (
                             <>
-                              {!loadedSet.has(`${project.id}-${type}`) && <Spinner />}
+                              {!loadedSet.has(loadKey) && <Spinner />}
                               <Image
                                 src={url}
                                 alt={`${project.title} ${type}`}
                                 fill
                                 sizes="120px"
                                 className="object-cover transition-opacity duration-300"
-                                style={{ opacity: loadedSet.has(`${project.id}-${type}`) ? 1 : 0 }}
-                                onLoad={() => setLoadedSet((prev) => new Set(prev).add(`${project.id}-${type}`))}
+                                style={{ opacity: loadedSet.has(loadKey) ? 1 : 0 }}
+                                onLoad={() => markLoaded(loadKey)}
                               />
                             </>
                           ) : (
@@ -177,7 +115,6 @@ export default function AdminProjectsPage() {
                           {url ? "Replace" : "Upload"}
                         </button>
 
-                        {/* Bottom offset input — display slot only */}
                         {type === "display" && (
                           <div className="flex items-center gap-1.5 mt-0.5">
                             <label className="text-[10px]" style={{ color: "#555" }}>
