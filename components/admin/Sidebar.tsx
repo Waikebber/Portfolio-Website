@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 
 const ALL_NAV_ITEMS = [
   { label: "Dashboard", href: "/admin", roles: ["full-admin"] },
+  { label: "Users", href: "/admin/users", roles: ["full-admin"] },
   { label: "Resume", href: "/admin/resume", roles: ["full-admin"] },
   { label: "Photos", href: "/admin/photos", roles: ["full-admin"] },
   { label: "Guitar Tabs", href: "/admin/guitar-tabs", roles: ["full-admin", "guest-admin"] },

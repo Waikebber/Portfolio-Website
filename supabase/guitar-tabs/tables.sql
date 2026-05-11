@@ -10,7 +10,7 @@ create table if not exists public.genres (
 
 create table if not exists public.tunings (
   id         uuid        default gen_random_uuid() primary key,
-  name       text        not null unique,
+  name       text        unique,
   strings    text        not null,
   created_at timestamptz default now()
 );
@@ -20,7 +20,7 @@ insert into public.tunings (name, strings) values
   ('Eb Standard', 'Eb Ab Db Gb Bb Eb'),
   ('Drop D',      'D A D G B E'),
   ('Open G',      'D G D G B D'),
-  ('DADGAD',      'D A D G A D')
+  (null,      'D A D G A D')
 on conflict (name) do nothing;
 
 create table if not exists public.artists (
@@ -47,6 +47,7 @@ create table if not exists public.tabs (
   song_id      uuid        references public.songs(id) on delete cascade,
   tuning_id    uuid        references public.tunings(id) on delete set null,
   capo         integer     check (capo between 1 and 12),
+  is_pinned    boolean     not null default false,
   source_type  text        not null check (source_type in ('file', 'link')),
   source_value text        not null,
   created_by   uuid        references auth.users(id) on delete set null,

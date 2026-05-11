@@ -30,11 +30,13 @@ export function useArtists(genreId: string) {
     }, {});
 
     setArtists(
-      (artistsData ?? []).map((a) => ({
-        ...a,
-        genre_name: genreMap[a.genre_id] ?? "",
-        song_count: countByArtist[a.id] ?? 0,
-      }))
+      (artistsData ?? [])
+        .map((a) => ({
+          ...a,
+          genre_name: genreMap[a.genre_id] ?? "",
+          song_count: countByArtist[a.id] ?? 0,
+        }))
+        .sort((a, b) => b.song_count - a.song_count || a.name.localeCompare(b.name))
     );
     setLoading(false);
   }

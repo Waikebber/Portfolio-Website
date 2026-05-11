@@ -7,7 +7,7 @@ export interface Genre {
 
 export interface Tuning {
   id: string
-  name: string
+  name: string | null
   strings: string
 }
 
@@ -54,6 +54,7 @@ export interface Tab {
   song_id: string
   tuning_id: string | null
   capo: number | null
+  is_pinned: boolean
   source_type: "file" | "link"
   source_value: string
   tuning: Tuning | null

@@ -1,7 +1,8 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useTabs } from "@/hooks/admin/useTabs";
 import { useTunings } from "@/hooks/admin/useTunings";
@@ -23,11 +24,13 @@ export default function TabOptionsPage({
   params: Promise<{ genreId: string; artistId: string; songId: string }>;
 }) {
   const { genreId, artistId, songId } = use(params);
+  const searchParams = useSearchParams();
   const { tabs, loading, refresh } = useTabs(songId);
   const { tunings } = useTunings();
-  const [panelOpen, setPanelOpen] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(searchParams.get("add") === "1");
   const [editingTab, setEditingTab] = useState<Tab | null>(null);
   const [songInfo, setSongInfo] = useState<SongInfo | null>(null);
+  const autoEditDone = useRef(false);
 
   useEffect(() => {
     async function fetchSong() {
@@ -51,6 +54,13 @@ export default function TabOptionsPage({
     }
     fetchSong();
   }, [songId]);
+
+  useEffect(() => {
+    if (!loading && tabs.length > 0 && searchParams.get("editFirst") === "1" && !autoEditDone.current) {
+      autoEditDone.current = true;
+      openEdit(tabs[0]);
+    }
+  }, [loading, tabs]);
 
   function openAdd() {
     setEditingTab(null);
@@ -120,14 +130,20 @@ export default function TabOptionsPage({
         <p className="text-muted text-[13px]">No tabs yet. Add one to get started.</p>
       ) : (
         <div className="flex flex-col gap-4">
-          {tabs.map((tab) => (
-            <TabCard
-              key={tab.id}
-              tab={tab}
-              onEdit={() => openEdit(tab)}
-              onDelete={() => deleteTab(tab)}
-            />
-          ))}
+          {[...tabs]
+            .sort((a, b) => {
+              if (a.is_pinned !== b.is_pinned) return a.is_pinned ? -1 : 1;
+              return (a.description ?? "").localeCompare(b.description ?? "");
+            })
+            .map((tab) => (
+              <TabCard
+                key={tab.id}
+                tab={tab}
+                onEdit={() => openEdit(tab)}
+                onDelete={() => deleteTab(tab)}
+                onPinToggle={refresh}
+              />
+            ))}
         </div>
       )}
 

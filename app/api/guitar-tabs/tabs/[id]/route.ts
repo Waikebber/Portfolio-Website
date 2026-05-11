@@ -15,13 +15,18 @@ export async function PATCH(request: NextRequest, ctx: { params: Promise<{ id: s
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { id } = await ctx.params;
-  const { description, tuning_id, capo, source_type, source_value } = await request.json();
+  const body = await request.json();
+
+  const patch: Record<string, unknown> = {};
+  if ("description" in body)  patch.description  = body.description?.trim() || null;
+  if ("tuning_id"   in body)  patch.tuning_id    = body.tuning_id || null;
+  if ("capo"        in body)  patch.capo         = body.capo ?? null;
+  if ("is_pinned"   in body)  patch.is_pinned    = body.is_pinned;
+  if ("source_type" in body)  patch.source_type  = body.source_type;
+  if ("source_value" in body) patch.source_value = body.source_value?.trim();
 
   const admin = createAdminClient();
-  const { error } = await admin
-    .from("tabs")
-    .update({ description: description?.trim() || null, tuning_id: tuning_id || null, capo: capo ?? null, source_type, source_value: source_value?.trim() })
-    .eq("id", id);
+  const { error } = await admin.from("tabs").update(patch).eq("id", id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
 }

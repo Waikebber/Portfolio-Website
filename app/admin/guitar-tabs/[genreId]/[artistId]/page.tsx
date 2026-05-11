@@ -42,9 +42,15 @@ export default function SongsPage({
     setEditingSong(null);
   }
 
-  function handleNavigate(song: Song) {
-    if (song.tab_count === 1 && song.first_tab_source_type === "link" && song.first_tab_source_value) {
-      window.open(song.first_tab_source_value, "_blank", "noopener noreferrer");
+  async function handleNavigate(song: Song) {
+    if (song.tab_count === 1 && song.first_tab_source_value) {
+      let url = song.first_tab_source_value;
+      if (song.first_tab_source_type === "file") {
+        const res = await fetch(`/api/guitar-tabs/signed-url?path=${encodeURIComponent(url)}`);
+        if (!res.ok) { router.push(`/admin/guitar-tabs/${genreId}/${artistId}/${song.id}`); return; }
+        url = (await res.json()).url;
+      }
+      window.open(url, "_blank", "noopener noreferrer");
       if (song.first_tab_id) {
         fetch("/api/guitar-tabs/recents", {
           method: "POST",
@@ -104,6 +110,8 @@ export default function SongsPage({
               song={song}
               onEdit={() => openEdit(song)}
               onNavigate={() => handleNavigate(song)}
+              onAddTab={() => router.push(`/admin/guitar-tabs/${genreId}/${artistId}/${song.id}?add=1`)}
+              onEditTab={() => router.push(`/admin/guitar-tabs/${genreId}/${artistId}/${song.id}?editFirst=1`)}
             />
           ))}
         </div>
