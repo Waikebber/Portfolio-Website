@@ -21,12 +21,13 @@ export default function PhotoGrid({ photos, onSelect }: Props) {
 
   return (
     <div className="grid grid-cols-4 gap-3">
-      {photos.map((photo) => (
+      {photos.map((photo, i) => (
         <PhotoTile
           key={photo.id}
           photo={photo}
           photoUrl={getPhotoUrl(photo.filename)}
           onClick={() => onSelect(photo)}
+          priority={i === 0}
         />
       ))}
     </div>

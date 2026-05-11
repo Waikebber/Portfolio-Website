@@ -35,15 +35,17 @@ export default function RegionOverview({
           >
             {/* Hero image */}
             {!loadedMap[region.id] && <Spinner />}
-            <Image
-              src={getPhotoUrl(region.heroPhoto)}
-              alt={region.label}
-              fill
-              unoptimized
-              className="object-cover transition-[opacity,transform] duration-500 group-hover:scale-[1.03]"
-              style={{ opacity: loadedMap[region.id] ? 1 : 0 }}
-              onLoad={() => setLoadedMap((m) => ({ ...m, [region.id]: true }))}
-            />
+            {region.heroPhoto && (
+              <Image
+                src={getPhotoUrl(region.heroPhoto)}
+                alt={region.label}
+                fill
+                unoptimized
+                className="object-cover transition-[opacity,transform] duration-500 group-hover:scale-[1.03]"
+                style={{ opacity: loadedMap[region.id] ? 1 : 0 }}
+                onLoad={() => setLoadedMap((m) => ({ ...m, [region.id]: true }))}
+              />
+            )}
 
             {/* Tint overlay */}
             <div

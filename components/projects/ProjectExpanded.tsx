@@ -20,12 +20,29 @@ export default function ProjectExpanded({
     >
       <div className="absolute inset-0">
         <div className="absolute inset-0" style={{ background: "#141417" }} />
-        <Image
-          src={project.activeImage ?? project.image}
-          alt={project.title}
-          fill
-          className="object-cover opacity-40 z-10"
-        />
+        {(project.activeImage ?? project.image) && (
+          <div
+            className="absolute z-10"
+            style={{
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: `${project.displayBottomOffset ?? 0}%`,
+            }}
+          >
+            <Image
+              src={(project.activeImage ?? project.image)!}
+              alt={project.title}
+              fill
+              sizes="100vw"
+              className="object-cover opacity-40"
+            />
+            <div
+              className="absolute inset-x-0 bottom-0 h-[15%]"
+              style={{ background: "linear-gradient(to bottom, transparent, #141417)" }}
+            />
+          </div>
+        )}
       </div>
 
       <div

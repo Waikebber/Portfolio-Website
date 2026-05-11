@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { getProjects } from "@/lib/data";
 import ProjectTile from "@/components/projects/ProjectTile";
 import ProjectExpanded from "@/components/projects/ProjectExpanded";
+import type { Project } from "@/types";
 
 const GRID_CLASSES: Record<number, string> = {
   0: "col-start-1 col-span-3 row-start-1 row-span-2",
@@ -15,10 +16,28 @@ const GRID_CLASSES: Record<number, string> = {
   5: "col-start-5 col-span-2 row-start-3",
 };
 
+const base = getProjects();
+
 export default function ProjectsSection() {
-  const projects = getProjects();
+  const [projects, setProjects] = useState<Project[]>(base);
   const [activeId, setActiveId] = useState<string | null>(null);
   const activeProject = projects.find((p) => p.id === activeId) ?? null;
+
+  useEffect(() => {
+    fetch("/api/projects/images")
+      .then((r) => r.json())
+      .then((map: Record<string, { bento: string | null; display: string | null; displayBottomOffset: number }>) => {
+        setProjects(
+          base.map((p) => ({
+            ...p,
+            image: map[p.id]?.bento ?? null,
+            activeImage: map[p.id]?.display ?? null,
+            displayBottomOffset: map[p.id]?.displayBottomOffset ?? 0,
+          }))
+        );
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="h-full flex flex-col pt-[72px] px-6 md:px-16 xl:pl-[270px] xl:pr-[270px]">

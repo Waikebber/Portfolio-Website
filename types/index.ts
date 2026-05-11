@@ -37,8 +37,9 @@ export interface Project {
   subtitle: string;
   description: string;
   chips: string[];
-  image: string;
-  activeImage?: string;
+  image?: string | null;
+  activeImage?: string | null;
+  displayBottomOffset?: number;
   link?: string;
   linkType?: LinkType;
   size: ProjectSize;

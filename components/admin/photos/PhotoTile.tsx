@@ -9,9 +9,10 @@ interface Props {
   photo: AdminPhoto;
   photoUrl: string;
   onClick: () => void;
+  priority?: boolean;
 }
 
-export default function PhotoTile({ photo, photoUrl, onClick }: Props) {
+export default function PhotoTile({ photo, photoUrl, onClick, priority = false }: Props) {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -25,7 +26,9 @@ export default function PhotoTile({ photo, photoUrl, onClick }: Props) {
         src={photoUrl}
         alt={photo.location}
         fill
+        sizes="(max-width: 768px) 50vw, 25vw"
         unoptimized
+        priority={priority}
         className="object-cover group-hover:scale-[1.03] transition-[opacity,transform] duration-300"
         style={{ opacity: loaded ? 1 : 0 }}
         onLoad={() => setLoaded(true)}
