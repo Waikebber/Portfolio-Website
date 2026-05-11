@@ -7,7 +7,7 @@ async function getStats() {
     const [photosRes, resumeRes, tabsRes] = await Promise.all([
       supabase.from("photos").select("*", { count: "exact", head: true }),
       supabase.from("resume").select("*").order("uploaded_at", { ascending: false }).limit(1).maybeSingle(),
-      supabase.from("guitar_tabs").select("*", { count: "exact", head: true }),
+      supabase.from("tabs").select("*", { count: "exact", head: true }),
     ]);
     return {
       photoCount: photosRes.count ?? 0,
