@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { getProjects } from "@/lib/data";
+import Spinner from "@/components/Spinner";
 import type { Project } from "@/types";
 
 type ImageMap = Record<string, { bento: string | null; display: string | null; displayBottomOffset: number }>;
@@ -18,6 +19,7 @@ export default function AdminProjectsPage() {
   const [imageMap, setImageMap] = useState<ImageMap>({});
   const [uploading, setUploading] = useState<{ projectId: string; type: "bento" | "display" } | null>(null);
   const [savingOffset, setSavingOffset] = useState<string | null>(null);
+  const [loadedSet, setLoadedSet] = useState<Set<string>>(new Set());
   const fileInputRef = useRef<HTMLInputElement>(null);
   const pendingUpload = useRef<{ projectId: string; type: "bento" | "display" } | null>(null);
   const debounceRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
@@ -52,6 +54,8 @@ export default function AdminProjectsPage() {
     const res = await fetch("/api/projects/images", { method: "POST", body: fd });
     if (res.ok) {
       const { url } = await res.json();
+      const key = `${meta.projectId}-${meta.type}`;
+      setLoadedSet((prev) => { const next = new Set(prev); next.delete(key); return next; });
       setImageMap((prev) => ({
         ...prev,
         [meta.projectId]: {
@@ -137,7 +141,18 @@ export default function AdminProjectsPage() {
                           }}
                         >
                           {url ? (
-                            <Image src={url} alt={`${project.title} ${type}`} fill sizes="120px" className="object-cover" />
+                            <>
+                              {!loadedSet.has(`${project.id}-${type}`) && <Spinner />}
+                              <Image
+                                src={url}
+                                alt={`${project.title} ${type}`}
+                                fill
+                                sizes="120px"
+                                className="object-cover transition-opacity duration-300"
+                                style={{ opacity: loadedSet.has(`${project.id}-${type}`) ? 1 : 0 }}
+                                onLoad={() => setLoadedSet((prev) => new Set(prev).add(`${project.id}-${type}`))}
+                              />
+                            </>
                           ) : (
                             <div className="absolute inset-0 flex items-center justify-center">
                               <p className="text-[11px]" style={{ color: "#444" }}>No image</p>
