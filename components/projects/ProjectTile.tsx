@@ -59,20 +59,23 @@ export default function ProjectTile({
       whileHover={inactive ? {} : { scale: 1.01 }}
     >
       <div className="absolute inset-0">
-        {!loaded && <Spinner />}
+        {project.image && !loaded && <Spinner />}
         <motion.div
           className="absolute inset-0 z-10 rounded-[12px]"
           animate={{ background: hovered ? "rgba(0,0,0,0.38)" : "rgba(0,0,0,0.62)" }}
           transition={{ duration: 0.25 }}
         />
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover rounded-[12px] transition-opacity duration-300"
-          style={{ opacity: loaded ? 1 : 0 }}
-          onLoad={() => setLoaded(true)}
-        />
+        {project.image && (
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 1280px) 50vw, 600px"
+            className="object-cover rounded-[12px] transition-opacity duration-300"
+            style={{ opacity: loaded ? 1 : 0 }}
+            onLoad={() => setLoaded(true)}
+          />
+        )}
       </div>
 
       <div
