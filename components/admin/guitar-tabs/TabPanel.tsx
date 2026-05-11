@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Tab, Tuning } from "@/types/guitar-tabs";
+import TuningSelect from "./TuningSelect";
 
 const inputStyle = {
   background: "#19191d",
@@ -57,11 +58,11 @@ export default function TabPanel({ tab, tunings, songId, isOpen, onClose, onSave
     setError(null);
 
     let resolvedTuningId: string | null = tuningId || null;
-    if (showNewTuning && newTuningName.trim() && newTuningStrings.trim()) {
+    if (showNewTuning && newTuningStrings.trim()) {
       const res = await fetch("/api/guitar-tabs/tunings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: newTuningName.trim(), strings: newTuningStrings.trim() }),
+        body: JSON.stringify({ name: newTuningName.trim() || null, strings: newTuningStrings.trim() }),
       });
       if (!res.ok) {
         const { error: msg } = await res.json();
@@ -161,17 +162,11 @@ export default function TabPanel({ tab, tunings, songId, isOpen, onClose, onSave
             <p className="text-muted text-[10px] tracking-[1.1px] uppercase mb-1">Tuning</p>
             {!showNewTuning ? (
               <>
-                <select
+                <TuningSelect
+                  tunings={tunings}
                   value={tuningId}
-                  onChange={(e) => setTuningId(e.target.value)}
-                  className="w-full h-10 px-3 rounded-[6px] text-warm-white text-[14px] outline-none cursor-pointer"
-                  style={inputStyle}
-                >
-                  <option value="">— none —</option>
-                  {tunings.map((t) => (
-                    <option key={t.id} value={t.id}>{t.name}</option>
-                  ))}
-                </select>
+                  onChange={setTuningId}
+                />
                 <button
                   onClick={() => setShowNewTuning(true)}
                   className="mt-2 text-teal text-[12px] hover:opacity-80 transition-opacity cursor-pointer"
@@ -181,14 +176,19 @@ export default function TabPanel({ tab, tunings, songId, isOpen, onClose, onSave
               </>
             ) : (
               <>
+                <div className="flex items-baseline gap-2 mb-1">
+                  <p className="text-muted text-[10px] tracking-[1.1px] uppercase">Name</p>
+                  <p className="text-[10px]" style={{ color: "#444" }}>optional</p>
+                </div>
                 <input
                   type="text"
                   value={newTuningName}
                   onChange={(e) => setNewTuningName(e.target.value)}
                   placeholder="e.g. Open E"
-                  className="w-full h-10 px-3 rounded-[6px] text-warm-white text-[14px] outline-none mb-2"
+                  className="w-full h-10 px-3 rounded-[6px] text-warm-white text-[14px] outline-none mb-3"
                   style={inputStyle}
                 />
+                <p className="text-muted text-[10px] tracking-[1.1px] uppercase mb-1">Strings</p>
                 <input
                   type="text"
                   value={newTuningStrings}

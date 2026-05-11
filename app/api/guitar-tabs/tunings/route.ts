@@ -22,10 +22,10 @@ export async function POST(request: NextRequest) {
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { name, strings } = await request.json();
-  if (!name?.trim() || !strings?.trim()) return NextResponse.json({ error: "Name and strings are required" }, { status: 400 });
+  if (!strings?.trim()) return NextResponse.json({ error: "Strings are required" }, { status: 400 });
 
   const admin = createAdminClient();
-  const { data, error } = await admin.from("tunings").insert({ name: name.trim(), strings: strings.trim() }).select().single();
+  const { data, error } = await admin.from("tunings").insert({ name: name?.trim() || null, strings: strings.trim() }).select().single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data);
 }

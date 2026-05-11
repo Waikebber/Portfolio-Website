@@ -85,7 +85,7 @@ export default async function AdminDashboard() {
       {/* Stats */}
       <div className="flex gap-4 mb-10">
         <StatTile count={photoCount} label="Photos" sub="across 3 regions" />
-        <StatTile count={resume ? 1 : 0} label="Resume" sub={resumeSub} />
+        <StatTile count={resume ? "✓" : "—"} label="Resume" sub={resumeSub} />
         <StatTile count={tabCount} label="Guitar Tabs" sub={tabCount === 0 ? "none uploaded yet" : `${tabCount} tab${tabCount === 1 ? "" : "s"}`} />
       </div>
 
@@ -105,6 +105,16 @@ export default async function AdminDashboard() {
           title="Browse & edit photos"
           subtitle="Modify locations or delete"
           href="/admin/photos"
+        />
+        <QuickAction
+          title="Invite user"
+          subtitle="Grant someone access to the admin"
+          href="/admin/users"
+        />
+        <QuickAction
+          title="Browse & add guitar tabs"
+          subtitle="Manage genres, artists, songs, and tabs"
+          href="/admin/guitar-tabs"
         />
       </div>
     </div>

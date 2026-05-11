@@ -7,7 +7,7 @@ export interface Genre {
 
 export interface Tuning {
   id: string
-  name: string
+  name: string | null
   strings: string
 }
 

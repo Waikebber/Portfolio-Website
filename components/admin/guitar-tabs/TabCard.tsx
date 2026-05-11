@@ -129,9 +129,15 @@ export default function TabCard({ tab, onEdit, onDelete, onPinToggle }: Props) {
         <div className="flex gap-12">
           <div>
             <p className="text-muted text-[10px] tracking-[1.1px] uppercase mb-2">Tuning</p>
-            <p className="text-warm-white text-[14px]">{tab.tuning?.name ?? "—"}</p>
-            {tab.tuning?.strings && (
-              <p className="text-muted text-[13px] mt-1">{tab.tuning.strings}</p>
+            {tab.tuning ? (
+              <>
+                <p className="text-warm-white text-[14px]">{tab.tuning.strings}</p>
+                {tab.tuning.name && (
+                  <p className="text-muted text-[13px] mt-1">{tab.tuning.name}</p>
+                )}
+              </>
+            ) : (
+              <p className="text-warm-white text-[14px]">—</p>
             )}
           </div>
 

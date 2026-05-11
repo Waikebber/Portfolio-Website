@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -30,6 +30,7 @@ export default function TabOptionsPage({
   const [panelOpen, setPanelOpen] = useState(searchParams.get("add") === "1");
   const [editingTab, setEditingTab] = useState<Tab | null>(null);
   const [songInfo, setSongInfo] = useState<SongInfo | null>(null);
+  const autoEditDone = useRef(false);
 
   useEffect(() => {
     async function fetchSong() {
@@ -53,6 +54,13 @@ export default function TabOptionsPage({
     }
     fetchSong();
   }, [songId]);
+
+  useEffect(() => {
+    if (!loading && tabs.length > 0 && searchParams.get("editFirst") === "1" && !autoEditDone.current) {
+      autoEditDone.current = true;
+      openEdit(tabs[0]);
+    }
+  }, [loading, tabs]);
 
   function openAdd() {
     setEditingTab(null);

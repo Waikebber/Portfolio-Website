@@ -10,7 +10,7 @@ create table if not exists public.genres (
 
 create table if not exists public.tunings (
   id         uuid        default gen_random_uuid() primary key,
-  name       text        not null unique,
+  name       text        unique,
   strings    text        not null,
   created_at timestamptz default now()
 );
@@ -20,7 +20,7 @@ insert into public.tunings (name, strings) values
   ('Eb Standard', 'Eb Ab Db Gb Bb Eb'),
   ('Drop D',      'D A D G B E'),
   ('Open G',      'D G D G B D'),
-  ('DADGAD',      'D A D G A D')
+  (null,      'D A D G A D')
 on conflict (name) do nothing;
 
 create table if not exists public.artists (
