@@ -24,7 +24,9 @@ export function useGenres() {
     }, {});
 
     setGenres(
-      (genresData ?? []).map((g) => ({ ...g, artist_count: countByGenre[g.id] ?? 0 }))
+      (genresData ?? [])
+        .map((g) => ({ ...g, artist_count: countByGenre[g.id] ?? 0 }))
+        .sort((a, b) => b.artist_count - a.artist_count || a.name.localeCompare(b.name))
     );
     setLoading(false);
   }

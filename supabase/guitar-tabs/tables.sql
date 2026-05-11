@@ -47,6 +47,7 @@ create table if not exists public.tabs (
   song_id      uuid        references public.songs(id) on delete cascade,
   tuning_id    uuid        references public.tunings(id) on delete set null,
   capo         integer     check (capo between 1 and 12),
+  is_pinned    boolean     not null default false,
   source_type  text        not null check (source_type in ('file', 'link')),
   source_value text        not null,
   created_by   uuid        references auth.users(id) on delete set null,

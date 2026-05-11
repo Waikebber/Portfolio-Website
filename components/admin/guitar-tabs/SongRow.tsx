@@ -6,9 +6,10 @@ interface Props {
   song: Song;
   onEdit: () => void;
   onNavigate: () => void;
+  onAddTab: () => void;
 }
 
-export default function SongRow({ song, onEdit, onNavigate }: Props) {
+export default function SongRow({ song, onEdit, onNavigate, onAddTab }: Props) {
   return (
     <div
       onClick={onNavigate}
@@ -32,13 +33,25 @@ export default function SongRow({ song, onEdit, onNavigate }: Props) {
         <p className="text-muted text-[13px] self-center mx-6 shrink-0">{song.tuning_name}</p>
       )}
 
-      <div className="flex flex-col items-end justify-between shrink-0 py-3">
-        <button
-          onClick={(e) => { e.stopPropagation(); onEdit(); }}
-          className="text-muted hover:text-warm-white transition-colors cursor-pointer text-[16px] leading-none px-1"
-        >
-          ···
-        </button>
+      <div className="flex flex-col items-end justify-between shrink-0 self-stretch py-3 pl-4">
+        <div className="flex items-center gap-1">
+          {song.tab_count !== 1 && (
+            <button
+              onClick={(e) => { e.stopPropagation(); onAddTab(); }}
+              title="Add tab"
+              className="h-[26px] w-[26px] flex items-center justify-center rounded-[6px] text-teal text-[15px] hover:opacity-80 transition-opacity cursor-pointer"
+              style={{ background: "rgba(97,193,216,0.08)", border: "1px solid rgba(97,193,216,0.2)" }}
+            >
+              +
+            </button>
+          )}
+          <button
+            onClick={(e) => { e.stopPropagation(); onEdit(); }}
+            className="text-muted hover:text-warm-white transition-colors cursor-pointer text-[16px] leading-none px-1 h-[26px] flex items-center"
+          >
+            ···
+          </button>
+        </div>
         <p className="text-teal text-[12px]">{song.tab_count} {song.tab_count === 1 ? "tab" : "tabs"}</p>
       </div>
     </div>

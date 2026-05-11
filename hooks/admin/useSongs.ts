@@ -25,18 +25,20 @@ export function useSongs(artistId: string) {
     }, {});
 
     setSongs(
-      (songsData ?? []).map((s) => {
-        const songTabs = tabsBySong[s.id] ?? [];
-        const first = songTabs[0];
-        return {
-          ...s,
-          tab_count: songTabs.length,
-          first_tab_id: first?.id ?? null,
-          first_tab_source_type: first?.source_type ?? null,
-          first_tab_source_value: first?.source_value ?? null,
-          tuning_name: first?.tunings?.name ?? null,
-        };
-      })
+      (songsData ?? [])
+        .map((s) => {
+          const songTabs = tabsBySong[s.id] ?? [];
+          const first = songTabs.find((t) => t.is_pinned) ?? songTabs[0];
+          return {
+            ...s,
+            tab_count: songTabs.length,
+            first_tab_id: first?.id ?? null,
+            first_tab_source_type: first?.source_type ?? null,
+            first_tab_source_value: first?.source_value ?? null,
+            tuning_name: first?.tunings?.name ?? null,
+          };
+        })
+        .sort((a, b) => b.tab_count - a.tab_count || a.title.localeCompare(b.title))
     );
     setLoading(false);
   }

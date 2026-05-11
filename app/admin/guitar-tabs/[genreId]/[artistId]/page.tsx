@@ -104,6 +104,7 @@ export default function SongsPage({
               song={song}
               onEdit={() => openEdit(song)}
               onNavigate={() => handleNavigate(song)}
+              onAddTab={() => router.push(`/admin/guitar-tabs/${genreId}/${artistId}/${song.id}?add=1`)}
             />
           ))}
         </div>
