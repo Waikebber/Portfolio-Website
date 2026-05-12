@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import ResumeButton from "@/components/ResumeButton";
 
 async function getResumeUrl(): Promise<string | null> {
   try {
@@ -42,14 +43,7 @@ export default async function HeroSection() {
       </p>
 
       <div className="flex items-center gap-4">
-        <a
-          href={resumeUrl ?? "#"}
-          target={resumeUrl ? "_blank" : undefined}
-          rel={resumeUrl ? "noopener noreferrer" : undefined}
-          className="inline-flex items-center justify-center h-[44px] px-8 bg-teal text-bg text-[13px] font-medium rounded-[4px] hover:opacity-90 transition-opacity"
-        >
-          View resume
-        </a>
+        <ResumeButton url={resumeUrl} variant="filled" />
         <a
           href="#contact"
           className="inline-flex items-center justify-center h-[44px] px-8 text-muted text-[13px] rounded-[4px] border transition-colors duration-200 hover:text-warm-white"

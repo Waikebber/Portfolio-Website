@@ -46,6 +46,12 @@ export interface Project {
   order: number;
 }
 
+export interface AboutData {
+  subheading: string;
+  bio: string[];
+  quickFacts: { label: string; value: string }[];
+}
+
 export interface SkillGroup {
   id: string;
   category: string;

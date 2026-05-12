@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { label: "Skills", href: "/#skills" },
   { label: "Photography", href: "/photography" },
   { label: "Contact", href: "/#contact" },
+  { label: "About", href: "/about" },
 ];
 
 export default function Nav() {
