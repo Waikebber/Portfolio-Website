@@ -1,0 +1,13 @@
+{
+  "subheading": "Software Engineer — San Francisco / New York",
+  "bio": [
+    "I'm a full-stack software engineer at eMoney Advisor, building financial software used by advisors across the country, working in C#, TypeScript, React, and SQL from the database all the way to the dashboard. I studied CS and Computer Engineering at Northeastern University, class of 2025.",
+    "Outside of work, weekend mornings are usually spent watching sports, admittedly mostly soccer. I'm a big supporter of Liverpool F.C. and follow the Japan and England national football teams. I was never much of a football fan, but Herbert kind of dragged me into being a Chargers fan. I grew up playing soccer and still kick around when I get the chance, boulder here and there, and mess around with sim racing when I need to decompress.",
+    "I also shoot photos when something catches my eye — not really a \"photography person,\" just someone who likes having a camera when I'm somewhere interesting. Same with guitar: I'll pick it up when there's something I want to learn, or when I just need something to fiddle with."
+  ],
+  "quickFacts": [
+    { "label": "BASED IN",  "value": "SF / NYC" },
+    { "label": "EMPLOYER",  "value": "eMoney Advisor" },
+    { "label": "EDUCATION", "value": "Northeastern '25" }
+  ]
+}

@@ -1,8 +1,13 @@
-import type { ExperienceEntry, Project, SkillGroup } from "@/types";
+import type { AboutData, ExperienceEntry, Project, SkillGroup } from "@/types";
 
+import aboutData from "@/data/about.json";
 import experienceData from "@/data/experience.json";
 import projectsData from "@/data/projects.json";
 import skillsData from "@/data/skills.json";
+
+export function getAbout(): AboutData {
+  return aboutData as AboutData;
+}
 
 export function getExperience(): ExperienceEntry[] {
   return experienceData as ExperienceEntry[];
