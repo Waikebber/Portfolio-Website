@@ -22,19 +22,21 @@ export default function Nav() {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => setMouseNearTop(e.clientY < 80);
+    window.addEventListener("mousemove", handleMouseMove);
+
     const hero = document.getElementById("hero");
-    if (!hero) return;
+    if (!hero) {
+      // No hero section — start hidden, only show on hover
+      setPastHero(true);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
+    }
 
     observerRef.current = new IntersectionObserver(
       ([entry]) => setPastHero(!entry.isIntersecting),
       { threshold: 0.1 }
     );
     observerRef.current.observe(hero);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouseNearTop(e.clientY < 80);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       observerRef.current?.disconnect();
