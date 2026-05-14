@@ -49,6 +49,22 @@ export async function proxy(request: NextRequest) {
   }
 
   if (user) {
+    const { data: onboarding } = await supabase
+      .from("onboarding_status")
+      .select("password_set_at, totp_enabled_at")
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+    // Only enforce for invited users who have an onboarding row
+    if (onboarding) {
+      if (!onboarding.password_set_at) {
+        return NextResponse.redirect(new URL("/accept-invite", request.url));
+      }
+      if (!onboarding.totp_enabled_at) {
+        return NextResponse.redirect(new URL("/setup-totp", request.url));
+      }
+    }
+
     // Fetch role to enforce access
     const { data: roleData } = await supabase
       .from("admin_roles")
@@ -57,7 +73,7 @@ export async function proxy(request: NextRequest) {
       .maybeSingle();
     const role = roleData?.role ?? "guest-admin";
 
-    const isGuestAllowed = pathname.startsWith("/admin/guitar-tabs") || pathname.startsWith("/admin/settings") || pathname === "/admin/accept-invite";
+    const isGuestAllowed = pathname.startsWith("/admin/guitar-tabs") || pathname.startsWith("/admin/settings");
     if (role === "guest-admin" && !isGuestAllowed) {
       return NextResponse.redirect(new URL("/admin/guitar-tabs", request.url));
     }

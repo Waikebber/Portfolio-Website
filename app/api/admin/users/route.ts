@@ -24,6 +24,19 @@ export async function GET() {
     return acc;
   }, {});
 
+  const { data: onboardingRows } = await admin
+    .from("onboarding_status")
+    .select("user_id, invite_clicked_at, password_set_at, totp_enabled_at");
+  const onboardingMap = (onboardingRows ?? []).reduce<Record<string, {
+    user_id: string;
+    invite_clicked_at: string | null;
+    password_set_at: string | null;
+    totp_enabled_at: string | null;
+  }>>((acc, r) => {
+    acc[r.user_id] = r;
+    return acc;
+  }, {});
+
   const result = users
     .filter((u) => u.id !== currentUser.id)
     .map((u) => ({
@@ -31,6 +44,7 @@ export async function GET() {
       email: u.email ?? "",
       role: roleMap[u.id] ?? "guest-admin",
       created_at: u.created_at,
+      onboarding: onboardingMap[u.id] ?? null,
     }))
     .sort((a, b) => a.email.localeCompare(b.email));
 
