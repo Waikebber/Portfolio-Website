@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = new URL(request.url);
+  const { searchParams } = new URL(request.url);
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type");
   const code = searchParams.get("code");
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
   const supabase = await createClient();
   let authed = false;
 
@@ -23,14 +24,14 @@ export async function GET(request: NextRequest) {
     authed = !error;
   }
 
-  if (!authed) return NextResponse.redirect(`${origin}/admin?error=invite`);
+  if (!authed) return NextResponse.redirect(`${siteUrl}/admin?error=invite`);
 
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.redirect(`${origin}/admin?error=invite`);
+  if (!user) return NextResponse.redirect(`${siteUrl}/admin?error=invite`);
 
   // Invite flow — send to password setup before entering the admin
   if (type === "invite") {
-    return NextResponse.redirect(`${origin}/admin/accept-invite`);
+    return NextResponse.redirect(`${siteUrl}/admin/accept-invite`);
   }
 
   const { data: roleData } = await supabase
@@ -40,5 +41,5 @@ export async function GET(request: NextRequest) {
     .maybeSingle();
 
   const dest = roleData?.role === "full-admin" ? "/admin/dashboard" : "/admin/guitar-tabs";
-  return NextResponse.redirect(`${origin}${dest}`);
+  return NextResponse.redirect(`${siteUrl}${dest}`);
 }
