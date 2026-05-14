@@ -36,36 +36,24 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
-  if (user && isLoginPage) {
-    // Fetch role to redirect to the right landing page
-    const { data: roleData } = await supabase
-      .from("admin_roles")
-      .select("role")
-      .eq("user_id", user.id)
-      .maybeSingle();
-    const role = roleData?.role ?? "guest-admin";
-    const dest = role === "guest-admin" ? "/admin/guitar-tabs" : "/admin";
-    return NextResponse.redirect(new URL(dest, request.url));
-  }
-
   if (user) {
-    const { data: onboarding } = await supabase
-      .from("onboarding_status")
-      .select("password_set_at, totp_enabled_at")
-      .eq("user_id", user.id)
-      .maybeSingle();
+    // Invited users (user.invited_at set by Supabase for all inviteUserByEmail accounts)
+    // must finish onboarding before touching any admin page — including the login page.
+    if (user.invited_at) {
+      const { data: onboarding } = await supabase
+        .from("onboarding_status")
+        .select("password_set_at, totp_enabled_at")
+        .eq("user_id", user.id)
+        .maybeSingle();
 
-    // Only enforce for invited users who have an onboarding row
-    if (onboarding) {
-      if (!onboarding.password_set_at) {
+      if (!onboarding?.password_set_at) {
         return NextResponse.redirect(new URL("/accept-invite", request.url));
       }
-      if (!onboarding.totp_enabled_at) {
+      if (!onboarding?.totp_enabled_at) {
         return NextResponse.redirect(new URL("/setup-totp", request.url));
       }
     }
 
-    // Fetch role to enforce access
     const { data: roleData } = await supabase
       .from("admin_roles")
       .select("role")
@@ -73,7 +61,15 @@ export async function proxy(request: NextRequest) {
       .maybeSingle();
     const role = roleData?.role ?? "guest-admin";
 
-    const isGuestAllowed = pathname.startsWith("/admin/guitar-tabs") || pathname.startsWith("/admin/settings");
+    // Already logged in — redirect away from login to the right landing page
+    if (isLoginPage) {
+      const dest = role === "guest-admin" ? "/admin/guitar-tabs" : "/admin";
+      return NextResponse.redirect(new URL(dest, request.url));
+    }
+
+    // Role-based access: guests can only reach guitar-tabs and settings
+    const isGuestAllowed =
+      pathname.startsWith("/admin/guitar-tabs") || pathname.startsWith("/admin/settings");
     if (role === "guest-admin" && !isGuestAllowed) {
       return NextResponse.redirect(new URL("/admin/guitar-tabs", request.url));
     }
