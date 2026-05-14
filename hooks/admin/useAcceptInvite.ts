@@ -19,15 +19,27 @@ export function useAcceptInvite() {
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(async ({ data: { user } }) => {
+      // No session at all → link is genuinely expired or already used
       if (!user) { setStatus("invalid"); return; }
 
-      const { data: onboarding } = await supabase
+      // Only invited users go through this flow
+      if (!user.invited_at) { setStatus("invalid"); return; }
+
+      let { data: onboarding } = await supabase
         .from("onboarding_status")
         .select("password_set_at, totp_enabled_at")
         .eq("user_id", user.id)
         .maybeSingle();
 
-      if (!onboarding) { setStatus("invalid"); return; }
+      // Row missing means the server-side insert in auth/callback failed.
+      // Recover client-side rather than dead-ending the user.
+      if (!onboarding) {
+        await supabase.from("onboarding_status").insert({
+          user_id: user.id,
+          invite_clicked_at: new Date().toISOString(),
+        });
+        onboarding = { password_set_at: null, totp_enabled_at: null };
+      }
 
       if (onboarding.password_set_at) {
         router.replace(onboarding.totp_enabled_at ? "/admin" : "/setup-totp");

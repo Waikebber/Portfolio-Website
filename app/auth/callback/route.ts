@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createServerClient } from "@supabase/ssr";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -8,7 +8,34 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
-  const supabase = await createClient();
+
+  // Collect cookies that Supabase sets during auth so we can apply them
+  // directly onto each redirect response. Using createClient() from server.ts
+  // writes via cookies().set(), which does NOT propagate into a NextResponse
+  // object — the browser would receive the redirect with no session cookies.
+  const pendingCookies: { name: string; value: string; options: Parameters<typeof NextResponse.prototype.cookies.set>[2] }[] = [];
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          pendingCookies.push(...cookiesToSet);
+        },
+      },
+    }
+  );
+
+  function redirect(url: string) {
+    const res = NextResponse.redirect(url);
+    pendingCookies.forEach(({ name, value, options }) => res.cookies.set(name, value, options));
+    return res;
+  }
+
   let authed = false;
 
   if (tokenHash && type) {
@@ -24,10 +51,10 @@ export async function GET(request: NextRequest) {
     authed = !error;
   }
 
-  if (!authed) return NextResponse.redirect(`${siteUrl}/admin/login?error=invite`);
+  if (!authed) return redirect(`${siteUrl}/admin/login?error=invite`);
 
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.redirect(`${siteUrl}/admin/login?error=invite`);
+  if (!user) return redirect(`${siteUrl}/admin/login?error=invite`);
 
   // Detect invite flow whether Supabase used token_hash (type=invite) or PKCE (no type).
   // user.invited_at is set by Supabase for any user created via inviteUserByEmail.
@@ -57,12 +84,12 @@ export async function GET(request: NextRequest) {
       const { data: roleData } = await supabase
         .from("admin_roles").select("role").eq("user_id", user.id).maybeSingle();
       const dest = roleData?.role === "full-admin" ? "/admin" : "/admin/guitar-tabs";
-      return NextResponse.redirect(`${siteUrl}${dest}`);
+      return redirect(`${siteUrl}${dest}`);
     }
     if (onboarding?.password_set_at) {
-      return NextResponse.redirect(`${siteUrl}/setup-totp`);
+      return redirect(`${siteUrl}/setup-totp`);
     }
-    return NextResponse.redirect(`${siteUrl}/accept-invite`);
+    return redirect(`${siteUrl}/accept-invite`);
   }
 
   const { data: roleData } = await supabase
@@ -72,5 +99,5 @@ export async function GET(request: NextRequest) {
     .maybeSingle();
 
   const dest = roleData?.role === "full-admin" ? "/admin" : "/admin/guitar-tabs";
-  return NextResponse.redirect(`${siteUrl}${dest}`);
+  return redirect(`${siteUrl}${dest}`);
 }
