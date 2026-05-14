@@ -44,10 +44,10 @@ export async function POST(request: NextRequest) {
   const { email } = await request.json();
   if (!email?.trim()) return NextResponse.json({ error: "Email is required" }, { status: 400 });
 
-  const origin = request.headers.get("origin") ?? "";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? request.headers.get("origin") ?? "";
   const admin = createAdminClient();
   const { error } = await admin.auth.admin.inviteUserByEmail(email.trim(), {
-    redirectTo: `${origin}/auth/callback`,
+    redirectTo: `${siteUrl}/auth/callback`,
   });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });

@@ -57,7 +57,7 @@ export async function proxy(request: NextRequest) {
       .maybeSingle();
     const role = roleData?.role ?? "guest-admin";
 
-    const isGuestAllowed = pathname.startsWith("/admin/guitar-tabs") || pathname.startsWith("/admin/settings");
+    const isGuestAllowed = pathname.startsWith("/admin/guitar-tabs") || pathname.startsWith("/admin/settings") || pathname === "/admin/accept-invite";
     if (role === "guest-admin" && !isGuestAllowed) {
       return NextResponse.redirect(new URL("/admin/guitar-tabs", request.url));
     }

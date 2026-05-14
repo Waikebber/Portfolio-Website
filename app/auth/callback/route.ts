@@ -28,6 +28,11 @@ export async function GET(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.redirect(`${origin}/admin?error=invite`);
 
+  // Invite flow — send to password setup before entering the admin
+  if (type === "invite") {
+    return NextResponse.redirect(`${origin}/admin/accept-invite`);
+  }
+
   const { data: roleData } = await supabase
     .from("admin_roles")
     .select("role")
