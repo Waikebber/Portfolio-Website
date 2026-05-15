@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export function InviteForm({ onDismiss }: { onDismiss: () => void }) {
+export function InviteForm({ onDismiss, onSuccess }: { onDismiss: () => void; onSuccess: () => void }) {
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +18,7 @@ export function InviteForm({ onDismiss }: { onDismiss: () => void }) {
     });
     if (res.ok) {
       setSent(true);
-      setTimeout(onDismiss, 2000);
+      setTimeout(onSuccess, 1000);
     } else {
       const { error: msg } = await res.json();
       setError(msg ?? "Failed to send invite");

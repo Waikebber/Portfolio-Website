@@ -55,13 +55,7 @@ export async function proxy(request: NextRequest) {
 
       // Password already set — /accept-invite must not be accessible again
       if (isAcceptInvitePage) {
-        return NextResponse.redirect(
-          new URL(onboarding.totp_enabled_at ? "/admin" : "/setup-totp", request.url)
-        );
-      }
-
-      if (!onboarding.totp_enabled_at) {
-        return NextResponse.redirect(new URL("/setup-totp", request.url));
+        return NextResponse.redirect(new URL("/admin", request.url));
       }
     }
 

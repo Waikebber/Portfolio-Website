@@ -51,5 +51,5 @@ export function useUsers() {
     setRevoking(null);
   }
 
-  return { users, loading, revoking, updating, updateRole, revoke };
+  return { users, loading, revoking, updating, updateRole, revoke, refetch: fetchUsers };
 }

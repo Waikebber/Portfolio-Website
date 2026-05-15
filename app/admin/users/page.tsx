@@ -6,7 +6,7 @@ import { UserRow } from "./UserRow";
 import { InviteForm } from "./InviteForm";
 
 export default function UsersPage() {
-  const { users, loading, revoking, updating, updateRole, revoke } = useUsers();
+  const { users, loading, revoking, updating, updateRole, revoke, refetch } = useUsers();
   const [showInvite, setShowInvite] = useState(false);
 
   const fullAdmins = users.filter((u) => u.role === "full-admin");
@@ -28,7 +28,12 @@ export default function UsersPage() {
         </button>
       </div>
 
-      {showInvite && <InviteForm onDismiss={() => setShowInvite(false)} />}
+      {showInvite && (
+        <InviteForm
+          onDismiss={() => setShowInvite(false)}
+          onSuccess={() => { refetch(); setShowInvite(false); }}
+        />
+      )}
 
       {loading ? (
         <p className="text-muted text-[13px]">Loading…</p>

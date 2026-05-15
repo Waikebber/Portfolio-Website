@@ -8,19 +8,16 @@ import { createClient } from "@/lib/supabase/server";
  * Returns whether the user's email is confirmed so the caller can decide
  * whether to show the verify-email page.
  */
-export async function savePasswordSet(): Promise<{ error: string | null; emailConfirmed: boolean }> {
+export async function savePasswordSet(): Promise<{ error: string | null }> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { error: "Session expired. Please use the invite link again.", emailConfirmed: false };
+  if (!user) return { error: "Session expired. Please use the invite link again." };
 
   const { error } = await supabase
     .from("onboarding_status")
     .upsert({ user_id: user.id, password_set_at: new Date().toISOString() }, { onConflict: "user_id" });
 
-  return {
-    error: error?.message ?? null,
-    emailConfirmed: !!user.email_confirmed_at,
-  };
+  return { error: error?.message ?? null };
 }
 
 /**
