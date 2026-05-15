@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { savePasswordSet } from "@/app/actions/onboarding";
 
 type Status = "loading" | "ready" | "invalid";
 
@@ -42,10 +43,6 @@ export function useAcceptInvite() {
       }
 
       if (onboarding.password_set_at) {
-        if (!user.email_confirmed_at) {
-          router.replace(`/verify-email?email=${encodeURIComponent(user.email ?? "")}`);
-          return;
-        }
         router.replace(onboarding.totp_enabled_at ? "/admin" : "/setup-totp");
         return;
       }
@@ -64,21 +61,19 @@ export function useAcceptInvite() {
     setLoading(true);
     const supabase = createClient();
 
-    // Capture user before updateUser — session token rotates after the call
-    // and a subsequent getUser() may return null, silently skipping the DB write.
-    const { data: { user: currentUser } } = await supabase.auth.getUser();
-    if (!currentUser) { setError("Session expired. Please use the invite link again."); setLoading(false); return; }
-
     const { error: updateError } = await supabase.auth.updateUser({ password });
     if (updateError) { setError(updateError.message); setLoading(false); return; }
 
-    // upsert so the row is created even if the server-side insert in auth/callback
-    // was skipped (e.g. PKCE flow race) — only touches password_set_at column.
-    await supabase
-      .from("onboarding_status")
-      .upsert({ user_id: currentUser.id, password_set_at: new Date().toISOString() }, { onConflict: "user_id" });
+    // Save password_set_at server-side — the browser client's session may not
+    // reflect the rotated token yet, so a server action reading request cookies
+    // is more reliable here. It also returns whether the email is confirmed.
+    const { error: saveError, emailConfirmed } = await savePasswordSet();
+    if (saveError) { setError(saveError); setLoading(false); return; }
 
-    router.push(`/verify-email?email=${encodeURIComponent(currentUser.email ?? "")}`);
+    // Invite links go through verifyOtp(type:'invite') which confirms the email
+    // immediately. If confirmed, skip verification and go straight to TOTP setup.
+    // If somehow unconfirmed (edge-case project config), show the verify page.
+    router.push(emailConfirmed ? "/setup-totp" : `/verify-email?email=${encodeURIComponent(email)}`);
   }
 
   return { status, email, password, setPassword, confirm, setConfirm, error, loading, submit };

@@ -31,14 +31,13 @@ export async function proxy(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
   const isLoginPage = pathname === "/admin/login";
+  const isAcceptInvitePage = pathname === "/accept-invite";
 
   if (!user && !isLoginPage) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
   if (user) {
-    // Invited users (user.invited_at set by Supabase for all inviteUserByEmail accounts)
-    // must finish onboarding before touching any admin page — including the login page.
     if (user.invited_at) {
       const { data: onboarding } = await supabase
         .from("onboarding_status")
@@ -47,9 +46,21 @@ export async function proxy(request: NextRequest) {
         .maybeSingle();
 
       if (!onboarding?.password_set_at) {
-        return NextResponse.redirect(new URL("/accept-invite", request.url));
+        // Password not set yet — only /accept-invite is allowed
+        if (!isAcceptInvitePage) {
+          return NextResponse.redirect(new URL("/accept-invite", request.url));
+        }
+        return supabaseResponse;
       }
-      if (!onboarding?.totp_enabled_at) {
+
+      // Password already set — /accept-invite must not be accessible again
+      if (isAcceptInvitePage) {
+        return NextResponse.redirect(
+          new URL(onboarding.totp_enabled_at ? "/admin" : "/setup-totp", request.url)
+        );
+      }
+
+      if (!onboarding.totp_enabled_at) {
         return NextResponse.redirect(new URL("/setup-totp", request.url));
       }
     }
@@ -61,13 +72,11 @@ export async function proxy(request: NextRequest) {
       .maybeSingle();
     const role = roleData?.role ?? "guest-admin";
 
-    // Already logged in — redirect away from login to the right landing page
     if (isLoginPage) {
       const dest = role === "guest-admin" ? "/admin/guitar-tabs" : "/admin";
       return NextResponse.redirect(new URL(dest, request.url));
     }
 
-    // Role-based access: guests can only reach guitar-tabs and settings
     const isGuestAllowed =
       pathname.startsWith("/admin/guitar-tabs") || pathname.startsWith("/admin/settings");
     if (role === "guest-admin" && !isGuestAllowed) {
@@ -79,5 +88,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/accept-invite"],
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { resendEmailConfirmation } from "@/app/actions/onboarding";
 
 export function useVerifyEmail(initialEmail: string) {
   const [cooldown, setCooldown] = useState(0);
@@ -19,10 +19,9 @@ export function useVerifyEmail(initialEmail: string) {
     if (!initialEmail || cooldown > 0 || sending) return;
     setError(null);
     setSending(true);
-    const supabase = createClient();
-    const { error: resendError } = await supabase.auth.resend({ type: "signup", email: initialEmail });
+    const { error: resendError } = await resendEmailConfirmation(initialEmail);
     setSending(false);
-    if (resendError) { setError(resendError.message); return; }
+    if (resendError) { setError(resendError); return; }
     setSent(true);
     setCooldown(60);
   }
