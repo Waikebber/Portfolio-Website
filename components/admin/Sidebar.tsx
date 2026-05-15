@@ -17,7 +17,7 @@ const ALL_NAV_ITEMS = [
 export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const [role, setRole] = useState<string>("full-admin");
+  const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
     const supabase = createClient();
@@ -32,7 +32,7 @@ export default function Sidebar() {
     });
   }, []);
 
-  const navItems = ALL_NAV_ITEMS.filter((item) => item.roles.includes(role));
+  const navItems = role ? ALL_NAV_ITEMS.filter((item) => item.roles.includes(role)) : [];
 
   async function signOut() {
     const supabase = createClient();
