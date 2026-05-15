@@ -7,7 +7,9 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type");
   const code = searchParams.get("code");
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL!;
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    `${request.nextUrl.protocol}//${request.nextUrl.host}`;
 
   // Collect cookies that Supabase sets during auth so we can apply them
   // directly onto each redirect response. Using createClient() from server.ts
@@ -46,9 +48,24 @@ export async function GET(request: NextRequest) {
     });
     authed = !error;
   } else if (code) {
-    // PKCE code exchange flow — Supabase redirects with ?code=
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    authed = !error;
+    // createServerClient hardcodes flowType:"pkce" and cannot be overridden.
+    // Admin invites never store a code verifier, so exchangeCodeForSession always
+    // throws AuthPKCECodeVerifierMissingError. Use the plain supabase-js client
+    // (defaults to flowType:"implicit") to bypass that check, then hand the
+    // session off to the SSR client so its cookie handlers fire.
+    const { createClient: createPlainClient } = await import("@supabase/supabase-js");
+    const plainClient = createPlainClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    );
+    const { data, error } = await plainClient.auth.exchangeCodeForSession(code);
+    if (!error && data.session) {
+      await supabase.auth.setSession({
+        access_token: data.session.access_token,
+        refresh_token: data.session.refresh_token,
+      });
+      authed = true;
+    }
   }
 
   if (!authed) return redirect(`${siteUrl}/admin/login?error=invite`);
