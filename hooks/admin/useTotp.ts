@@ -24,13 +24,22 @@ export function useTotp(onSuccess: () => void): TotpState {
   useEffect(() => {
     const supabase = createClient();
     async function enroll() {
-      const { data: existing } = await supabase.auth.mfa.listFactors();
-      for (const f of existing?.totp ?? []) {
-        if (f.status !== "verified") {
-          await supabase.auth.mfa.unenroll({ factorId: f.id });
+      // Try direct enrollment first — Supabase auto-replaces any existing
+      // unverified factor and returns fresh QR code + secret.
+      let { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp" });
+
+      if (error) {
+        // Enrollment failed (stale factor state). Clean up unverified factors
+        // and retry once.
+        const { data: existing } = await supabase.auth.mfa.listFactors();
+        for (const f of existing?.totp ?? []) {
+          if (f.status !== "verified") {
+            await supabase.auth.mfa.unenroll({ factorId: f.id });
+          }
         }
+        ({ data, error } = await supabase.auth.mfa.enroll({ factorType: "totp" }));
       }
-      const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp" });
+
       if (error || !data) return;
       setFactorId(data.id);
       setQrCode(data.totp.qr_code);

@@ -7,6 +7,9 @@ create table if not exists public.onboarding_status (
 
 alter table public.onboarding_status enable row level security;
 
+grant select, insert, update, delete on public.onboarding_status to authenticated;
+grant all on public.onboarding_status to service_role;
+
 create policy "users_own_onboarding"
   on public.onboarding_status
   for all
