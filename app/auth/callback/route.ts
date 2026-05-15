@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
     // token_hash flow — email template links directly to /auth/callback
     const { error } = await supabase.auth.verifyOtp({
       token_hash: tokenHash,
-      type: type as "invite",
+      type: type as "signup" | "invite" | "magiclink" | "recovery" | "email_change" | "email",
     });
     authed = !error;
   } else if (code) {
