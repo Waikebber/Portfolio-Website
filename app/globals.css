@@ -36,6 +36,14 @@ body {
   height: 100%;
 }
 
+@media (max-width: 48rem) {
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+  }
+}
+
 body {
   background-color: #0d0d0f;
   color: #f0ede6;

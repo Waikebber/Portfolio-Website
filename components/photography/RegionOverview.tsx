@@ -22,12 +22,12 @@ export default function RegionOverview({
       <h1 className="text-warm-white text-[48px] font-medium mb-4">Photography</h1>
 
       {/* Region cards */}
-      <div className="flex gap-10 justify-center">
+      <div className="flex gap-10 justify-center max-md:flex-col max-md:items-center max-md:gap-6 max-md:w-full">
         {regions.map((region) => (
           <button
             key={region.id}
             onClick={() => onSelectRegion(region.id)}
-            className="group relative w-[380px] h-[580px] rounded-[14px] overflow-hidden cursor-pointer text-left flex-shrink-0"
+            className="group relative w-[380px] h-[580px] rounded-[14px] overflow-hidden cursor-pointer text-left flex-shrink-0 max-md:w-[calc(100%-3rem)] max-md:h-auto max-md:aspect-[3/4]"
             style={{
               background: "#141417",
               border: "1px solid rgba(255,255,255,0.08)",

@@ -1,6 +1,7 @@
 interface Props {
   url: string | null;
   variant?: "filled" | "outline";
+  className?: string;
 }
 
 const base =
@@ -11,13 +12,13 @@ const variants = {
   outline: "bg-bg text-warm-white border border-white hover:opacity-80",
 };
 
-export default function ResumeButton({ url, variant = "filled" }: Props) {
+export default function ResumeButton({ url, variant = "filled", className = "" }: Props) {
   return (
     <a
       href={url ?? "#"}
       target={url ? "_blank" : undefined}
       rel={url ? "noopener noreferrer" : undefined}
-      className={`${base} ${variants[variant]}`}
+      className={`${base} ${variants[variant]} ${className}`}
     >
       View resume
     </a>

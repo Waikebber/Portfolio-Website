@@ -30,10 +30,10 @@ export default async function AboutPage() {
   const portraitUrl = getPortraitUrl();
 
   return (
-    <div className="h-screen bg-bg overflow-hidden flex items-center">
+    <div className="h-screen bg-bg overflow-hidden flex items-center max-md:h-auto max-md:overflow-visible max-md:block">
       <Nav />
-      <div className="w-full mx-auto max-w-[90rem] xl:pl-[16.875rem] px-10">
-        <div className="flex gap-[3rem] items-start">
+      <div className="w-full mx-auto max-w-[90rem] xl:pl-[16.875rem] px-10 max-md:px-6 max-md:pt-[72px] max-md:pb-[3.75rem]">
+        <div className="flex gap-[3rem] items-start max-md:flex-col max-md:gap-0">
           <AboutLeft portraitUrl={portraitUrl} />
           <AboutBio data={about} resumeUrl={resumeUrl} />
         </div>

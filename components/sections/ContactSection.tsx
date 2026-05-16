@@ -49,7 +49,7 @@ export default async function ContactSection() {
   ];
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col max-md:min-h-screen max-md:h-auto">
       {/* Main contact content — vertically centered */}
       <div className="flex-1 flex flex-col justify-center px-6 md:px-16 xl:pl-[270px] xl:pr-[270px]">
         <p className="text-teal text-[11px] tracking-[2.2px] mb-3">CONTACT</p>
@@ -70,7 +70,7 @@ export default async function ContactSection() {
               target={href !== "#" ? "_blank" : undefined}
               rel={href !== "#" ? "noopener noreferrer" : undefined}
               aria-label={label}
-              className="relative size-[28px] rounded-[2px] opacity-70 hover:opacity-100 transition-opacity"
+              className="relative size-[28px] max-md:size-8 rounded-[2px] opacity-70 hover:opacity-100 transition-opacity"
             >
               <Image src={icon} alt={label} fill className="object-contain invert" />
             </a>
