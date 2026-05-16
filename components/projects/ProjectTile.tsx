@@ -89,7 +89,7 @@ export default function ProjectTile({
         <p className="text-[10px] tracking-[1.4px] mb-1" style={{ color: "#d9ebf0" }}>
           {project.tag}
         </p>
-        <p className="text-warm-white font-medium text-[15px] leading-tight mb-1">
+        <p className="text-warm-white font-medium text-[15px] leading-tight mb-1 max-md:text-[0.875rem]">
           {project.title}
         </p>
         <p className="text-[#bfbfbf] text-[11px] leading-[16px]">{project.tileBlurb}</p>

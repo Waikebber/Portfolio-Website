@@ -22,31 +22,31 @@ export default async function HeroSection() {
   const resumeUrl = await getResumeUrl();
 
   return (
-    <div className="h-full flex flex-col justify-center px-6 md:px-16 xl:pl-[270px] xl:pr-[270px]">
-      <p className="text-teal text-[12px] tracking-[1.8px] mb-8">
+    <div className="h-full flex flex-col justify-center px-6 md:px-16 xl:pl-[270px] xl:pr-[270px] max-md:min-h-screen">
+      <p className="text-teal text-[12px] tracking-[1.8px] max-md:tracking-[0.1em] mb-8">
         Software Engineer &nbsp;—&nbsp; San Francisco / New York
       </p>
 
       <div className="mb-8">
-        <h1 className="text-warm-white text-[64px] md:text-[80px] xl:text-[96px] font-medium leading-none">
+        <h1 className="text-warm-white text-[64px] md:text-[80px] xl:text-[96px] font-medium leading-none max-md:text-[clamp(2.5rem,10vw,4rem)]">
           Kai
         </h1>
-        <h1 className="text-teal text-[64px] md:text-[80px] xl:text-[96px] font-medium leading-none">
+        <h1 className="text-teal text-[64px] md:text-[80px] xl:text-[96px] font-medium leading-none max-md:text-[clamp(2.5rem,10vw,4rem)]">
           Webber.
         </h1>
       </div>
 
-      <p className="text-muted text-[16px] xl:text-[18px] leading-[30px] max-w-[615px] mb-10">
+      <p className="text-muted text-[16px] xl:text-[18px] leading-[30px] max-w-[615px] max-md:text-base max-md:leading-[1.625] max-md:max-w-full mb-10">
         Full-stack engineer building financial software at eMoney Advisor.
         <br />
         Computer Engineering &amp; CS, Northeastern University &apos;25.
       </p>
 
-      <div className="flex items-center gap-4">
-        <ResumeButton url={resumeUrl} variant="filled" />
+      <div className="flex items-center gap-4 max-md:w-full">
+        <ResumeButton url={resumeUrl} variant="filled" className="max-md:flex-1" />
         <a
           href="#contact"
-          className="inline-flex items-center justify-center h-[44px] px-8 text-muted text-[13px] rounded-[4px] border transition-colors duration-200 hover:text-warm-white"
+          className="inline-flex items-center justify-center h-[44px] px-8 text-muted text-[13px] rounded-[4px] border transition-colors duration-200 hover:text-warm-white max-md:flex-1"
           style={{ borderColor: "rgba(255,255,255,0.07)" }}
         >
           Get in touch

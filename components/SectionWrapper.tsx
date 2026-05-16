@@ -12,7 +12,7 @@ export default function SectionWrapper({ id, children, className = "" }: Section
   return (
     <motion.section
       id={id}
-      className={`snap-start h-screen ${className}`}
+      className={`snap-start h-screen max-md:h-auto max-md:min-h-screen ${className}`}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}

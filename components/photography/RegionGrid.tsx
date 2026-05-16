@@ -1,10 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getPhotoUrl } from "@/lib/storage";
 import Spinner from "@/components/Spinner";
 import type { Photo, RegionId } from "@/types";
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 48rem)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isMobile;
+}
 
 function PhotoCard({
   photo,
@@ -41,7 +53,7 @@ function PhotoCard({
       />
 
       {/* Caption */}
-      <p className="absolute bottom-[10px] left-[10px] text-[#cccccc] text-[10px] leading-none pointer-events-none">
+      <p className="absolute bottom-[10px] left-[10px] text-[#cccccc] text-[10px] leading-none pointer-events-none max-md:text-[0.625rem]">
         {photo.location}
       </p>
 
@@ -65,10 +77,13 @@ export default function RegionGrid({
   onBack: () => void;
   onSelectPhoto: (index: number) => void;
 }) {
+  const isMobile = useIsMobile();
+  const numCols = isMobile ? 2 : 3;
   const regionLabel = region.charAt(0).toUpperCase() + region.slice(1);
+  const gap = isMobile ? "0.5rem" : "1rem";
 
   return (
-    <div className="min-h-[calc(100vh-64px)] px-12 pt-6 pb-16">
+    <div className="min-h-[calc(100vh-64px)] px-12 pt-6 pb-16 max-md:px-4">
       {/* Breadcrumb */}
       <button
         onClick={onBack}
@@ -78,18 +93,18 @@ export default function RegionGrid({
       </button>
 
       {/* Header */}
-      <h1 className="text-warm-white text-[48px] font-medium leading-tight mb-2">
+      <h1 className="text-warm-white text-[48px] font-medium leading-tight mb-2 max-md:text-[2rem]">
         {regionLabel}
       </h1>
-      <p className="text-muted text-[14px] mb-8">{photos.length} photos</p>
+      <p className="text-muted text-[14px] mb-8 max-md:text-[0.875rem]">{photos.length} photos</p>
 
       {/* Masonry grid */}
-      <div className="flex gap-4 items-start">
-        {[0, 1, 2].map((col) => (
-          <div key={col} className="flex-1 flex flex-col gap-4">
+      <div className="flex items-start" style={{ gap }}>
+        {Array.from({ length: numCols }).map((_, col) => (
+          <div key={col} className="flex-1 flex flex-col" style={{ gap }}>
             {photos
               .map((photo, i) => ({ photo, i }))
-              .filter(({ i }) => i % 3 === col)
+              .filter(({ i }) => i % numCols === col)
               .map(({ photo, i }) => (
                 <PhotoCard key={photo.id} photo={photo} onClick={() => onSelectPhoto(i)} />
               ))}

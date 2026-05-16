@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <>
       <Nav />
-      <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+      <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth max-md:h-auto max-md:overflow-visible max-md:snap-none">
         <SectionWrapper id="hero">
           <HeroSection />
         </SectionWrapper>
