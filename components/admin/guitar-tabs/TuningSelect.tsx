@@ -49,11 +49,12 @@ export default function TuningSelect({ tunings, value, onChange }: Props) {
 
       {open && (
         <div
-          className="absolute top-full left-0 right-0 mt-1 rounded-[6px] overflow-hidden z-50"
+          className="absolute top-full left-0 right-0 mt-1 rounded-[6px] z-50 overflow-y-auto"
           style={{
             background: "#19191d",
             border: "1px solid rgba(255,255,255,0.12)",
             boxShadow: "0 8px 24px rgba(0,0,0,0.5)",
+            maxHeight: "20rem",
           }}
         >
           {tunings.map((t, i) => (

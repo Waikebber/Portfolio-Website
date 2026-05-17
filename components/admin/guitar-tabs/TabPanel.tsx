@@ -16,9 +16,11 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   onSaved: () => void;
+  onTuningsRefresh?: () => void;
 }
 
-export default function TabPanel({ tab, tunings, songId, isOpen, onClose, onSaved }: Props) {
+export default function TabPanel({ tab, tunings, songId, isOpen, onClose, onSaved, onTuningsRefresh }: Props) {
+  const [localTunings, setLocalTunings] = useState<Tuning[]>(tunings);
   const [description, setDescription] = useState("");
   const [tuningId, setTuningId] = useState("");
   const [capo, setCapo] = useState<string>("");
@@ -30,6 +32,8 @@ export default function TabPanel({ tab, tunings, songId, isOpen, onClose, onSave
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => { setLocalTunings(tunings); }, [tunings]);
 
   useEffect(() => {
     if (tab) {
@@ -72,6 +76,9 @@ export default function TabPanel({ tab, tunings, songId, isOpen, onClose, onSave
       }
       const data = await res.json();
       resolvedTuningId = data.id;
+      const created: Tuning = { id: data.id, name: newTuningName.trim() || null, strings: newTuningStrings.trim() };
+      setLocalTunings((prev) => [...prev, created]);
+      onTuningsRefresh?.();
     }
 
     let resolvedSourceValue = sourceValue;
@@ -163,7 +170,7 @@ export default function TabPanel({ tab, tunings, songId, isOpen, onClose, onSave
             {!showNewTuning ? (
               <>
                 <TuningSelect
-                  tunings={tunings}
+                  tunings={localTunings}
                   value={tuningId}
                   onChange={setTuningId}
                 />
