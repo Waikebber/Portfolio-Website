@@ -51,7 +51,7 @@ export default function AdminProjectsPage() {
               className="rounded-[10px] px-5 py-4"
               style={{ background: "#141417", border: "1px solid rgba(255,255,255,0.08)" }}
             >
-              <div className="flex items-start gap-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
                 {/* Info */}
                 <div className="flex-1 min-w-0 pt-1">
                   <p className="text-teal text-[10px] tracking-[1.4px] mb-1">{project.tag}</p>

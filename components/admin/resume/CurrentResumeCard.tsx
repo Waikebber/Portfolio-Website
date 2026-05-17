@@ -17,11 +17,14 @@ export default function CurrentResumeCard({ current, getPublicUrl }: Props) {
   }
 
   return (
-    <div className="flex items-center justify-between h-[80px] px-5 rounded-[10px] mb-6" style={cardStyle}>
-      <div>
+    <div
+      className="flex items-start justify-between gap-4 px-5 py-4 rounded-[10px] mb-6 sm:items-center"
+      style={cardStyle}
+    >
+      <div className="min-w-0">
         <p className="text-muted text-[10px] tracking-[1.2px] uppercase mb-1">Current Resume</p>
-        <p className="text-warm-white text-[14px] font-medium">{current.filename}</p>
-        <p className="text-muted text-[11px] mt-0.5">
+        <p className="text-warm-white font-medium truncate" style={{ fontSize: "0.875rem" }}>{current.filename}</p>
+        <p className="text-muted" style={{ fontSize: "0.6875rem", marginTop: "0.125rem" }}>
           Uploaded{" "}
           {new Date(current.uploaded_at).toLocaleDateString("en-US", {
             month: "short", day: "numeric", year: "numeric",
@@ -32,8 +35,14 @@ export default function CurrentResumeCard({ current, getPublicUrl }: Props) {
         href={getPublicUrl(current.storage_path)}
         target="_blank"
         rel="noopener noreferrer"
-        className="h-7 px-3 flex items-center rounded-[4px] text-teal text-[11px] hover:bg-teal/10 transition-colors"
-        style={{ border: "1px solid rgba(97,193,216,0.3)" }}
+        className="flex-none flex items-center text-teal hover:bg-teal/10 transition-colors"
+        style={{
+          height: "1.75rem",
+          padding: "0 0.75rem",
+          borderRadius: "0.25rem",
+          fontSize: "0.6875rem",
+          border: "1px solid rgba(97,193,216,0.3)",
+        }}
       >
         View PDF
       </a>

@@ -74,7 +74,7 @@ export default function SongsPage({
       </Link>
 
       {/* Header */}
-      <div className="flex items-start justify-between mb-2">
+      <div className="flex items-start justify-between gap-4 mb-2">
         <div>
           <h1 className="text-warm-white text-[32px] font-medium">
             {currentArtist?.name ?? "Songs"}

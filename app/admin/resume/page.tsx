@@ -39,8 +39,14 @@ export default function AdminResumePage() {
         <button
           onClick={upload}
           disabled={uploading}
-          className="w-full h-11 rounded-[8px] text-[14px] font-medium transition-opacity disabled:opacity-50 cursor-pointer"
-          style={{ background: "#61c1d8", color: "#0d0d0f" }}
+          className="w-full font-medium transition-opacity disabled:opacity-50 cursor-pointer"
+          style={{
+            height: "3rem",
+            borderRadius: "0.625rem",
+            fontSize: "0.875rem",
+            background: "#61c1d8",
+            color: "#0d0d0f",
+          }}
         >
           {uploading ? "Uploading…" : "Upload & replace current resume"}
         </button>

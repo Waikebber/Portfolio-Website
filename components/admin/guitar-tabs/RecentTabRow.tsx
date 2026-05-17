@@ -24,24 +24,29 @@ export default function RecentTabRow({ recent }: Props) {
       className="w-full text-left rounded-[10px] px-4 py-4 hover:opacity-90 transition-opacity cursor-pointer"
       style={{ background: "#141417", border: "1px solid rgba(255,255,255,0.08)" }}
     >
+      {/* Song title — translation inline on desktop, hidden on mobile */}
       <p style={{ color: "#f0ede6", fontSize: "14px", fontWeight: 500, lineHeight: "18px" }} className="truncate">
         {recent.song_title}
         {recent.song_title_translated && (
-          <span style={{ color: "#888", fontWeight: 400 }}> · {recent.song_title_translated}</span>
+          <span className="hidden sm:inline" style={{ color: "#888", fontWeight: 400 }}> · {recent.song_title_translated}</span>
         )}
       </p>
+
+      {/* Artist — translation inline on desktop, hidden on mobile */}
       <p style={{ color: "#888", fontSize: "11px", marginTop: "3px" }} className="truncate">
         {recent.artist_name}
-        {recent.artist_name_translated && ` · ${recent.artist_name_translated}`}
+        {recent.artist_name_translated && (
+          <span className="hidden sm:inline"> · {recent.artist_name_translated}</span>
+        )}
       </p>
-      {recent.tab_description && (
-        <p style={{ color: "#61c1d8", fontSize: "11px", marginTop: "2px" }} className="truncate">
-          {recent.tab_description}
-        </p>
-      )}
-      {recent.tuning_name && (
-        <p style={{ color: "#666", fontSize: "11px", marginTop: "4px" }}>{recent.tuning_name}</p>
-      )}
+
+      {/* Tab description + tuning — desktop only, always rendered for consistent height */}
+      <p className="hidden sm:block truncate" style={{ color: "#61c1d8", fontSize: "11px", marginTop: "2px", visibility: recent.tab_description ? "visible" : "hidden" }}>
+        {recent.tab_description || " "}
+      </p>
+      <p className="hidden sm:block" style={{ color: "#666", fontSize: "11px", marginTop: "4px", visibility: recent.tuning_name ? "visible" : "hidden" }}>
+        {recent.tuning_name || " "}
+      </p>
     </button>
   );
 }

@@ -14,7 +14,7 @@ export default function UsersPage() {
 
   return (
     <div className="max-w-[860px]">
-      <div className="flex items-start justify-between mb-10">
+      <div className="flex items-start justify-between gap-4 mb-10">
         <div>
           <h1 className="text-warm-white text-[32px] font-medium">Users</h1>
           <p className="text-muted text-[14px] mt-1">All users with admin access, excluding you.</p>

@@ -43,15 +43,20 @@ export default function EditPanel({
         />
       )}
 
-      {/* Panel */}
+      {/* Panel — bottom sheet on mobile, right drawer on sm+ */}
       <div
-        className="fixed top-0 right-0 h-screen w-[300px] z-40 flex flex-col transition-transform duration-300"
-        style={{
-          background: "#141417",
-          borderLeft: "1px solid rgba(255,255,255,0.08)",
-          transform: isOpen ? "translateX(0)" : "translateX(100%)",
-        }}
+        className={`fixed z-40 flex flex-col transition-[transform] duration-300
+          inset-x-0 bottom-0 rounded-t-[1rem] max-h-[85dvh]
+          border-t border-[rgba(255,255,255,0.08)]
+          sm:inset-x-auto sm:top-0 sm:right-0 sm:bottom-auto sm:h-screen sm:w-[18.75rem] sm:rounded-none sm:max-h-none
+          sm:border-t-0 sm:border-l sm:border-[rgba(255,255,255,0.08)]
+          ${isOpen
+            ? "translate-y-0 sm:translate-x-0 sm:translate-y-0"
+            : "translate-y-full sm:translate-x-full sm:translate-y-0"
+          }`}
+        style={{ background: "#141417" }}
       >
+
         {/* Header */}
         <div className="flex items-center justify-between px-5 h-[64px] shrink-0" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
           <p className="text-warm-white text-[15px] font-medium">Edit Photo</p>

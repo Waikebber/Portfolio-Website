@@ -13,7 +13,7 @@ export default function GenreCard({ genre, onClick, onEdit }: Props) {
     <div
       onClick={onClick}
       className="rounded-[12px] overflow-hidden relative hover:opacity-90 transition-opacity cursor-pointer"
-      style={{ background: "#141417", border: "1px solid rgba(255,255,255,0.08)", height: "112px" }}
+      style={{ background: "#141417", border: "1px solid rgba(255,255,255,0.08)", minHeight: "7rem" }}
     >
       <div
         className="absolute top-0 left-0 h-full w-[3px] rounded-l-[12px]"

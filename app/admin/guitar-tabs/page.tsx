@@ -34,7 +34,7 @@ export default function GuitarTabsPage() {
   return (
     <div className="max-w-[1180px]">
       {/* Header */}
-      <div className="flex items-start justify-between mb-2">
+      <div className="flex items-start justify-between gap-4 mb-2">
         <div>
           <h1 className="text-warm-white text-[32px] font-medium">Guitar Tabs</h1>
           <p className="text-muted text-[14px] mt-1">Browse tabs by genre, artist, and song.</p>
@@ -51,9 +51,11 @@ export default function GuitarTabsPage() {
       {recents.length > 0 && (
         <>
           <p className="text-muted text-[11px] tracking-[1.1px] uppercase mt-8 mb-4">Recently Accessed</p>
-          <div className="grid grid-cols-2 gap-3">
-            {recents.map((r) => (
-              <RecentTabRow key={r.tab_id} recent={r} />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {recents.slice(0, 6).map((r, i) => (
+              <div key={r.tab_id} className={i >= 4 ? "hidden sm:block" : ""}>
+                <RecentTabRow recent={r} />
+              </div>
             ))}
           </div>
         </>
@@ -66,7 +68,7 @@ export default function GuitarTabsPage() {
       ) : genres.length === 0 ? (
         <p className="text-muted text-[13px]">No genres yet. Add one to get started.</p>
       ) : (
-        <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(3, 340px)" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {genres.map((genre) => (
             <GenreCard
               key={genre.id}

@@ -45,7 +45,7 @@ export default function ArtistsPage({ params }: { params: Promise<{ genreId: str
       </Link>
 
       {/* Header */}
-      <div className="flex items-start justify-between mb-2">
+      <div className="flex items-start justify-between gap-4 mb-2">
         <div>
           <h1 className="text-warm-white text-[32px] font-medium">
             {currentGenre?.name ?? "Artists"}
@@ -70,7 +70,7 @@ export default function ArtistsPage({ params }: { params: Promise<{ genreId: str
       ) : artists.length === 0 ? (
         <p className="text-muted text-[13px]">No artists yet. Add one to get started.</p>
       ) : (
-        <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(4, 248px)" }}>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {artists.map((artist) => (
             <ArtistCard
               key={artist.id}
