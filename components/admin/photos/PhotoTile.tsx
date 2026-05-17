@@ -18,7 +18,7 @@ export default function PhotoTile({ photo, photoUrl, onClick, priority = false }
   return (
     <button
       onClick={onClick}
-      className="relative w-full h-[180px] rounded-[8px] overflow-hidden group cursor-pointer"
+      className="relative w-full aspect-[4/3] rounded-[8px] overflow-hidden group cursor-pointer"
       style={{ background: "#141417" }}
     >
       {!loaded && <Spinner />}

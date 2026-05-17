@@ -14,15 +14,18 @@ export default function AdminPhotosPage() {
   return (
     <div className="max-w-[860px]">
       {/* Header */}
-      <div className="flex items-start justify-between mb-2">
+      <div className="flex items-start justify-between gap-4 mb-2">
         <div>
           <h1 className="text-warm-white text-[32px] font-medium">Photos</h1>
           <p className="text-muted text-[14px] mt-1">Click a photo to edit its metadata or delete it.</p>
         </div>
         <Link
           href="/admin/photos/upload"
-          className="h-9 px-4 flex items-center rounded-[6px] text-[13px] font-medium shrink-0 mt-1"
-          style={{ background: "#61c1d8", color: "#0d0d0f" }}
+          className="flex-none h-9 px-4 flex items-center rounded-[6px] text-[13px] font-medium mt-1"
+          style={{
+            border: "1px solid rgba(97,193,216,0.35)",
+            color: "#61c1d8",
+          }}
         >
           + Upload photo
         </Link>

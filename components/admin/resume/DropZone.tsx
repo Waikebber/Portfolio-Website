@@ -17,7 +17,7 @@ export default function DropZone({ dragging, onDragOver, onDragLeave, onDrop, on
       onDragLeave={onDragLeave}
       onDrop={onDrop}
       onClick={() => inputRef.current?.click()}
-      className="h-[260px] rounded-[12px] flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors mb-4"
+      className="h-[180px] sm:h-[260px] rounded-[12px] flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors mb-4"
       style={{
         background: "#141417",
         border: `1px dashed ${dragging ? "#61c1d8" : "rgba(97,193,216,0.3)"}`,

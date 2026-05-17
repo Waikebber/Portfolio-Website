@@ -36,7 +36,7 @@ export default function AdminPhotosUploadPage() {
       <h1 className="text-warm-white text-[32px] font-medium mb-2">Upload Photo</h1>
       <p className="text-muted text-[14px] mb-8">Add a new photo to the photography page.</p>
 
-      <div className="grid grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 items-start">
         <PhotoDropZone
           preview={upload.preview}
           fileSize={upload.file?.size ?? null}
