@@ -26,7 +26,7 @@ export default function TabOptionsPage({
   const { genreId, artistId, songId } = use(params);
   const searchParams = useSearchParams();
   const { tabs, loading, refresh } = useTabs(songId);
-  const { tunings } = useTunings();
+  const { tunings, refresh: refreshTunings } = useTunings();
   const [panelOpen, setPanelOpen] = useState(searchParams.get("add") === "1");
   const [editingTab, setEditingTab] = useState<Tab | null>(null);
   const [songInfo, setSongInfo] = useState<SongInfo | null>(null);
@@ -154,6 +154,7 @@ export default function TabOptionsPage({
         isOpen={panelOpen}
         onClose={closePanel}
         onSaved={refresh}
+        onTuningsRefresh={refreshTunings}
       />
     </div>
   );
