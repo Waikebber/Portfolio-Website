@@ -11,6 +11,8 @@ interface Props {
 }
 
 export default function SongRow({ song, onEdit, onNavigate, onAddTab, onEditTab }: Props) {
+  const tuningDisplay = song.tuning_name ?? song.tuning_strings;
+
   return (
     <div
       onClick={onNavigate}
@@ -30,9 +32,14 @@ export default function SongRow({ song, onEdit, onNavigate, onAddTab, onEditTab 
         )}
       </div>
 
-      {song.tuning_name && (
-        <p className="text-muted text-[13px] self-center mx-6 shrink-0">{song.tuning_name}</p>
-      )}
+      <div className="flex flex-col items-end mx-6 shrink-0 self-center" style={song.tab_count !== 1 ? { paddingRight: "1rem" } : undefined}>
+        <p className="text-muted text-[13px]" style={{ visibility: tuningDisplay ? "visible" : "hidden" }}>
+          {tuningDisplay ?? " "}
+        </p>
+        <p style={{ color: "#666", fontSize: "11px", marginTop: "2px", visibility: (song.tab_count === 1 && song.first_tab_capo) ? "visible" : "hidden" }}>
+          {song.tab_count === 1 && song.first_tab_capo ? `Capo ${song.first_tab_capo}` : " "}
+        </p>
+      </div>
 
       <div className="flex flex-col items-end justify-between shrink-0 self-stretch py-3 pl-4">
         <button

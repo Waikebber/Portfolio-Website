@@ -18,6 +18,8 @@ export default function RecentTabRow({ recent }: Props) {
     }
   }
 
+  const tuningDisplay = recent.tuning_name ?? recent.tuning_strings;
+
   return (
     <button
       onClick={handleOpen}
@@ -42,10 +44,10 @@ export default function RecentTabRow({ recent }: Props) {
 
       {/* Tab description + tuning — desktop only, always rendered for consistent height */}
       <p className="hidden sm:block truncate" style={{ color: "#61c1d8", fontSize: "11px", marginTop: "2px", visibility: recent.tab_description ? "visible" : "hidden" }}>
-        {recent.tab_description || " "}
+        {recent.tab_description ?? " "}
       </p>
-      <p className="hidden sm:block" style={{ color: "#666", fontSize: "11px", marginTop: "4px", visibility: recent.tuning_name ? "visible" : "hidden" }}>
-        {recent.tuning_name || " "}
+      <p className="hidden sm:block" style={{ color: "#666", fontSize: "11px", marginTop: "4px", visibility: tuningDisplay ? "visible" : "hidden" }}>
+        {tuningDisplay ?? " "}
       </p>
     </button>
   );

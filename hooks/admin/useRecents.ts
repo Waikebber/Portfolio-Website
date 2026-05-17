@@ -22,7 +22,7 @@ export function useRecents() {
         accessed_at,
         tabs (
           id, description, source_type, source_value,
-          tunings ( name ),
+          tunings ( name, strings ),
           songs (
             id, title, title_translated,
             artists (
@@ -50,6 +50,7 @@ export function useRecents() {
           source_type: (tab?.source_type ?? "link") as "file" | "link",
           source_value: tab?.source_value ?? "",
           tuning_name: tuning?.name ?? null,
+          tuning_strings: tuning?.strings ?? null,
           song_id: song?.id ?? "",
           song_title: song?.title ?? "",
           song_title_translated: song?.title_translated ?? null,
