@@ -30,6 +30,8 @@ export interface Song {
   first_tab_source_type: "file" | "link" | null
   first_tab_source_value: string | null
   tuning_name: string | null
+  tuning_strings: string | null
+  first_tab_capo: number | null
 }
 
 export interface RecentTab {
@@ -39,6 +41,7 @@ export interface RecentTab {
   source_type: "file" | "link"
   source_value: string
   tuning_name: string | null
+  tuning_strings: string | null
   song_id: string
   song_title: string
   song_title_translated: string | null

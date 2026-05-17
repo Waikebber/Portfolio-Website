@@ -15,7 +15,7 @@ export function useSongs(artistId: string) {
     const supabase = createClient();
     const [{ data: songsData }, { data: tabsData }] = await Promise.all([
       supabase.from("songs").select("*").eq("artist_id", artistId).order("title"),
-      supabase.from("tabs").select("*, tunings(name)").order("created_at"),
+      supabase.from("tabs").select("*, tunings(name, strings)").order("created_at"),
     ]);
 
     const tabsBySong = (tabsData ?? []).reduce<Record<string, typeof tabsData>>((acc, t) => {
@@ -36,6 +36,8 @@ export function useSongs(artistId: string) {
             first_tab_source_type: first?.source_type ?? null,
             first_tab_source_value: first?.source_value ?? null,
             tuning_name: first?.tunings?.name ?? null,
+            tuning_strings: first?.tunings?.strings ?? null,
+            first_tab_capo: first?.capo ?? null,
           };
         })
         .sort((a, b) => b.tab_count - a.tab_count || a.title.localeCompare(b.title))
