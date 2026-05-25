@@ -3,14 +3,14 @@ import { fmt, fmtDate } from "@/lib/marketsFormat";
 import StatBlock from "./StatBlock";
 
 export default function PriceTab({ detail }: { detail: TickerDetail }) {
-  const t = detail.today;
+  const t = detail.today ?? null;
   return (
     <div className="flex flex-col gap-6 p-5">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <StatBlock label="Close Price" value={t.price_close != null ? `$${t.price_close.toFixed(2)}` : "—"} />
-        <StatBlock label="1-Day Return" value={fmt(t.return_1d, true)} />
-        <StatBlock label="5-Day Return" value={fmt(t.return_5d, true)} />
-        <StatBlock label="20-Day Return" value={fmt(t.return_20d, true)} />
+        <StatBlock label="Close Price" value={t?.price_close != null ? `$${t.price_close.toFixed(2)}` : "—"} />
+        <StatBlock label="1-Day Return" value={fmt(t?.return_1d ?? null, true)} />
+        <StatBlock label="5-Day Return" value={fmt(t?.return_5d ?? null, true)} />
+        <StatBlock label="20-Day Return" value={fmt(t?.return_20d ?? null, true)} />
       </div>
 
       <div>

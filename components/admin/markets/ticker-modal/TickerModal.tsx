@@ -88,7 +88,7 @@ export default function TickerModal({ ticker, onClose }: Props) {
                       <span className="text-warm-white" style={{ fontSize: "0.9375rem" }}>
                         {detail.metadata.company_name}
                       </span>
-                      <SignalBadge signal={detail.today.signal_strength} size="xs" />
+                      {detail.today && <SignalBadge signal={detail.today.signal_strength} size="xs" />}
                       <span className="text-muted hidden sm:block" style={{ fontSize: "0.75rem" }}>
                         {[
                           detail.metadata.sector,

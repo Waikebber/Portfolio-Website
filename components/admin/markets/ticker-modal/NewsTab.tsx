@@ -12,16 +12,16 @@ function sentimentTrend(detail: TickerDetail): string {
 }
 
 export default function NewsTab({ detail }: { detail: TickerDetail }) {
-  const t = detail.today;
+  const t = detail.today ?? null;
   return (
     <div className="flex flex-col">
       <div
         className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
       >
-        <StatBlock label="Today's Score" value={fmt(t.sentiment_score)} />
+        <StatBlock label="Today's Score" value={fmt(t?.sentiment_score ?? null)} />
         <StatBlock label="5-Day Trend" value={sentimentTrend(detail)} />
-        <StatBlock label="Articles Today" value={t.article_count != null ? `${t.article_count} articles` : "—"} />
+        <StatBlock label="Articles Today" value={t?.article_count != null ? `${t.article_count} articles` : "—"} />
         <StatBlock
           label="vs. Sector"
           value={detail.sector_avg_score != null ? `Sector: ${fmt(detail.sector_avg_score)}` : "—"}
