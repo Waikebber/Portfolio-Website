@@ -14,6 +14,7 @@ const ALL_NAV_ITEMS = [
   { label: "Projects", href: "/admin/projects", roles: ["full-admin"] },
   { label: "Photos", href: "/admin/photos", roles: ["full-admin"] },
   { label: "Guitar Tabs", href: "/admin/guitar-tabs", roles: ["full-admin", "guest-admin"] },
+  { label: "Markets", href: "/admin/markets", roles: ["full-admin", "guest-admin"] },
 ];
 
 function getPageName(pathname: string): string {
@@ -24,6 +25,8 @@ function getPageName(pathname: string): string {
   if (pathname === "/admin/photos") return "Photos";
   if (pathname === "/admin/photos/upload") return "Upload Photo";
   if (pathname.startsWith("/admin/guitar-tabs")) return "Guitar Tabs";
+  if (pathname.startsWith("/admin/markets/universe")) return "Markets — Universe";
+  if (pathname.startsWith("/admin/markets")) return "Markets";
   return "Admin";
 }
 
