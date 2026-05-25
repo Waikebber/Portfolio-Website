@@ -3,7 +3,7 @@ import { fmt } from "@/lib/marketsFormat";
 import StatBlock from "./StatBlock";
 
 function sentimentTrend(detail: TickerDetail): string {
-  const score = detail.today.sentiment_score;
+  const score = detail.today?.sentiment_score ?? null;
   const history = detail.sentiment_history.filter((h) => h.sentiment_score != null).slice(0, 5);
   if (!history.length || score == null) return "—";
   const avg = history.reduce((s, h) => s + (h.sentiment_score ?? 0), 0) / history.length;
