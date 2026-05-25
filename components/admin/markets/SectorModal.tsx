@@ -18,16 +18,18 @@ interface Props {
 export default function SectorModal({ sector, onClose, onTickerClick }: Props) {
   const [detail, setDetail] = useState<SectorDetail | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("stocks");
 
   useEffect(() => {
-    if (!sector) { setDetail(null); return; }
+    if (!sector) { setDetail(null); setError(false); return; }
     setLoading(true);
+    setError(false);
     setActiveTab("stocks");
     fetch(`/api/markets/sectors/${encodeURIComponent(sector)}`)
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
       .then(setDetail)
-      .catch(console.error)
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, [sector]);
 
@@ -114,7 +116,9 @@ export default function SectorModal({ sector, onClose, onTickerClick }: Props) {
               <div className="flex-1 overflow-y-auto pt-1">
                 {loading || !detail ? (
                   <div className="flex items-center justify-center p-12">
-                    <p className="text-muted text-[13px]">{loading ? "Loading…" : "No data"}</p>
+                    <p className="text-muted text-[13px]">
+                      {loading ? "Loading…" : error ? "Could not reach markets API" : "No data"}
+                    </p>
                   </div>
                 ) : activeTab === "stocks" ? (
                   <StocksTab tickers={detail.tickers} onTickerClick={(t) => { onClose(); onTickerClick(t); }} />

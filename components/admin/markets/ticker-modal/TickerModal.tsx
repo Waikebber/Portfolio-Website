@@ -26,16 +26,18 @@ interface Props {
 export default function TickerModal({ ticker, onClose }: Props) {
   const [detail, setDetail] = useState<TickerDetail | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("news");
 
   useEffect(() => {
-    if (!ticker) { setDetail(null); return; }
+    if (!ticker) { setDetail(null); setError(false); return; }
     setLoading(true);
+    setError(false);
     setActiveTab("news");
     fetch(`/api/markets/tickers/${ticker}/detail`)
-      .then((r) => r.json())
+      .then((r) => { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
       .then(setDetail)
-      .catch(console.error)
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, [ticker]);
 
@@ -134,7 +136,9 @@ export default function TickerModal({ ticker, onClose }: Props) {
               <div className="flex-1 overflow-y-auto px-1">
                 {loading || !detail ? (
                   <div className="flex items-center justify-center p-12">
-                    <p className="text-muted text-[13px]">{loading ? "Loading…" : "No data"}</p>
+                    <p className="text-muted text-[13px]">
+                      {loading ? "Loading…" : error ? "Could not reach markets API" : "No data"}
+                    </p>
                   </div>
                 ) : (
                   <>
