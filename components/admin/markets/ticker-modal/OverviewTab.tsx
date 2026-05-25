@@ -18,19 +18,19 @@ export default function OverviewTab({ detail }: { detail: TickerDetail }) {
         className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
       >
-        <StatBlock label="Today's Score" value={fmt(t.sentiment_score)} />
+        <StatBlock label="Today's Score" value={fmt(t?.sentiment_score ?? null)} />
         <StatBlock label="5-Day Trend" value={sentimentTrend(detail)} />
-        <StatBlock label="Articles Today" value={t.article_count != null ? `${t.article_count} articles` : "—"} />
+        <StatBlock label="Articles Today" value={t?.article_count != null ? `${t.article_count} articles` : "—"} />
         <StatBlock
           label="vs. Sector"
           value={detail.sector_avg_score != null ? `Sector: ${fmt(detail.sector_avg_score)}` : "—"}
         />
       </div>
       <div className="px-5 grid grid-cols-2 sm:grid-cols-4 gap-4 pb-5">
-        <StatBlock label="Close Price" value={t.price_close != null ? `$${t.price_close.toFixed(2)}` : "—"} />
-        <StatBlock label="1-Day Return" value={fmt(t.return_1d, true)} />
-        <StatBlock label="5-Day Return" value={fmt(t.return_5d, true)} />
-        <StatBlock label="Volume Ratio" value={t.volume_ratio != null ? `${t.volume_ratio.toFixed(1)}×` : "—"} sub="vs 20d avg" />
+        <StatBlock label="Close Price" value={t?.price_close != null ? `$${t.price_close.toFixed(2)}` : "—"} />
+        <StatBlock label="1-Day Return" value={fmt(t?.return_1d ?? null, true)} />
+        <StatBlock label="5-Day Return" value={fmt(t?.return_5d ?? null, true)} />
+        <StatBlock label="Volume Ratio" value={t?.volume_ratio != null ? `${t.volume_ratio.toFixed(1)}×` : "—"} sub="vs 20d avg" />
       </div>
     </div>
   );

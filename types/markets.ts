@@ -121,7 +121,7 @@ export interface TickerDetail {
     return_20d: number | null;
     volume_ratio: number | null;
     price_close: number | null;
-  };
+  } | null;
   sentiment_history: Array<{
     date: string;
     sentiment_score: number | null;
