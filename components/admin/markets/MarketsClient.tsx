@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { DashboardData } from "@/types/markets";
 import WatchlistStrip from "./WatchlistStrip";
+import SectorEtfStrip from "./SectorEtfStrip";
 import SectorHeatmap from "./SectorHeatmap";
 import TopMovers from "./TopMovers";
 import UnusualVolume from "./UnusualVolume";
@@ -117,7 +118,15 @@ export default function MarketsClient({ data }: { data: DashboardData }) {
       {data.watchlist.length > 0 && (
         <section className="mb-8">
           <SectionLabel>WATCHLIST</SectionLabel>
-          <WatchlistStrip tickers={data.watchlist} />
+          <WatchlistStrip tickers={data.watchlist} onTickerClick={setActiveTicker} />
+        </section>
+      )}
+
+      {/* Sector ETFs */}
+      {(data.sector_etfs?.length ?? 0) > 0 && (
+        <section className="mb-8">
+          <SectionLabel>SECTOR ETFs</SectionLabel>
+          <SectorEtfStrip etfs={data.sector_etfs} />
         </section>
       )}
 
@@ -145,7 +154,7 @@ export default function MarketsClient({ data }: { data: DashboardData }) {
         <EarningsRadar rows={data.earnings_radar} onTickerClick={setActiveTicker} />
       </section>
 
-      <TickerModal ticker={activeTicker} onClose={() => setActiveTicker(null)} />
+      <TickerModal ticker={activeTicker} onClose={() => setActiveTicker(null)} onWatchlistChange={() => router.refresh()} />
       <SectorModal
         sector={activeSector}
         onClose={() => setActiveSector(null)}

@@ -51,9 +51,18 @@ export interface EarningsRow {
   days_out: number;
 }
 
+export interface SectorEtf {
+  ticker: string;
+  sector: string | null;
+  return_1d: number | null;
+  return_5d: number | null;
+  price_close: number | null;
+}
+
 export interface DashboardData {
   as_of: string;
   watchlist: WatchlistTicker[];
+  sector_etfs: SectorEtf[];
   sector_heatmap: SectorRow[];
   top_movers: TopMovers;
   unusual_volume: VolumeFlag[];

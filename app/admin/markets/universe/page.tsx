@@ -9,7 +9,7 @@ import AddTickerPanel from "@/components/admin/markets/AddTickerPanel";
 import TickerModal from "@/components/admin/markets/ticker-modal/TickerModal";
 
 export default function UniversePage() {
-  const { filtered, loading, sectors, sector, setSector, search, setSearch, deleting, deactivate, reload } =
+  const { filtered, loading, sectors, sector, setSector, search, setSearch, deleting, deactivate, toggleWatchlist, reload } =
     useMarketsTickers();
 
   const [panelOpen, setPanelOpen] = useState(false);
@@ -60,6 +60,7 @@ export default function UniversePage() {
         deleting={deleting}
         onTickerClick={setActiveTicker}
         onDeactivate={deactivate}
+        onWatchlistToggle={toggleWatchlist}
       />
 
       <AddTickerPanel isOpen={panelOpen} onClose={() => setPanelOpen(false)} onSaved={reload} />

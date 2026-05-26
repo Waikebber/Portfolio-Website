@@ -1,6 +1,7 @@
 import type { TickerRow } from "@/types/markets";
+import GlassesIcon from "../GlassesIcon";
 
-const COLS = "5rem 1fr 8rem 8rem 6rem 5.5rem";
+const COLS = "5rem 1fr 8rem 8rem 6rem 6rem";
 const HEADERS = ["TICKER", "COMPANY", "SECTOR", "INDUSTRY", "MARKET CAP", ""];
 
 interface Props {
@@ -9,9 +10,10 @@ interface Props {
   deleting: string | null;
   onTickerClick: (ticker: string) => void;
   onDeactivate: (ticker: string) => void;
+  onWatchlistToggle: (ticker: string, currentlyIn: boolean) => void;
 }
 
-export default function UniverseTable({ rows, empty, deleting, onTickerClick, onDeactivate }: Props) {
+export default function UniverseTable({ rows, empty, deleting, onTickerClick, onDeactivate, onWatchlistToggle }: Props) {
   return (
     <div
       style={{
@@ -59,15 +61,31 @@ export default function UniverseTable({ rows, empty, deleting, onTickerClick, on
             <span className="text-muted" style={{ fontSize: "0.8125rem" }}>
               {t.market_cap_b != null ? `$${t.market_cap_b}B` : "—"}
             </span>
-            <div className="flex justify-end">
+            <div className="flex items-center justify-end gap-3">
+              <button
+                onClick={() => onWatchlistToggle(t.ticker, t.in_watchlist)}
+                className="cursor-pointer transition-opacity hover:opacity-80"
+                title={t.in_watchlist ? "Remove from watchlist" : "Add to watchlist"}
+                style={{ opacity: t.in_watchlist ? 1 : 0.25, color: "#555" }}
+              >
+                <GlassesIcon active={t.in_watchlist} />
+              </button>
               {t.active && (
                 <button
                   onClick={() => onDeactivate(t.ticker)}
                   disabled={deleting === t.ticker}
-                  className="text-[11px] cursor-pointer hover:opacity-80 transition-opacity disabled:opacity-40"
+                  title="Deactivate"
+                  className="cursor-pointer hover:opacity-80 transition-opacity disabled:opacity-40"
                   style={{ color: "#555" }}
                 >
-                  {deleting === t.ticker ? "…" : "Deactivate"}
+                  {deleting === t.ticker ? (
+                    <span style={{ fontSize: "0.75rem" }}>…</span>
+                  ) : (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.4"/>
+                      <line x1="4" y1="7" x2="10" y2="7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                    </svg>
+                  )}
                 </button>
               )}
             </div>

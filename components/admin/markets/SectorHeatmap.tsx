@@ -17,7 +17,7 @@ interface Props {
 
 export default function SectorHeatmap({ sectors, onSectorClick }: Props) {
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2">
+    <div className="flex flex-wrap justify-center gap-2">
       {sectors.map((s) => {
         const { bg, textPrimary, textSub } = sectorColor(s.return_5d_avg);
         return (
@@ -26,6 +26,8 @@ export default function SectorHeatmap({ sectors, onSectorClick }: Props) {
             onClick={() => onSectorClick(s.sector)}
             className="text-left cursor-pointer hover:brightness-110 transition-all"
             style={{
+              flex: "0 0 calc(16.667% - 0.417rem)",
+              minWidth: "9rem",
               background: bg,
               border: "1px solid rgba(255,255,255,0.06)",
               borderRadius: "0.625rem",

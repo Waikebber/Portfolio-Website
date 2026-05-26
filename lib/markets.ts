@@ -25,8 +25,10 @@ async function mfetch<T>(path: string, options?: RequestInit, revalidate = 1800)
   return res.json();
 }
 
-export const getDashboard = () =>
-  mfetch<DashboardData>("/api/dashboard", undefined, 1800);
+export const getDashboard = (watchlist: string[] = []) => {
+  const qs = watchlist.length ? `?watchlist=${watchlist.join(",")}` : "";
+  return mfetch<DashboardData>(`/api/dashboard${qs}`, undefined, 300);
+};
 
 export const getTickers = () =>
   mfetch<TickerRow[]>("/api/tickers", undefined, 300);

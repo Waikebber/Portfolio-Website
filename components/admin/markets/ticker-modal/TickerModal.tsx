@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { TickerDetail } from "@/types/markets";
 import SignalBadge from "../SignalBadge";
+import GlassesIcon from "../GlassesIcon";
+import { createClient } from "@/lib/supabase/client";
 import OverviewTab from "./OverviewTab";
 import NewsTab from "./NewsTab";
 import PriceTab from "./PriceTab";
@@ -21,29 +23,39 @@ const TABS: { id: Tab; label: string }[] = [
 interface Props {
   ticker: string | null;
   onClose: () => void;
+  onWatchlistChange?: () => void;
 }
 
-export default function TickerModal({ ticker, onClose }: Props) {
+export default function TickerModal({ ticker, onClose, onWatchlistChange }: Props) {
   const [detail, setDetail] = useState<TickerDetail | null>(null);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("news");
+  const [pinned, setPinned] = useState(false);
 
   useEffect(() => {
-    if (!ticker) { setDetail(null); return; }
+    if (!ticker) { setDetail(null); setPinned(false); return; }
     setLoading(true);
     setActiveTab("news");
-    fetch(`/api/markets/tickers/${ticker}/detail`)
-      .then((r) => r.json())
-      .then(setDetail)
+    // Fetch market data and Supabase watchlist state in parallel
+    const supabase = createClient();
+    Promise.all([
+      fetch(`/api/markets/tickers/${ticker}/detail`).then((r) => r.json()),
+      supabase.from("user_watchlist").select("ticker").eq("ticker", ticker.toUpperCase()).maybeSingle(),
+    ])
+      .then(([d, { data: wl }]) => { setDetail(d); setPinned(!!wl); })
       .catch(console.error)
       .finally(() => setLoading(false));
   }, [ticker]);
 
   useEffect(() => {
     if (!ticker) return;
+    document.body.style.overflow = "hidden";
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handler);
+    };
   }, [ticker, onClose]);
 
   return (
@@ -99,12 +111,37 @@ export default function TickerModal({ ticker, onClose }: Props) {
                     </>
                   )}
                 </div>
-                <button
-                  onClick={onClose}
-                  className="text-muted hover:text-warm-white transition-colors cursor-pointer shrink-0"
-                >
-                  ✕
-                </button>
+                <div className="flex items-center gap-3 shrink-0">
+                  {detail && (
+                    <button
+                      onClick={() => {
+                        const next = !pinned;
+                        setPinned(next);
+                        fetch(`/api/markets/tickers/${ticker}/watchlist`, {
+                          method: pinned ? "DELETE" : "POST",
+                        }).then(async (r) => {
+                          if (!r.ok) {
+                            setPinned(pinned);
+                            console.error("Watchlist toggle failed", r.status, await r.text());
+                          } else {
+                            onWatchlistChange?.();
+                          }
+                        }).catch((err) => { setPinned(pinned); console.error("Watchlist toggle error", err); });
+                      }}
+                      className="cursor-pointer transition-opacity hover:opacity-80"
+                      title={pinned ? "Remove from watchlist" : "Add to watchlist"}
+                      style={{ opacity: pinned ? 1 : 0.3, color: "#555" }}
+                    >
+                      <GlassesIcon active={pinned} />
+                    </button>
+                  )}
+                  <button
+                    onClick={onClose}
+                    className="text-muted hover:text-warm-white transition-colors cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
 
               {/* Tabs */}

@@ -1,12 +1,22 @@
+import { createClient } from "@/lib/supabase/server";
 import { getDashboard } from "@/lib/markets";
 import MarketsClient from "@/components/admin/markets/MarketsClient";
 
-export const revalidate = 1800;
+export const revalidate = 300;
 
 export default async function MarketsPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  let watchlistTickers: string[] = [];
+  if (user) {
+    const { data } = await supabase.from("user_watchlist").select("ticker").eq("user_id", user.id);
+    watchlistTickers = data?.map((r) => r.ticker) ?? [];
+  }
+
   let data;
   try {
-    data = await getDashboard();
+    data = await getDashboard(watchlistTickers);
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     return (

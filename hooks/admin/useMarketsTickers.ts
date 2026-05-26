@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { TickerRow } from "@/types/markets";
+import { createClient } from "@/lib/supabase/client";
 
 const ORDERED_SECTORS = [
   "All",
@@ -19,10 +20,17 @@ const ORDERED_SECTORS = [
 
 export function useMarketsTickers() {
   const [tickers, setTickers] = useState<TickerRow[]>([]);
+  const [watchlistSet, setWatchlistSet] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [sector, setSector] = useState("All");
   const [search, setSearch] = useState("");
   const [deleting, setDeleting] = useState<string | null>(null);
+
+  async function reloadWatchlist() {
+    const supabase = createClient();
+    const { data } = await supabase.from("user_watchlist").select("ticker");
+    setWatchlistSet(new Set(data?.map((r) => r.ticker) ?? []));
+  }
 
   async function reload() {
     setLoading(true);
@@ -34,16 +42,24 @@ export function useMarketsTickers() {
     }
   }
 
-  useEffect(() => { reload(); }, []);
+  useEffect(() => {
+    reload();
+    reloadWatchlist();
+  }, []);
 
-  // Keep sector chips in a consistent order, only showing sectors that exist in data
   const sectors = useMemo(() => {
     const present = new Set(tickers.map((t) => t.sector).filter(Boolean) as string[]);
     return ORDERED_SECTORS.filter((s) => s === "All" || present.has(s));
   }, [tickers]);
 
+  // Overlay per-user watchlist onto backend ticker data
+  const tickersWithWatchlist = useMemo(
+    () => tickers.map((t) => ({ ...t, in_watchlist: watchlistSet.has(t.ticker) })),
+    [tickers, watchlistSet]
+  );
+
   const filtered = useMemo(() => {
-    return tickers.filter((t) => {
+    return tickersWithWatchlist.filter((t) => {
       if (sector !== "All" && t.sector !== sector) return false;
       if (search) {
         const q = search.toLowerCase();
@@ -51,7 +67,7 @@ export function useMarketsTickers() {
       }
       return true;
     });
-  }, [tickers, sector, search]);
+  }, [tickersWithWatchlist, sector, search]);
 
   async function deactivate(ticker: string) {
     setDeleting(ticker);
@@ -63,8 +79,27 @@ export function useMarketsTickers() {
     }
   }
 
+  async function toggleWatchlist(ticker: string, currentlyIn: boolean) {
+    setWatchlistSet((prev) => {
+      const next = new Set(prev);
+      currentlyIn ? next.delete(ticker) : next.add(ticker);
+      return next;
+    });
+    const res = await fetch(`/api/markets/tickers/${ticker}/watchlist`, {
+      method: currentlyIn ? "DELETE" : "POST",
+    });
+    if (!res.ok) {
+      setWatchlistSet((prev) => {
+        const next = new Set(prev);
+        currentlyIn ? next.add(ticker) : next.delete(ticker);
+        return next;
+      });
+      console.error("Watchlist toggle failed", res.status, await res.text());
+    }
+  }
+
   return {
-    tickers,
+    tickers: tickersWithWatchlist,
     filtered,
     loading,
     sectors,
@@ -74,6 +109,7 @@ export function useMarketsTickers() {
     setSearch,
     deleting,
     deactivate,
+    toggleWatchlist,
     reload,
   };
 }
