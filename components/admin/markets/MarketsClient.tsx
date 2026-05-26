@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { DashboardData } from "@/types/markets";
@@ -11,6 +11,48 @@ import UnusualVolume from "./UnusualVolume";
 import EarningsRadar from "./EarningsRadar";
 import TickerModal from "./ticker-modal/TickerModal";
 import SectorModal from "./SectorModal";
+
+type ApiState = "checking" | "live" | "down";
+
+function ApiStatus() {
+  const [state, setState] = useState<ApiState>("checking");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000);
+    fetch("/api/markets/health", { signal: controller.signal })
+      .then((r) => setState(r.ok ? "live" : "down"))
+      .catch(() => setState("down"))
+      .finally(() => clearTimeout(timer));
+    return () => { clearTimeout(timer); controller.abort(); };
+  }, []);
+
+  const dot: Record<ApiState, string> = {
+    checking: "#555",
+    live:     "#4ade80",
+    down:     "#f87171",
+  };
+  const label: Record<ApiState, string> = {
+    checking: "checking",
+    live:     "API live",
+    down:     "API down",
+  };
+
+  return (
+    <span className="flex items-center gap-1.5" style={{ fontSize: "0.75rem", color: "#555" }}>
+      <span
+        style={{
+          width: "0.45rem",
+          height: "0.45rem",
+          borderRadius: "50%",
+          background: dot[state],
+          flexShrink: 0,
+        }}
+      />
+      {label[state]}
+    </span>
+  );
+}
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -47,8 +89,9 @@ export default function MarketsClient({ data }: { data: DashboardData }) {
       <div className="flex items-start justify-between gap-4 mb-8">
         <div>
           <h1 className="text-warm-white font-medium" style={{ fontSize: "2rem" }}>Markets — Mid Cap</h1>
-          <p className="text-muted" style={{ fontSize: "0.875rem", marginTop: "0.25rem" }}>
+          <p className="text-muted flex items-center gap-3" style={{ fontSize: "0.875rem", marginTop: "0.25rem" }}>
             Daily briefing{asOf ? ` — last updated ${asOf}` : ""}
+            <ApiStatus />
           </p>
         </div>
         <div className="flex items-center gap-2">
