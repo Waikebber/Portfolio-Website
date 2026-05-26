@@ -8,6 +8,7 @@ export default async function MarketsPage() {
   try {
     data = await getDashboard();
   } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
     return (
       <div>
         <h1 className="text-warm-white font-medium mb-2" style={{ fontSize: "2rem" }}>Markets</h1>
@@ -21,11 +22,10 @@ export default async function MarketsPage() {
           }}
         >
           <p className="text-warm-white text-[14px] font-medium mb-1">Markets API unavailable</p>
-          <p className="text-muted text-[13px]">
-            Make sure the FastAPI service is running at{" "}
-            <code className="text-teal">{process.env.MARKETS_API_URL ?? "MARKETS_API_URL not set"}</code>.
+          <p className="text-muted text-[13px] mt-1">
+            The backend may still be starting up — try refreshing in a moment.
           </p>
-          <p className="text-muted text-[11px] mt-2">{String(e)}</p>
+          <p className="text-muted text-[11px] mt-2" style={{ opacity: 0.5 }}>{msg}</p>
         </div>
       </div>
     );

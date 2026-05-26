@@ -16,8 +16,11 @@ async function mfetch<T>(path: string, options?: RequestInit, revalidate = 1800)
     next: { revalidate },
   });
   if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`Markets API ${res.status} ${path}: ${text}`);
+    const isJson = res.headers.get("content-type")?.includes("application/json");
+    const detail = isJson
+      ? await res.json().then((d) => d?.detail ?? d?.error ?? "").catch(() => "")
+      : "";
+    throw new Error(`Markets API ${res.status}${detail ? `: ${detail}` : ""}`);
   }
   return res.json();
 }
