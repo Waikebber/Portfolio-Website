@@ -112,6 +112,28 @@ export default function TickerModal({ ticker, onClose, onWatchlistChange }: Prop
                   )}
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
+                  {ticker && (
+                    <>
+                      <a
+                        href={`https://finance.yahoo.com/quote/${ticker}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Yahoo Finance"
+                        className="opacity-50 hover:opacity-100 transition-opacity"
+                      >
+                        <img src="/assets/logos/yahoo-finance.svg" alt="Yahoo Finance" width={18} height={18} style={{ display: "block" }} />
+                      </a>
+                      <a
+                        href={`https://finviz.com/quote.ashx?t=${ticker}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Finviz"
+                        className="opacity-50 hover:opacity-100 transition-opacity"
+                      >
+                        <img src="/assets/logos/finviz_logo.jpeg" alt="Finviz" width={18} height={18} style={{ display: "block", borderRadius: "3px" }} />
+                      </a>
+                    </>
+                  )}
                   {detail && (
                     <button
                       onClick={() => {
