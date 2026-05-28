@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef } from "react";
 import type { SectorEtf } from "@/types/markets";
 import { pct } from "@/lib/marketsFormat";
 
@@ -34,10 +37,31 @@ function ReturnPill({ value, label }: { value: number | null; label: string }) {
 }
 
 export default function SectorEtfStrip({ etfs }: { etfs: SectorEtf[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const drag = useRef({ active: false, startX: 0, scrollLeft: 0 });
+
   if (!etfs.length) return null;
 
+  function onMouseDown(e: React.MouseEvent) {
+    drag.current = { active: true, startX: e.pageX, scrollLeft: ref.current?.scrollLeft ?? 0 };
+  }
+  function onMouseMove(e: React.MouseEvent) {
+    if (!drag.current.active || !ref.current) return;
+    e.preventDefault();
+    ref.current.scrollLeft = drag.current.scrollLeft - (e.pageX - drag.current.startX);
+  }
+  function onMouseUp() { drag.current.active = false; }
+
   return (
-    <div className="flex gap-2 overflow-x-auto pb-0.5" style={{ scrollbarWidth: "none" }}>
+    <div
+      ref={ref}
+      className="flex gap-2 overflow-x-auto pb-0.5 select-none"
+      style={{ scrollbarWidth: "none", cursor: "grab" }}
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
+      onMouseLeave={onMouseUp}
+    >
       {etfs.map((e) => (
         <div
           key={e.ticker}
@@ -58,14 +82,7 @@ export default function SectorEtfStrip({ etfs }: { etfs: SectorEtf[] }) {
               {e.sector ? (SECTOR_SHORT[e.sector] ?? e.sector) : "—"}
             </p>
           </div>
-          <div
-            style={{
-              width: "1px",
-              height: "1.5rem",
-              background: "rgba(255,255,255,0.07)",
-              flexShrink: 0,
-            }}
-          />
+          <div style={{ width: "1px", height: "1.5rem", background: "rgba(255,255,255,0.07)", flexShrink: 0 }} />
           <div className="flex gap-3">
             <ReturnPill value={e.return_1d} label="1D" />
             <ReturnPill value={e.return_5d} label="5D" />

@@ -130,23 +130,23 @@ export default function MarketsClient({ data }: { data: DashboardData }) {
         </section>
       )}
 
-      {/* Sector Heatmap */}
-      <section className="mb-8">
-        <SectionLabel>SECTOR ROTATION</SectionLabel>
-        <SectorHeatmap sectors={data.sector_heatmap} onSectorClick={setActiveSector} />
-      </section>
-
-      {/* Top Movers + Unusual Volume */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <section>
-          <SectionLabel>TOP MOVERS TODAY</SectionLabel>
-          <TopMovers bull={data.top_movers.bull} bear={data.top_movers.bear} onTickerClick={setActiveTicker} />
+      {/* Sector Rotation + Unusual Volume */}
+      <div className="flex flex-col lg:flex-row gap-6 mb-8">
+        <section className="flex-1 min-w-0">
+          <SectionLabel>SECTOR ROTATION</SectionLabel>
+          <SectorHeatmap sectors={data.sector_heatmap} onSectorClick={setActiveSector} />
         </section>
-        <section>
+        <section className="lg:shrink-0 lg:w-[30%]">
           <SectionLabel>UNUSUAL VOLUME</SectionLabel>
           <UnusualVolume flags={data.unusual_volume} onTickerClick={setActiveTicker} />
         </section>
       </div>
+
+      {/* Top Movers */}
+      <section className="mb-8">
+        <SectionLabel>TOP MOVERS TODAY</SectionLabel>
+        <TopMovers bull={data.top_movers.bull} bear={data.top_movers.bear} onTickerClick={setActiveTicker} />
+      </section>
 
       {/* Earnings Radar */}
       <section className="mb-8">

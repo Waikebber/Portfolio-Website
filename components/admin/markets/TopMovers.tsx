@@ -1,11 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import type { MoverTicker } from "@/types/markets";
 import { pct } from "@/lib/marketsFormat";
 
-interface Props {
-  bull: MoverTicker[];
-  bear: MoverTicker[];
-  onTickerClick: (ticker: string) => void;
-}
+const MAX = 4;
 
 function MoverRow({ m, onTickerClick }: { m: MoverTicker; onTickerClick: (t: string) => void }) {
   const ret = m.return_1d;
@@ -14,10 +13,7 @@ function MoverRow({ m, onTickerClick }: { m: MoverTicker; onTickerClick: (t: str
     <button
       onClick={() => onTickerClick(m.ticker)}
       className="w-full text-left hover:bg-white/[0.03] transition-colors cursor-pointer"
-      style={{
-        padding: "0.75rem 1rem",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
-      }}
+      style={{ padding: "0.75rem 1rem", borderBottom: "1px solid rgba(255,255,255,0.05)" }}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
@@ -35,8 +31,11 @@ function MoverRow({ m, onTickerClick }: { m: MoverTicker; onTickerClick: (t: str
   );
 }
 
-export default function TopMovers({ bull, bear, onTickerClick }: Props) {
-  const movers = [...bull, ...bear].sort((a, b) => Math.abs(b.return_1d ?? 0) - Math.abs(a.return_1d ?? 0));
+function MoverList({ items, onTickerClick }: { items: MoverTicker[]; onTickerClick: (t: string) => void }) {
+  const [expanded, setExpanded] = useState(false);
+  const visible = expanded ? items : items.slice(0, MAX);
+  const hidden = items.length - MAX;
+
   return (
     <div
       style={{
@@ -46,11 +45,51 @@ export default function TopMovers({ bull, bear, onTickerClick }: Props) {
         overflow: "hidden",
       }}
     >
-      {movers.length === 0 ? (
-        <p className="text-muted text-[13px] p-4">No movers data yet.</p>
+      {items.length === 0 ? (
+        <p className="text-muted text-[13px] p-4">No data yet.</p>
       ) : (
-        movers.map((m) => <MoverRow key={m.ticker} m={m} onTickerClick={onTickerClick} />)
+        <>
+          {visible.map((m) => <MoverRow key={m.ticker} m={m} onTickerClick={onTickerClick} />)}
+          {hidden > 0 && (
+            <button
+              onClick={() => setExpanded((e) => !e)}
+              className="w-full flex items-center justify-center gap-1.5 hover:bg-white/[0.03] transition-colors cursor-pointer"
+              style={{ padding: "0.6rem", color: "#555" }}
+            >
+              <svg
+                width="12" height="12" viewBox="0 0 12 12" fill="none"
+                style={{ transition: "transform 0.2s", transform: expanded ? "rotate(180deg)" : "none" }}
+              >
+                <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span style={{ fontSize: "0.6875rem" }}>
+                {expanded ? "Show less" : `${hidden} more`}
+              </span>
+            </button>
+          )}
+        </>
       )}
+    </div>
+  );
+}
+
+interface Props {
+  bull: MoverTicker[];
+  bear: MoverTicker[];
+  onTickerClick: (ticker: string) => void;
+}
+
+export default function TopMovers({ bull, bear, onTickerClick }: Props) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <p style={{ fontSize: "0.6rem", letterSpacing: "0.1em", color: "#4ade80", marginBottom: "0.5rem" }}>GAINERS</p>
+        <MoverList items={bull} onTickerClick={onTickerClick} />
+      </div>
+      <div>
+        <p style={{ fontSize: "0.6rem", letterSpacing: "0.1em", color: "#f87171", marginBottom: "0.5rem" }}>LOSERS</p>
+        <MoverList items={bear} onTickerClick={onTickerClick} />
+      </div>
     </div>
   );
 }
