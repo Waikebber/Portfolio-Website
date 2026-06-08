@@ -14,7 +14,9 @@ const ALL_NAV_ITEMS = [
   { label: "Projects", href: "/admin/projects", roles: ["full-admin"] },
   { label: "Photos", href: "/admin/photos", roles: ["full-admin"] },
   { label: "Guitar Tabs", href: "/admin/guitar-tabs", roles: ["full-admin", "guest-admin"] },
-  { label: "Markets", href: "/admin/markets", roles: ["full-admin", "guest-admin"] },
+  ...(process.env.NEXT_PUBLIC_MARKETS_ENABLED === "true"
+    ? [{ label: "Markets", href: "/admin/markets", roles: ["full-admin", "guest-admin"] }]
+    : []),
 ];
 
 function getPageName(pathname: string): string {
