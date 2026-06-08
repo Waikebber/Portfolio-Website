@@ -19,7 +19,7 @@ export function usePitchDetector(
   const analyserRef = useRef<AnalyserNode | null>(null);
   const streamRef   = useRef<MediaStream | null>(null);
   const rafRef      = useRef<number>(0);
-  const bufRef      = useRef<Float32Array>(new Float32Array(BUFFER_SIZE));
+  const bufRef      = useRef<Float32Array<ArrayBuffer>>(new Float32Array(BUFFER_SIZE));
   const onPitchRef  = useRef(onPitch);
   useEffect(() => { onPitchRef.current = onPitch; }, [onPitch]);
 

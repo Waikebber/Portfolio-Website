@@ -9,7 +9,7 @@ export interface PitchResult {
  * Autocorrelation-based pitch detector for guitar frequencies (60–1200 Hz).
  * Returns null when the signal is too quiet or no clear pitch is found.
  */
-export function autoCorrelate(buf: Float32Array, sampleRate: number, maxFreq = 400): PitchResult | null {
+export function autoCorrelate(buf: Float32Array<ArrayBuffer>, sampleRate: number, maxFreq = 400): PitchResult | null {
   // Reject silence
   let rms = 0;
   for (const s of buf) rms += s * s;
