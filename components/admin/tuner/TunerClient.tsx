@@ -11,10 +11,10 @@ import MicButton from "./MicButton";
 import TuningSelector from "./TuningSelector";
 import type { PitchResult } from "@/lib/autoCorrelate";
 
-const MIN_CLARITY        = 0.65;
-const STREAK_NEEDED      = 3;    // consecutive consistent readings before display updates
+const MIN_CLARITY        = 0.5;
+const STREAK_NEEDED      = 2;    // consecutive consistent readings before display updates
 const STREAK_CENTS       = 100;  // max deviation within a streak (~1 semitone)
-const HOLD_MS            = 700;  // ms to keep last reading after signal goes quiet
+const HOLD_MS            = 1200; // ms to keep last reading after signal goes quiet
 const SWITCH_FRAMES      = 5;    // consecutive frames detecting a new string before auto-switching
 const SWITCH_COOLDOWN_MS = 1000; // min ms between auto-switches (prevents ping-pong)
 
@@ -45,6 +45,14 @@ export default function TunerClient() {
   const parsedStrings = useMemo(
     () => (selectedTuning ? parseStrings(selectedTuning.strings) : []),
     [selectedTuning]
+  );
+
+  // Highest open string + 1 semitone headroom for sharp/out-of-tune strings
+  const maxFreq = useMemo(
+    () => parsedStrings.length
+      ? Math.max(...parsedStrings.map((s) => s.frequency)) * 1.06
+      : 400,
+    [parsedStrings]
   );
 
   function clearDisplay() {
@@ -115,7 +123,7 @@ export default function TunerClient() {
     [parsedStrings, pinnedString]
   );
 
-  const { micState, listening, toggle } = usePitchDetector(onPitch);
+  const { micState, listening, toggle } = usePitchDetector(onPitch, maxFreq);
 
   if (loading) return <p className="text-muted text-[13px]">Loading tunings…</p>;
 

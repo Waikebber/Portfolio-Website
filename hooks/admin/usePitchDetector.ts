@@ -8,7 +8,10 @@ export type MicState = "idle" | "requesting" | "granted" | "denied";
 
 const BUFFER_SIZE = 2048;
 
-export function usePitchDetector(onPitch: (r: import("@/lib/autoCorrelate").PitchResult | null) => void) {
+export function usePitchDetector(
+  onPitch: (r: import("@/lib/autoCorrelate").PitchResult | null) => void,
+  maxFreq = 400,
+) {
   const [micState, setMicState] = useState<MicState>("idle");
   const [listening, setListening] = useState(false);
 
@@ -60,7 +63,7 @@ export function usePitchDetector(onPitch: (r: import("@/lib/autoCorrelate").Pitc
       const tick = () => {
         if (!analyserRef.current) return;
         analyserRef.current.getFloatTimeDomainData(bufRef.current);
-        onPitchRef.current(autoCorrelate(bufRef.current, ctx.sampleRate));
+        onPitchRef.current(autoCorrelate(bufRef.current, ctx.sampleRate, maxFreq));
         rafRef.current = requestAnimationFrame(tick);
       };
       rafRef.current = requestAnimationFrame(tick);

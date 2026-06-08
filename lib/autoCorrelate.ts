@@ -1,4 +1,4 @@
-const MIN_RMS = 0.003;
+const MIN_RMS = 0.0001;
 
 export interface PitchResult {
   frequency: number;
@@ -9,14 +9,14 @@ export interface PitchResult {
  * Autocorrelation-based pitch detector for guitar frequencies (60–1200 Hz).
  * Returns null when the signal is too quiet or no clear pitch is found.
  */
-export function autoCorrelate(buf: Float32Array, sampleRate: number): PitchResult | null {
+export function autoCorrelate(buf: Float32Array, sampleRate: number, maxFreq = 400): PitchResult | null {
   // Reject silence
   let rms = 0;
   for (const s of buf) rms += s * s;
   rms = Math.sqrt(rms / buf.length);
   if (rms < MIN_RMS) return null;
 
-  const minLag = Math.floor(sampleRate / 1200);
+  const minLag = Math.floor(sampleRate / maxFreq);
   const maxLag = Math.min(Math.ceil(sampleRate / 60), buf.length - 1);
 
   let maxCorr = -Infinity;
