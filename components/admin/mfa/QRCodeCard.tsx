@@ -1,21 +1,29 @@
+import { useMemo } from "react";
+
 interface Props {
   qrCode: string;
   secret: string;
 }
-
 export default function QRCodeCard({ qrCode, secret }: Props) {
-  // The SDK wraps the SVG as data:image/svg+xml;utf-8,<svg ...fill="#000"...>
-  // Using that string in <img src> truncates at '#' (treated as URL fragment).
-  // Render the raw SVG via innerHTML instead — safe since it's from our own
-  // Supabase instance.
   const rawSvg = qrCode.replace(/^data:image\/svg\+xml[^,]*,/, "");
+
+  const svgWithViewBox = useMemo(() => {
+    if (/viewBox=/i.test(rawSvg)) return rawSvg;
+
+    const widthMatch = rawSvg.match(/width="(\d+(\.\d+)?)"/);
+    const heightMatch = rawSvg.match(/height="(\d+(\.\d+)?)"/);
+    const w = widthMatch?.[1] ?? "100";
+    const h = heightMatch?.[1] ?? "100";
+
+    return rawSvg.replace("<svg", `<svg viewBox="0 0 ${w} ${h}"`);
+  }, [rawSvg]);
 
   return (
     <>
       <div
         className="w-[180px] h-[180px] rounded-[10px] mb-6 overflow-hidden p-3 [&_svg]:w-full [&_svg]:h-full"
         style={{ background: "#fff" }}
-        dangerouslySetInnerHTML={{ __html: rawSvg }}
+        dangerouslySetInnerHTML={{ __html: svgWithViewBox }}
       />
 
       <div className="mb-6">
