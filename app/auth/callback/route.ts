@@ -6,6 +6,7 @@ export async function GET(request: NextRequest) {
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type");
   const code = searchParams.get("code");
+  const next = searchParams.get("next");
 
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -69,6 +70,12 @@ export async function GET(request: NextRequest) {
   }
 
   if (!authed) return redirect(`${siteUrl}/admin/login?error=invite`);
+
+  // Recovery bypasses invite/onboarding/role logic entirely.
+  // Only allow relative paths so this can't be turned into an open redirect.
+  if (next && next.startsWith("/")) {
+    return redirect(`${siteUrl}${next}`);
+  }
 
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return redirect(`${siteUrl}/admin/login?error=invite`);

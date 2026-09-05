@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
-export type LoginStep = "credentials" | "mfa";
+export type LoginStep = "credentials" | "mfa" | "forgot";;
 
 export function useLogin() {
   const router = useRouter();
@@ -16,8 +16,11 @@ export function useLogin() {
   const [loading, setLoading] = useState(false);
   const [mfaFactorId, setMfaFactorId] = useState<string | null>(null);
   const [mfaChallengeId, setMfaChallengeId] = useState<string | null>(null);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [message, setMessage] = useState<string | null>(null);
+  const [sent, setSent] = useState(false);
 
-  async function submitCredentials(e: React.FormEvent) {
+  async function submitCredentials(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
     setLoading(true);
@@ -42,7 +45,7 @@ export function useLogin() {
     setLoading(false);
   }
 
-  async function submitMfa(e: React.FormEvent) {
+  async function submitMfa(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!mfaFactorId || !mfaChallengeId) return;
     setError(null);
@@ -60,10 +63,40 @@ export function useLogin() {
     router.refresh();
   }
 
+  function goToForgotPassword() {
+    setError(null);
+    setMessage(null);
+    setForgotEmail(email);
+    setStep("forgot");
+    setSent(false);
+  }
+
+  async function submitForgotPassword(e: React.SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    setMessage(null);
+    setLoading(true);
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
+      redirectTo: `${window.location.origin}/auth/callback?next=/reset-password`,
+    });
+
+    setLoading(false);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setMessage("If that email exists, a reset link is on its way.");
+    setSent(true);
+  }
+
+
   function backToCredentials() {
     setStep("credentials");
     setError(null);
     setCode("");
+    setSent(false);
   }
 
   return {
@@ -71,7 +104,9 @@ export function useLogin() {
     email, setEmail,
     password, setPassword,
     code, setCode,
-    error, loading,
-    submitCredentials, submitMfa, backToCredentials,
+    forgotEmail, setForgotEmail,
+    error, message, loading, sent,
+    submitCredentials, submitMfa, submitForgotPassword,
+    goToForgotPassword, backToCredentials,
   };
 }

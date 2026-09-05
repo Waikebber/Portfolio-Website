@@ -3,7 +3,7 @@ interface Props {
   setCode: (v: string) => void;
   error: string | null;
   loading: boolean;
-  onSubmit: (e: React.FormEvent) => void;
+  onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
   onBack: () => void;
 }
 
