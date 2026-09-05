@@ -3,7 +3,7 @@
     "id": "emoney-ase",
     "dateRange": "Sep 2025 — Present",
     "location": "Radnor, PA",
-    "title": "Associate Software Engineer",
+    "title": "Software Engineer",
     "company": "eMoney Advisor",
     "description": "Owned two production API connectors via HTTP, REST, and SOAP with OAuth/FDX, and built an in-house payload simulation tool. Now building full-stack premium features in C#, SQL, TypeScript, and React — analytics dashboards surfacing real-time client engagement metrics.",
     "type": "work"
